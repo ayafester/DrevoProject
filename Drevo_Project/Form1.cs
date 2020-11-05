@@ -59,40 +59,7 @@ namespace Drevo_Project
             }
         }
 
-       private void btnReadDB_Click(object sender, EventArgs e)
-        {
-
-            DataTable dTable = new DataTable();
-            String sqlQuery;
-
-
-            if (connect.State != ConnectionState.Open)
-            {
-                MessageBox.Show("Сначала подключитесь к БД!");
-                return;
-            }
-
-            try
-            {
-                sqlQuery = "SELECT * FROM User";
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, connect);
-                adapter.Fill(dTable);
-
-                if (dTable.Rows.Count > 0)
-                {
-                    dgvViewer.Rows.Clear();
-
-                    for (int i = 0; i < dTable.Rows.Count; i++)
-                        dgvViewer.Rows.Add(dTable.Rows[i].ItemArray);
-                }
-                else
-                    MessageBox.Show("БД пуста");
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Ошибка: " + ex.Message);
-            }
-        }
+       
 
         private void btnToReg_Click(object sender, EventArgs e)
         {
