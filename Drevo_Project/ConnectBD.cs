@@ -42,7 +42,7 @@ namespace Drevo_Project
                 command.ExecuteNonQuery();
 
                 command.CommandText = "CREATE TABLE IF NOT EXISTS Card (id INTEGER PRIMARY KEY AUTOINCREMENT, surname TEXT, name TEXT, middlename TEXT, gender INTEGER, " +
-                    "bio TEXT, birthday TEXT, deathday TEXT, idCreator INTEGER REFERENCES User(id), idMom INTEGER REFERENCES Card(id) DEFAULT 0, " +
+                    "bio TEXT, birthday TEXT, deathday TEXT, number TEXT, idCreator INTEGER REFERENCES User(id), idMom INTEGER REFERENCES Card(id) DEFAULT 0, " +
                     "idDad INTEGER REFERENCES Card(id) DEFAULT 0, idPartner INTEGER REFERENCES Card(id) DEFAULT 0, PhotoOnAva TEXT)";
                 command.ExecuteNonQuery();
 

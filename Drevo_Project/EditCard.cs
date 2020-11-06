@@ -21,5 +21,10 @@ namespace Drevo_Project
         {
             DialogResult = DialogResult.OK;
         }
+
+        private void EditCard_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

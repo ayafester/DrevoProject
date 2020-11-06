@@ -48,3 +48,4 @@ C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.c
 C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.csproj.CopyComplete
 C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.exe
 C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.pdb
+C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.NewCard.resources

@@ -37,23 +37,23 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabInfoCard = new System.Windows.Forms.TabControl();
             this.tabBioProfile = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
             this.tabDrevo = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanelTree = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonAddCard = new System.Windows.Forms.Button();
             this.tabSearch = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelSearchWork = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabInfoCard.SuspendLayout();
-            this.tabBioProfile.SuspendLayout();
+            this.tabDrevo.SuspendLayout();
             this.tabSearch.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelChk
@@ -144,7 +144,6 @@
             // 
             // tabBioProfile
             // 
-            this.tabBioProfile.Controls.Add(this.label2);
             this.tabBioProfile.Location = new System.Drawing.Point(4, 29);
             this.tabBioProfile.Name = "tabBioProfile";
             this.tabBioProfile.Padding = new System.Windows.Forms.Padding(3);
@@ -153,15 +152,6 @@
             this.tabBioProfile.Text = "Биография";
             this.tabBioProfile.UseVisualStyleBackColor = true;
             this.tabBioProfile.Click += new System.EventHandler(this.tabBioProfile_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "label2";
             // 
             // tabPhotoCard
             // 
@@ -184,6 +174,9 @@
             // 
             // tabDrevo
             // 
+            this.tabDrevo.Controls.Add(this.buttonDelete);
+            this.tabDrevo.Controls.Add(this.flowLayoutPanelTree);
+            this.tabDrevo.Controls.Add(this.buttonAddCard);
             this.tabDrevo.Location = new System.Drawing.Point(4, 29);
             this.tabDrevo.Name = "tabDrevo";
             this.tabDrevo.Padding = new System.Windows.Forms.Padding(10, 10, 10, 3);
@@ -191,6 +184,26 @@
             this.tabDrevo.TabIndex = 1;
             this.tabDrevo.Text = "Древо семьи";
             this.tabDrevo.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanelTree
+            // 
+            this.flowLayoutPanelTree.AutoScroll = true;
+            this.flowLayoutPanelTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanelTree.Location = new System.Drawing.Point(3, 64);
+            this.flowLayoutPanelTree.Name = "flowLayoutPanelTree";
+            this.flowLayoutPanelTree.Size = new System.Drawing.Size(820, 606);
+            this.flowLayoutPanelTree.TabIndex = 2;
+            // 
+            // buttonAddCard
+            // 
+            this.buttonAddCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddCard.Location = new System.Drawing.Point(517, 13);
+            this.buttonAddCard.Name = "buttonAddCard";
+            this.buttonAddCard.Size = new System.Drawing.Size(154, 31);
+            this.buttonAddCard.TabIndex = 1;
+            this.buttonAddCard.Text = "Добавить человека";
+            this.buttonAddCard.UseVisualStyleBackColor = true;
+            this.buttonAddCard.Click += new System.EventHandler(this.buttonAddCard_Click);
             // 
             // tabSearch
             // 
@@ -217,37 +230,38 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.labelSearchWork);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(38, 90);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(752, 594);
+            this.panel1.Size = new System.Drawing.Size(752, 570);
             this.panel1.TabIndex = 2;
-            // 
-            // labelSearchWork
-            // 
-            this.labelSearchWork.AutoSize = true;
-            this.labelSearchWork.Location = new System.Drawing.Point(17, 21);
-            this.labelSearchWork.Name = "labelSearchWork";
-            this.labelSearchWork.Size = new System.Drawing.Size(51, 20);
-            this.labelSearchWork.TabIndex = 0;
-            this.labelSearchWork.Text = "label2";
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(38, 25);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(489, 29);
+            this.textBox1.Size = new System.Drawing.Size(616, 28);
             this.textBox1.TabIndex = 1;
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(533, 25);
+            this.buttonSearch.Location = new System.Drawing.Point(671, 24);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(119, 29);
             this.buttonSearch.TabIndex = 0;
             this.buttonSearch.Text = "Искать";
             this.buttonSearch.UseVisualStyleBackColor = true;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDelete.Location = new System.Drawing.Point(677, 13);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(142, 31);
+            this.buttonDelete.TabIndex = 3;
+            this.buttonDelete.Text = "Удалить человека";
+            this.buttonDelete.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -258,18 +272,14 @@
             this.Controls.Add(this.labelChk);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "Main";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabMenu.ResumeLayout(false);
             this.tabMyProfile.ResumeLayout(false);
             this.tabMyProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabInfoCard.ResumeLayout(false);
-            this.tabBioProfile.ResumeLayout(false);
-            this.tabBioProfile.PerformLayout();
+            this.tabDrevo.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
             this.tabSearch.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,7 +303,8 @@
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label labelSearchWork;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonAddCard;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTree;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }

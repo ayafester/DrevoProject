@@ -18,7 +18,6 @@ namespace Drevo_Project
     public partial class Form1 : Form
     {
 
-
         ConnectBD sql = new ConnectBD();
 
         public Form1()
