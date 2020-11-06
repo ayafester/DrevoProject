@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.lbConnectMsg = new System.Windows.Forms.Label();
             this.btnToReg = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnToLogin = new System.Windows.Forms.Button();
@@ -40,15 +39,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // lbConnectMsg
-            // 
-            this.lbConnectMsg.AutoSize = true;
-            this.lbConnectMsg.Location = new System.Drawing.Point(687, 9);
-            this.lbConnectMsg.Name = "lbConnectMsg";
-            this.lbConnectMsg.Size = new System.Drawing.Size(76, 13);
-            this.lbConnectMsg.TabIndex = 16;
-            this.lbConnectMsg.Text = "Подключение";
             // 
             // btnToReg
             // 
@@ -93,11 +83,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(542, 304);
+            this.label1.Location = new System.Drawing.Point(713, 304);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 25;
-            this.label1.Text = "пароль: 1 логин: 1";
+            this.label1.Text = "пароль: 2 логин: 2";
             // 
             // Form1
             // 
@@ -109,7 +99,6 @@
             this.Controls.Add(this.btnToLogin);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnToReg);
-            this.Controls.Add(this.lbConnectMsg);
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -119,7 +108,6 @@
 
         #endregion
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Label lbConnectMsg;
         private System.Windows.Forms.Button btnToReg;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnToLogin;

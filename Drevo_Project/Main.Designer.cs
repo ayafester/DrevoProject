@@ -34,12 +34,13 @@
             this.buttonEdit = new System.Windows.Forms.Button();
             this.labelDataBorn = new System.Windows.Forms.Label();
             this.labelFio = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxAva = new System.Windows.Forms.PictureBox();
             this.tabInfoCard = new System.Windows.Forms.TabControl();
             this.tabBioProfile = new System.Windows.Forms.TabPage();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
             this.tabDrevo = new System.Windows.Forms.TabPage();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.flowLayoutPanelTree = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.tabSearch = new System.Windows.Forms.TabPage();
@@ -47,10 +48,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.buttonDelete = new System.Windows.Forms.Button();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
             this.tabInfoCard.SuspendLayout();
             this.tabDrevo.SuspendLayout();
             this.tabSearch.SuspendLayout();
@@ -77,7 +77,7 @@
             this.tabMenu.Location = new System.Drawing.Point(12, 12);
             this.tabMenu.Name = "tabMenu";
             this.tabMenu.SelectedIndex = 0;
-            this.tabMenu.Size = new System.Drawing.Size(840, 711);
+            this.tabMenu.Size = new System.Drawing.Size(854, 711);
             this.tabMenu.TabIndex = 3;
             // 
             // tabMyProfile
@@ -85,12 +85,12 @@
             this.tabMyProfile.Controls.Add(this.buttonEdit);
             this.tabMyProfile.Controls.Add(this.labelDataBorn);
             this.tabMyProfile.Controls.Add(this.labelFio);
-            this.tabMyProfile.Controls.Add(this.pictureBox1);
+            this.tabMyProfile.Controls.Add(this.pictureBoxAva);
             this.tabMyProfile.Controls.Add(this.tabInfoCard);
             this.tabMyProfile.Location = new System.Drawing.Point(4, 29);
             this.tabMyProfile.Name = "tabMyProfile";
             this.tabMyProfile.Padding = new System.Windows.Forms.Padding(10);
-            this.tabMyProfile.Size = new System.Drawing.Size(832, 678);
+            this.tabMyProfile.Size = new System.Drawing.Size(846, 678);
             this.tabMyProfile.TabIndex = 0;
             this.tabMyProfile.Text = "Мой профиль";
             this.tabMyProfile.UseVisualStyleBackColor = true;
@@ -123,13 +123,19 @@
             this.labelFio.TabIndex = 2;
             this.labelFio.Text = "Фамилия Имя Отчество";
             // 
-            // pictureBox1
+            // pictureBoxAva
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(492, 178);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(305, 328);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxAva.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxAva.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pictureBoxAva.ErrorImage = null;
+            this.pictureBoxAva.Image = global::Drevo_Project.Properties.Resources.logo;
+            this.pictureBoxAva.InitialImage = null;
+            this.pictureBoxAva.Location = new System.Drawing.Point(497, 142);
+            this.pictureBoxAva.Name = "pictureBoxAva";
+            this.pictureBoxAva.Size = new System.Drawing.Size(305, 357);
+            this.pictureBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxAva.TabIndex = 1;
+            this.pictureBoxAva.TabStop = false;
             // 
             // tabInfoCard
             // 
@@ -180,18 +186,28 @@
             this.tabDrevo.Location = new System.Drawing.Point(4, 29);
             this.tabDrevo.Name = "tabDrevo";
             this.tabDrevo.Padding = new System.Windows.Forms.Padding(10, 10, 10, 3);
-            this.tabDrevo.Size = new System.Drawing.Size(832, 678);
+            this.tabDrevo.Size = new System.Drawing.Size(846, 678);
             this.tabDrevo.TabIndex = 1;
             this.tabDrevo.Text = "Древо семьи";
             this.tabDrevo.UseVisualStyleBackColor = true;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDelete.Location = new System.Drawing.Point(677, 13);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(142, 31);
+            this.buttonDelete.TabIndex = 3;
+            this.buttonDelete.Text = "Удалить человека";
+            this.buttonDelete.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanelTree
             // 
             this.flowLayoutPanelTree.AutoScroll = true;
             this.flowLayoutPanelTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanelTree.Location = new System.Drawing.Point(3, 64);
+            this.flowLayoutPanelTree.Location = new System.Drawing.Point(13, 64);
             this.flowLayoutPanelTree.Name = "flowLayoutPanelTree";
-            this.flowLayoutPanelTree.Size = new System.Drawing.Size(820, 606);
+            this.flowLayoutPanelTree.Size = new System.Drawing.Size(810, 606);
             this.flowLayoutPanelTree.TabIndex = 2;
             // 
             // buttonAddCard
@@ -253,21 +269,11 @@
             this.buttonSearch.Text = "Искать";
             this.buttonSearch.UseVisualStyleBackColor = true;
             // 
-            // buttonDelete
-            // 
-            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelete.Location = new System.Drawing.Point(677, 13);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(142, 31);
-            this.buttonDelete.TabIndex = 3;
-            this.buttonDelete.Text = "Удалить человека";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(877, 749);
+            this.ClientSize = new System.Drawing.Size(891, 749);
             this.Controls.Add(this.tabMenu);
             this.Controls.Add(this.labelChk);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -275,7 +281,7 @@
             this.tabMenu.ResumeLayout(false);
             this.tabMyProfile.ResumeLayout(false);
             this.tabMyProfile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).EndInit();
             this.tabInfoCard.ResumeLayout(false);
             this.tabDrevo.ResumeLayout(false);
             this.tabSearch.ResumeLayout(false);
@@ -292,7 +298,7 @@
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Label labelDataBorn;
         private System.Windows.Forms.Label labelFio;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxAva;
         private System.Windows.Forms.TabControl tabInfoCard;
         private System.Windows.Forms.TabPage tabBioProfile;
         private System.Windows.Forms.TabPage tabPhotoCard;
