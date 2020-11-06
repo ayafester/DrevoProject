@@ -18,9 +18,7 @@ namespace Drevo_Project
     public partial class Main : Form
     {
 
-        private String dbName;
-        private SQLiteConnection connect;
-        private SQLiteCommand command;
+        ConnectBD sql = new ConnectBD();
         public Main()
         {
             InitializeComponent();
@@ -32,33 +30,8 @@ namespace Drevo_Project
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            connect = new SQLiteConnection();
-            command = new SQLiteCommand();
+            
 
-            dbName = "DrevoBD.sqlite";
-            labelChk.Text = "Не соединено с БД";
-
-            if (!File.Exists(dbName))
-                SQLiteConnection.CreateFile(dbName);
-
-
-
-            try
-            {
-                connect = new SQLiteConnection("Data Source=" + dbName + ";Version=3;");
-                connect.Open();
-                command.Connection = connect;
-
-                command.CommandText = "CREATE TABLE IF NOT EXISTS Card (id INTEGER PRIMARY KEY AUTOINCREMENT, surname TEXT, name TEXT, middlename TEXT, bio TEXT, idContacts INTEGER, idPhotos INTEGER)";
-                command.ExecuteNonQuery();
-
-                labelChk.Text = "Cоединено с БД";
-            }
-            catch (SQLiteException ex)
-            {
-                labelChk.Text = "Не соединено с БД";
-                MessageBox.Show("Error: " + ex.Message);
-            }
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -77,20 +50,15 @@ namespace Drevo_Project
             String sqlQuery1;
             sqlQuery1 = "SELECT CardID FROM User WHERE id = @DataCard.ID";
 
-            SQLiteConnection connect2 = new SQLiteConnection("Data Source=" + dbName + ";Version=3;");
-            connect2.Open();
-
-            SQLiteCommand cmd = new SQLiteCommand(sqlQuery1, connect2);
+            SQLiteCommand cmd = new SQLiteCommand(sqlQuery1, sql.connect);
             SQLiteDataAdapter adapter1 = new SQLiteDataAdapter(cmd);
-
 
             SQLiteDataReader SQL = cmd.ExecuteReader();
 
-            while (SQL.Read())
-            {
-                DataClass.CardID = SQL["CardID"].ToString();
-            }
-            tabBioProfile.Text = DataClass.CardID; //Этот блок пока не работает так что TO DO
+            
+            DataClass.CardID = SQL.ToString();
+            
+            //Этот блок пока не работает так что TO DO
 
         }
     }

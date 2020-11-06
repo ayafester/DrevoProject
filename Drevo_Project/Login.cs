@@ -13,7 +13,7 @@ namespace Drevo_Project
 {
     public partial class Login : Form
     {
-        private String dbName1;
+        ConnectBD sql = new ConnectBD();
         public String userMail { get; set; } //??
         public String userPassword { get; set; }
         public Login()
@@ -23,7 +23,7 @@ namespace Drevo_Project
 
         private void Login_Load(object sender, EventArgs e)
         {
-            dbName1 = "DrevoBD.sqlite";
+            
         }
 
         private void btnCheckLogin_Click(object sender, EventArgs e)
@@ -41,12 +41,10 @@ namespace Drevo_Project
 
                 sqlQuery1 = "SELECT * FROM User WHERE mail = @userMail AND password = @userPassword";
 
-                SQLiteConnection connect2 = new SQLiteConnection("Data Source=" + dbName1 + ";Version=3;");
-                connect2.Open();
-
-                SQLiteCommand cmd = new SQLiteCommand(sqlQuery1, connect2);
+                SQLiteCommand cmd = new SQLiteCommand(sqlQuery1, sql.connect);
                 cmd.Parameters.AddWithValue("@userMail", tbCheckMail.Text);
                 cmd.Parameters.AddWithValue("@userPassword", tbCheckPassword.Text);
+
                 SQLiteDataAdapter adapter1 = new SQLiteDataAdapter(cmd);
                 
                 DataTable db2 = new DataTable();
@@ -58,6 +56,8 @@ namespace Drevo_Project
                 {
                     DataClass.ID = SQL["id"].ToString();
                 }
+                
+                                
 
                 if (db2.Rows.Count > 0)
                 {

@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnToLogin = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -89,11 +90,21 @@
             this.label3.TabIndex = 24;
             this.label3.Text = "Древо Семьи";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(542, 304);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "пароль: 1 логин: 1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 515);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnToLogin);
             this.Controls.Add(this.label2);
@@ -113,6 +124,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnToLogin;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
     }
 }
 

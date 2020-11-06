@@ -37,6 +37,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabInfoCard = new System.Windows.Forms.TabControl();
             this.tabBioProfile = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
             this.tabDrevo = new System.Windows.Forms.TabPage();
@@ -46,11 +47,11 @@
             this.labelSearchWork = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.BoxID2 = new System.Windows.Forms.TextBox();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabInfoCard.SuspendLayout();
+            this.tabBioProfile.SuspendLayout();
             this.tabSearch.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +82,6 @@
             // 
             // tabMyProfile
             // 
-            this.tabMyProfile.Controls.Add(this.BoxID2);
             this.tabMyProfile.Controls.Add(this.buttonEdit);
             this.tabMyProfile.Controls.Add(this.labelDataBorn);
             this.tabMyProfile.Controls.Add(this.labelFio);
@@ -144,6 +144,7 @@
             // 
             // tabBioProfile
             // 
+            this.tabBioProfile.Controls.Add(this.label2);
             this.tabBioProfile.Location = new System.Drawing.Point(4, 29);
             this.tabBioProfile.Name = "tabBioProfile";
             this.tabBioProfile.Padding = new System.Windows.Forms.Padding(3);
@@ -152,6 +153,15 @@
             this.tabBioProfile.Text = "Биография";
             this.tabBioProfile.UseVisualStyleBackColor = true;
             this.tabBioProfile.Click += new System.EventHandler(this.tabBioProfile_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "label2";
             // 
             // tabPhotoCard
             // 
@@ -239,13 +249,6 @@
             this.buttonSearch.Text = "Искать";
             this.buttonSearch.UseVisualStyleBackColor = true;
             // 
-            // BoxID2
-            // 
-            this.BoxID2.Location = new System.Drawing.Point(427, 13);
-            this.BoxID2.Name = "BoxID2";
-            this.BoxID2.Size = new System.Drawing.Size(40, 26);
-            this.BoxID2.TabIndex = 7;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,6 +264,8 @@
             this.tabMyProfile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabInfoCard.ResumeLayout(false);
+            this.tabBioProfile.ResumeLayout(false);
+            this.tabBioProfile.PerformLayout();
             this.tabSearch.ResumeLayout(false);
             this.tabSearch.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -289,6 +294,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelSearchWork;
-        private System.Windows.Forms.TextBox BoxID2;
+        private System.Windows.Forms.Label label2;
     }
 }

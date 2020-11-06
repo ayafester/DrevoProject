@@ -19,10 +19,8 @@ namespace Drevo_Project
     {
 
 
+        ConnectBD sql = new ConnectBD();
 
-        private String dbName;
-        private SQLiteConnection connect;
-        private SQLiteCommand command;
         public Form1()
         {
             InitializeComponent();
@@ -30,70 +28,31 @@ namespace Drevo_Project
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            connect = new SQLiteConnection();
-            command = new SQLiteCommand();
-
-            dbName = "DrevoBD.sqlite";
-            lbConnectMsg.Text = "Не соединено с БД";
-
-            if (!File.Exists(dbName))
-                    SQLiteConnection.CreateFile(dbName);
-
-            
-
-            try
-            {
-                connect = new SQLiteConnection("Data Source=" + dbName + ";Version=3;");
-                connect.Open();
-                command.Connection = connect;
-
-                command.CommandText = "CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY AUTOINCREMENT, mail TEXT, password TEXT)";
-                command.ExecuteNonQuery();
-
-                lbConnectMsg.Text = "Cоединено с БД";
-            }
-            catch (SQLiteException ex)
-            {
-                lbConnectMsg.Text = "Не соединено с БД";
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            sql.command.CommandText = "INSERT or REPLACE INTO Card(id, idCreator) VALUES(0,1)";
+            sql.command.ExecuteNonQuery();
         }
-
-       
 
         private void btnToReg_Click(object sender, EventArgs e)
         {
-            if (connect.State != ConnectionState.Open)
+            if (sql.connect.State != ConnectionState.Open)
             {
                 MessageBox.Show("Сначала подключитесь к БД!");
                 return;
             }
 
             RegForm addData = new RegForm();
+
             if (addData.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    command.CommandText = "INSERT INTO User ('mail', 'password') values ('" +
-                        addData.Mail + "' , '" +
-                        addData.Password + "')";
 
-                    command.ExecuteNonQuery();
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
+                MessageBox.Show("Войдите в систему");
 
-                this.Hide();
-                Main mainForm = new Main();
-                mainForm.Show();
             }
         }
 
         private void btnToLogin_Click(object sender, EventArgs e)
         {
-            if (connect.State != ConnectionState.Open)
+            if (sql.connect.State != ConnectionState.Open)
             {
                 MessageBox.Show("Сначала подключитесь к БД!");
                 return;
@@ -103,6 +62,8 @@ namespace Drevo_Project
 
             if(checkUser.ShowDialog() == DialogResult.OK)
             {
+                
+
                 this.Hide();
                 Main mainForm = new Main();
                 mainForm.Show();

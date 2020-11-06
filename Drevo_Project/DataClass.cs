@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Drevo_Project
 {
-    static class DataClass
+    public static class DataClass
     {
         public static string ID;
         public static string CardID;

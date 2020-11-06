@@ -71,6 +71,7 @@
     <Compile Include="Card.Designer.cs">
       <DependentUpon>Card.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConnectBD.cs" />
     <Compile Include="DataClass.cs" />
     <Compile Include="EditCard.cs">
       <SubType>Form</SubType>
