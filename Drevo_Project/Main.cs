@@ -59,31 +59,31 @@ namespace Drevo_Project
         private void DrawTree() //вынести в класс для отрисовки древа
         {
             //код вывода фотографий для древа 
-            List<PictureBox> picturebox = new List<PictureBox>(); //написать как грамотно выводить дерево. Данные в отдельном файле сохранять в listы данных
-            List<Label> labeltext = new List<Label>();
-            DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\Server\data\htdocs\img\alb");
-            var recentpics = directoryInfo.GetFiles().ToList();
-            var y = 10;
+            /* List<PictureBox> picturebox = new List<PictureBox>(); //написать как грамотно выводить дерево. Данные в отдельном файле сохранять в listы данных
+             List<Label> labeltext = new List<Label>();
+             DirectoryInfo directoryInfo = new DirectoryInfo(@"C:\Server\data\htdocs\img\alb");
+             var recentpics = directoryInfo.GetFiles().ToList();
+             var y = 10;
 
-            foreach (var file in recentpics)
-            {
-                var pb = new PictureBox();
-                var label = new Label();
-                label.Location = new Point(labeltext.Count * 120 + 20, y);
-                label.Size = new Size(80, 30);
-                label.Text = "фио";
-                pb.Location = new Point(picturebox.Count * 120 + 20, y);
-                pb.Size = new Size(100, 100);
-                try
-                {
-                    pb.Image = Image.FromFile(file.FullName);
-                }
-                catch (OutOfMemoryException) { continue; }
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                flowLayoutPanelTree.Controls.Add(pb);
-                flowLayoutPanelTree.Controls.Add(label);
-                picturebox.Add(pb);
-            }
+             foreach (var file in recentpics)
+             {
+                 var pb = new PictureBox();
+                 var label = new Label();
+                 label.Location = new Point(labeltext.Count * 120 + 20, y);
+                 label.Size = new Size(80, 30);
+                 label.Text = "фио";
+                 pb.Location = new Point(picturebox.Count * 120 + 20, y);
+                 pb.Size = new Size(100, 100);
+                 try
+                 {
+                     pb.Image = Image.FromFile(file.FullName);
+                 }
+                 catch (OutOfMemoryException) { continue; }
+                 pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                 flowLayoutPanelTree.Controls.Add(pb);
+                 flowLayoutPanelTree.Controls.Add(label);
+                 picturebox.Add(pb);
+             }*/
 
 
 
