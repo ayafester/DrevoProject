@@ -23,7 +23,7 @@ namespace Drevo_Project
         public Main()
         {
             InitializeComponent();
-            DrawTree();
+            
         }
       
 
@@ -32,9 +32,9 @@ namespace Drevo_Project
             EditCard editCard = new EditCard();
            
 
-            if(editCard.ShowDialog() == DialogResult.OK)
+            if (editCard.ShowDialog() == DialogResult.OK)
             {
-
+                editCard.Close();
             }
         }
 
@@ -56,23 +56,15 @@ namespace Drevo_Project
 
         }
 
-        private void DrawTree() //вынести в класс для отрисовки древа
-        {
-           
 
-
-
-
-
-        }
 
         private void buttonAddCard_Click(object sender, EventArgs e) //кнопка добавления человека в дерево
         {
             NewCard newCard = new NewCard();
-            
 
             if (newCard.ShowDialog() == DialogResult.OK)
             {
+                newCard.Close();
                 //вызвать новую отрисовку древа
                 
             }

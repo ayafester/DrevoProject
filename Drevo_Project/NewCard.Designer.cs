@@ -93,20 +93,23 @@
             // 
             // dateTimePickerDeathdayAdd
             // 
+            this.dateTimePickerDeathdayAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePickerDeathdayAdd.Location = new System.Drawing.Point(84, 343);
             this.dateTimePickerDeathdayAdd.Name = "dateTimePickerDeathdayAdd";
-            this.dateTimePickerDeathdayAdd.Size = new System.Drawing.Size(405, 20);
+            this.dateTimePickerDeathdayAdd.Size = new System.Drawing.Size(405, 26);
             this.dateTimePickerDeathdayAdd.TabIndex = 23;
             // 
             // dateTimePickerBirthdayAdd
             // 
+            this.dateTimePickerBirthdayAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateTimePickerBirthdayAdd.Location = new System.Drawing.Point(84, 267);
             this.dateTimePickerBirthdayAdd.Name = "dateTimePickerBirthdayAdd";
-            this.dateTimePickerBirthdayAdd.Size = new System.Drawing.Size(405, 20);
+            this.dateTimePickerBirthdayAdd.Size = new System.Drawing.Size(405, 26);
             this.dateTimePickerBirthdayAdd.TabIndex = 22;
             // 
             // textBoxMiddlenameAdd
             // 
+            this.textBoxMiddlenameAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxMiddlenameAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxMiddlenameAdd.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBoxMiddlenameAdd.Location = new System.Drawing.Point(84, 179);
@@ -117,12 +120,16 @@
             // 
             // buttonSaveInfoAdd
             // 
-            this.buttonSaveInfoAdd.Location = new System.Drawing.Point(531, 629);
+            this.buttonSaveInfoAdd.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.buttonSaveInfoAdd.FlatAppearance.BorderSize = 0;
+            this.buttonSaveInfoAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSaveInfoAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSaveInfoAdd.Location = new System.Drawing.Point(499, 601);
             this.buttonSaveInfoAdd.Name = "buttonSaveInfoAdd";
-            this.buttonSaveInfoAdd.Size = new System.Drawing.Size(88, 53);
+            this.buttonSaveInfoAdd.Size = new System.Drawing.Size(155, 53);
             this.buttonSaveInfoAdd.TabIndex = 20;
             this.buttonSaveInfoAdd.Text = "Сохранить";
-            this.buttonSaveInfoAdd.UseVisualStyleBackColor = true;
+            this.buttonSaveInfoAdd.UseVisualStyleBackColor = false;
             this.buttonSaveInfoAdd.Click += new System.EventHandler(this.buttonSaveInfoAdd_Click);
             // 
             // textBoxMailAdd
@@ -137,6 +144,7 @@
             // 
             // textBoxNumberAdd
             // 
+            this.textBoxNumberAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxNumberAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxNumberAdd.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBoxNumberAdd.Location = new System.Drawing.Point(83, 475);
@@ -147,17 +155,20 @@
             // 
             // textBoxBioAdd
             // 
+            this.textBoxBioAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxBioAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxBioAdd.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBoxBioAdd.Location = new System.Drawing.Point(665, 89);
             this.textBoxBioAdd.Multiline = true;
             this.textBoxBioAdd.Name = "textBoxBioAdd";
+            this.textBoxBioAdd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxBioAdd.Size = new System.Drawing.Size(406, 217);
             this.textBoxBioAdd.TabIndex = 17;
             this.textBoxBioAdd.Text = "Введите биографию";
             // 
             // textBoxNameAdd
             // 
+            this.textBoxNameAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxNameAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxNameAdd.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBoxNameAdd.Location = new System.Drawing.Point(83, 133);
@@ -168,6 +179,7 @@
             // 
             // textBoxSurnameAdd
             // 
+            this.textBoxSurnameAdd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxSurnameAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxSurnameAdd.ForeColor = System.Drawing.SystemColors.ControlText;
             this.textBoxSurnameAdd.Location = new System.Drawing.Point(83, 89);
@@ -179,10 +191,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(494, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(142, 25);
+            this.label5.Size = new System.Drawing.Size(167, 29);
             this.label5.TabIndex = 14;
             this.label5.Text = "Информация";
             // 
@@ -264,6 +276,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1131, 700);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
@@ -287,7 +300,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Name = "NewCard";
-            this.Text = "NewCard";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 

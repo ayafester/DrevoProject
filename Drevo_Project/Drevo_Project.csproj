@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="ConnectBD.cs" />
     <Compile Include="DataClass.cs" />
+    <Compile Include="DrawTree.cs" />
     <Compile Include="EditCard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\Tree.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

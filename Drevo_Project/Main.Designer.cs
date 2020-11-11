@@ -1,4 +1,6 @@
-﻿namespace Drevo_Project
+﻿using System.Windows.Forms;
+
+namespace Drevo_Project
 {
     partial class Main
     {
@@ -82,6 +84,8 @@
             // 
             // tabMyProfile
             // 
+            this.tabMyProfile.BackColor = System.Drawing.Color.White;
+            this.tabMyProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabMyProfile.Controls.Add(this.buttonEdit);
             this.tabMyProfile.Controls.Add(this.labelDataBorn);
             this.tabMyProfile.Controls.Add(this.labelFio);
@@ -90,19 +94,22 @@
             this.tabMyProfile.Location = new System.Drawing.Point(4, 29);
             this.tabMyProfile.Name = "tabMyProfile";
             this.tabMyProfile.Padding = new System.Windows.Forms.Padding(10);
+            this.tabMyProfile.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabMyProfile.Size = new System.Drawing.Size(846, 678);
             this.tabMyProfile.TabIndex = 0;
             this.tabMyProfile.Text = "Мой профиль";
-            this.tabMyProfile.UseVisualStyleBackColor = true;
             // 
             // buttonEdit
             // 
+            this.buttonEdit.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.buttonEdit.FlatAppearance.BorderSize = 0;
+            this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEdit.Location = new System.Drawing.Point(570, 542);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(163, 51);
             this.buttonEdit.TabIndex = 4;
             this.buttonEdit.Text = "Редактировать";
-            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.UseVisualStyleBackColor = false;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
             // labelDataBorn
@@ -145,41 +152,46 @@
             this.tabInfoCard.Location = new System.Drawing.Point(13, 40);
             this.tabInfoCard.Name = "tabInfoCard";
             this.tabInfoCard.SelectedIndex = 0;
-            this.tabInfoCard.Size = new System.Drawing.Size(461, 647);
+            this.tabInfoCard.Size = new System.Drawing.Size(461, 635);
             this.tabInfoCard.TabIndex = 0;
             // 
             // tabBioProfile
             // 
+            this.tabBioProfile.BackColor = System.Drawing.Color.White;
+            this.tabBioProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabBioProfile.Location = new System.Drawing.Point(4, 29);
             this.tabBioProfile.Name = "tabBioProfile";
             this.tabBioProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBioProfile.Size = new System.Drawing.Size(453, 614);
+            this.tabBioProfile.Size = new System.Drawing.Size(453, 602);
             this.tabBioProfile.TabIndex = 0;
             this.tabBioProfile.Text = "Биография";
-            this.tabBioProfile.UseVisualStyleBackColor = true;
             this.tabBioProfile.Click += new System.EventHandler(this.tabBioProfile_Click);
             // 
             // tabPhotoCard
             // 
+            this.tabPhotoCard.BackColor = System.Drawing.Color.White;
+            this.tabPhotoCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPhotoCard.Location = new System.Drawing.Point(4, 29);
             this.tabPhotoCard.Name = "tabPhotoCard";
             this.tabPhotoCard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPhotoCard.Size = new System.Drawing.Size(453, 614);
+            this.tabPhotoCard.Size = new System.Drawing.Size(453, 602);
             this.tabPhotoCard.TabIndex = 1;
             this.tabPhotoCard.Text = "Фотоальбом";
-            this.tabPhotoCard.UseVisualStyleBackColor = true;
             // 
             // tabContactsCard
             // 
+            this.tabContactsCard.BackColor = System.Drawing.Color.White;
+            this.tabContactsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabContactsCard.Location = new System.Drawing.Point(4, 29);
             this.tabContactsCard.Name = "tabContactsCard";
-            this.tabContactsCard.Size = new System.Drawing.Size(453, 614);
+            this.tabContactsCard.Size = new System.Drawing.Size(453, 602);
             this.tabContactsCard.TabIndex = 2;
             this.tabContactsCard.Text = "Контакты";
-            this.tabContactsCard.UseVisualStyleBackColor = true;
             // 
             // tabDrevo
             // 
+            this.tabDrevo.BackColor = System.Drawing.Color.White;
+            this.tabDrevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabDrevo.Controls.Add(this.buttonDelete);
             this.tabDrevo.Controls.Add(this.flowLayoutPanelTree);
             this.tabDrevo.Controls.Add(this.buttonAddCard);
@@ -189,17 +201,19 @@
             this.tabDrevo.Size = new System.Drawing.Size(846, 678);
             this.tabDrevo.TabIndex = 1;
             this.tabDrevo.Text = "Древо семьи";
-            this.tabDrevo.UseVisualStyleBackColor = true;
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDelete.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.buttonDelete.FlatAppearance.BorderSize = 0;
+            this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonDelete.Location = new System.Drawing.Point(677, 13);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(142, 31);
             this.buttonDelete.TabIndex = 3;
-            this.buttonDelete.Text = "Удалить человека";
-            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Text = "Удалить";
+            this.buttonDelete.UseVisualStyleBackColor = false;
             // 
             // flowLayoutPanelTree
             // 
@@ -212,17 +226,22 @@
             // 
             // buttonAddCard
             // 
-            this.buttonAddCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddCard.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.buttonAddCard.FlatAppearance.BorderSize = 0;
+            this.buttonAddCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonAddCard.Location = new System.Drawing.Point(517, 13);
             this.buttonAddCard.Name = "buttonAddCard";
             this.buttonAddCard.Size = new System.Drawing.Size(154, 31);
             this.buttonAddCard.TabIndex = 1;
-            this.buttonAddCard.Text = "Добавить человека";
-            this.buttonAddCard.UseVisualStyleBackColor = true;
+            this.buttonAddCard.Text = "Добавить";
+            this.buttonAddCard.UseVisualStyleBackColor = false;
             this.buttonAddCard.Click += new System.EventHandler(this.buttonAddCard_Click);
             // 
             // tabSearch
             // 
+            this.tabSearch.BackColor = System.Drawing.Color.White;
+            this.tabSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabSearch.Controls.Add(this.label1);
             this.tabSearch.Controls.Add(this.panel1);
             this.tabSearch.Controls.Add(this.textBox1);
@@ -230,10 +249,9 @@
             this.tabSearch.Location = new System.Drawing.Point(4, 29);
             this.tabSearch.Name = "tabSearch";
             this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch.Size = new System.Drawing.Size(832, 678);
+            this.tabSearch.Size = new System.Drawing.Size(846, 678);
             this.tabSearch.TabIndex = 2;
             this.tabSearch.Text = "Поиск";
-            this.tabSearch.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -254,6 +272,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Location = new System.Drawing.Point(38, 25);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -262,22 +281,29 @@
             // 
             // buttonSearch
             // 
+            this.buttonSearch.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.buttonSearch.FlatAppearance.BorderSize = 0;
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSearch.Location = new System.Drawing.Point(671, 24);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(119, 29);
             this.buttonSearch.TabIndex = 0;
             this.buttonSearch.Text = "Искать";
-            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.UseVisualStyleBackColor = false;
             // 
             // Main
             // 
+            this.FormClosing += Main_FormClosing;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(891, 749);
             this.Controls.Add(this.tabMenu);
             this.Controls.Add(this.labelChk);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "Main";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.tabMenu.ResumeLayout(false);
             this.tabMyProfile.ResumeLayout(false);
             this.tabMyProfile.PerformLayout();
@@ -289,6 +315,14 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        
+
+        private void Main_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            Application.Exit();
+            
         }
 
         #endregion
@@ -312,5 +346,6 @@
         private System.Windows.Forms.Button buttonAddCard;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTree;
         private System.Windows.Forms.Button buttonDelete;
+
     }
 }

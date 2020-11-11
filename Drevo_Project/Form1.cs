@@ -43,7 +43,7 @@ namespace Drevo_Project
 
             if (addData.ShowDialog() == DialogResult.OK)
             {
-
+                addData.Close();
                 MessageBox.Show("Войдите в систему");
 
             }
@@ -61,11 +61,14 @@ namespace Drevo_Project
 
             if(checkUser.ShowDialog() == DialogResult.OK)
             {
-                
 
-                this.Hide();
                 Main mainForm = new Main();
                 mainForm.Show();
+
+                checkUser.Close();
+                this.Hide();
+
+                
             }
 
         }
