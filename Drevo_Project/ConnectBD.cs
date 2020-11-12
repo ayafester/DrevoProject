@@ -55,7 +55,7 @@ namespace Drevo_Project
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: стр датакласс" + ex.Message);
+                MessageBox.Show("Error:" + ex.Message);
             }
         }
     }

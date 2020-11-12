@@ -50,6 +50,7 @@ namespace Drevo_Project
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -192,6 +193,7 @@ namespace Drevo_Project
             // 
             this.tabDrevo.BackColor = System.Drawing.Color.White;
             this.tabDrevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabDrevo.Controls.Add(this.label2);
             this.tabDrevo.Controls.Add(this.buttonDelete);
             this.tabDrevo.Controls.Add(this.flowLayoutPanelTree);
             this.tabDrevo.Controls.Add(this.buttonAddCard);
@@ -291,9 +293,17 @@ namespace Drevo_Project
             this.buttonSearch.Text = "Искать";
             this.buttonSearch.UseVisualStyleBackColor = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(362, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "label2";
+            // 
             // Main
             // 
-            this.FormClosing += Main_FormClosing;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -310,6 +320,7 @@ namespace Drevo_Project
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).EndInit();
             this.tabInfoCard.ResumeLayout(false);
             this.tabDrevo.ResumeLayout(false);
+            this.tabDrevo.PerformLayout();
             this.tabSearch.ResumeLayout(false);
             this.tabSearch.PerformLayout();
             this.ResumeLayout(false);
@@ -317,12 +328,9 @@ namespace Drevo_Project
 
         }
 
-        
-
-        private void Main_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        private void Main_FormClosing1(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-            
         }
 
         #endregion
@@ -344,8 +352,8 @@ namespace Drevo_Project
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonAddCard;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTree;
         private System.Windows.Forms.Button buttonDelete;
-
+        public FlowLayoutPanel flowLayoutPanelTree;
+        private Label label2;
     }
 }

@@ -73,7 +73,6 @@
     </Compile>
     <Compile Include="ConnectBD.cs" />
     <Compile Include="DataClass.cs" />
-    <Compile Include="DrawTree.cs" />
     <Compile Include="EditCard.cs">
       <SubType>Form</SubType>
     </Compile>
