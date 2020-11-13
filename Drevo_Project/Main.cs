@@ -24,8 +24,6 @@ namespace Drevo_Project
         public Main()
         {
             InitializeComponent();
-            
-
 
         }
       
