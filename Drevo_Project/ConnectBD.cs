@@ -42,8 +42,8 @@ namespace Drevo_Project
                 command.ExecuteNonQuery();
 
                 command.CommandText = "CREATE TABLE IF NOT EXISTS Card (id INTEGER PRIMARY KEY AUTOINCREMENT, surname TEXT, name TEXT, middlename TEXT, gender INTEGER, " +
-                    "bio TEXT, birthday TEXT, deathday TEXT, number TEXT, idCreator INTEGER REFERENCES User(id), idMom INTEGER REFERENCES Card(id) DEFAULT 0, " +
-                    "idDad INTEGER REFERENCES Card(id) DEFAULT 0, idPartner INTEGER REFERENCES Card(id) DEFAULT 0, PhotoOnAva TEXT, Generation INTEGER)";
+                    "bio TEXT, birthday TEXT, deathday TEXT, number TEXT, idCreator INTEGER REFERENCES User(id), idMom INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, " +
+                    "idDad INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, idPartner INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, PhotoOnAva TEXT, Generation INTEGER NOT NULL DEFAULT 0)";
                 command.ExecuteNonQuery();
 
                 command.CommandText = "CREATE TABLE IF NOT EXISTS Photos (id INTEGER PRIMARY KEY AUTOINCREMENT, link TEXT, idCard INTEGER REFERENCES Card(id) DEFAULT 0)"; //Создали таблицу Фото ... если много фото?

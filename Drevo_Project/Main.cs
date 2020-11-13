@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.Windows.Markup;
 
+
 namespace Drevo_Project
 {
     public partial class Main : Form
@@ -28,8 +29,49 @@ namespace Drevo_Project
 
 
         }
-      
 
+        private void Main_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                sql.command.CommandText = "SELECT * FROM User WHERE id='" + DataClass.ID + "' ";
+                //SQLiteDataAdapter adapter1 = new SQLiteDataAdapter(sql.command.Connection);
+
+                SQLiteDataReader read = sql.command.ExecuteReader();
+
+                while (read.Read())
+                {
+                    DataClass.CardID = read["idCard"].ToString();
+                }
+                read.Close();
+
+                sql.command.CommandText = "SELECT * FROM Card WHERE id = '" + DataClass.CardID + "' ";
+                SQLiteDataReader read2 = sql.command.ExecuteReader();
+                while (read2.Read())
+                {
+                    labelFio.Text = read2["surname"].ToString() + " " + read2["name"].ToString() + " " + read2["middlename"].ToString();
+                   
+                    listBoxBio.Items.Add(Convert.ToString(read2["bio"]));
+                    if (read2["deathday"].ToString() == "")
+                    {
+                        labelDataBorn.Text = read2["birthday"].ToString() + "-...";
+                    }
+                    else
+                    {
+                        labelDataBorn.Text = read2["birthday"].ToString() + "-" + read2["deathday"].ToString();
+                    }
+                }
+                read2.Close();
+
+
+
+            }
+
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: стр рег" + ex.Message);
+            }
+        }
         private void buttonEdit_Click(object sender, EventArgs e) //реализовать после вывода данных в БИО табличку админа
         {
             EditCard editCard = new EditCard();
@@ -41,23 +83,7 @@ namespace Drevo_Project
             }
         }
 
-        private void tabBioProfile_Click(object sender, EventArgs e) //Тут должен выполнятся вывод Биографии в поле tabBioProfile.Text
-        {
-            String sqlQuery1;
-            sqlQuery1 = "SELECT CardID FROM User WHERE id = @DataCard.ID";
-
-            SQLiteCommand cmd = new SQLiteCommand(sqlQuery1, sql.connect);
-            SQLiteDataAdapter adapter1 = new SQLiteDataAdapter(cmd);
-
-            SQLiteDataReader SQL = cmd.ExecuteReader();
-
-            
-            DataClass.CardID = SQL.ToString();
-            
-
-            //Этот блок пока не работает так что TO DO
-
-        }
+       
 
 
 
@@ -74,5 +100,6 @@ namespace Drevo_Project
 
         }
         
+
     }
 }

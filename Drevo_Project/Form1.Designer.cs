@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +87,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(92, 44);
+            this.label3.Location = new System.Drawing.Point(89, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(265, 42);
             this.label3.TabIndex = 24;
@@ -95,7 +96,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(577, 261);
+            this.label1.Location = new System.Drawing.Point(599, 261);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 25;
@@ -106,12 +107,20 @@
             this.pictureBoxLogo.ErrorImage = global::Drevo_Project.Properties.Resources.Tree;
             this.pictureBoxLogo.Image = global::Drevo_Project.Properties.Resources.Tree;
             this.pictureBoxLogo.InitialImage = global::Drevo_Project.Properties.Resources.Tree;
-            this.pictureBoxLogo.Location = new System.Drawing.Point(12, 12);
+            this.pictureBoxLogo.Location = new System.Drawing.Point(20, 1);
             this.pictureBoxLogo.Name = "pictureBoxLogo";
             this.pictureBoxLogo.Size = new System.Drawing.Size(63, 74);
             this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxLogo.TabIndex = 26;
             this.pictureBoxLogo.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label4.Location = new System.Drawing.Point(20, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(687, 2);
+            this.label4.TabIndex = 27;
             // 
             // Form1
             // 
@@ -119,6 +128,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(739, 562);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
@@ -145,6 +155,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxLogo;
+        private System.Windows.Forms.Label label4;
     }
 }
 
