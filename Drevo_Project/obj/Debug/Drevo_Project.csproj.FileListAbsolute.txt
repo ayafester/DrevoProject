@@ -49,3 +49,29 @@ C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.c
 C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.exe
 C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.pdb
 C:\Users\Georg\source\repos\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.NewCard.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\Drevo_Project.exe.config
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\Drevo_Project.exe
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\Drevo_Project.pdb
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\EntityFramework.dll
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\System.Data.SQLite.dll
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\EntityFramework.xml
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\System.Data.SQLite.xml
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.csprojAssemblyReference.cache
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.Card.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.EditCard.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.Form1.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.Login.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.Main.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.NewCard.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.Properties.Resources.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.RegForm.resources
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.csproj.GenerateResource.cache
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.csproj.CoreCompileInputs.cache
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.csproj.CopyComplete
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.exe
+C:\Users\vanes\OneDrive\Рабочий стол\Новая папка\Сысоев Иоанн\gitHub\DrevoProject\Drevo_Project\obj\Debug\Drevo_Project.pdb

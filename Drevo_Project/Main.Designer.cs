@@ -54,6 +54,7 @@ namespace Drevo_Project
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -95,6 +96,7 @@ namespace Drevo_Project
             // 
             this.tabMyProfile.BackColor = System.Drawing.Color.White;
             this.tabMyProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabMyProfile.Controls.Add(this.button1);
             this.tabMyProfile.Controls.Add(this.buttonEdit);
             this.tabMyProfile.Controls.Add(this.labelDataBorn);
             this.tabMyProfile.Controls.Add(this.labelFio);
@@ -245,7 +247,7 @@ namespace Drevo_Project
             this.tabDrevo.Location = new System.Drawing.Point(4, 29);
             this.tabDrevo.Name = "tabDrevo";
             this.tabDrevo.Padding = new System.Windows.Forms.Padding(10, 10, 10, 3);
-            this.tabDrevo.Size = new System.Drawing.Size(839, 678);
+            this.tabDrevo.Size = new System.Drawing.Size(842, 678);
             this.tabDrevo.TabIndex = 1;
             this.tabDrevo.Text = "Древо семьи";
             // 
@@ -303,7 +305,7 @@ namespace Drevo_Project
             this.tabSearch.Location = new System.Drawing.Point(4, 29);
             this.tabSearch.Name = "tabSearch";
             this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch.Size = new System.Drawing.Size(839, 678);
+            this.tabSearch.Size = new System.Drawing.Size(842, 678);
             this.tabSearch.TabIndex = 2;
             this.tabSearch.Text = "Поиск";
             // 
@@ -344,6 +346,17 @@ namespace Drevo_Project
             this.buttonSearch.TabIndex = 0;
             this.buttonSearch.Text = "Искать";
             this.buttonSearch.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.button1.Location = new System.Drawing.Point(570, 608);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(163, 38);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Выход";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Main
             // 
@@ -406,5 +419,6 @@ namespace Drevo_Project
         private ListBox listBoxBio;
         private ListBox listBoxPhoto;
         private ListBox listBoxContacts;
+        private Button button1;
     }
 }
