@@ -71,6 +71,11 @@ namespace Drevo_Project
             }
 
         }
-        
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Application.Exit();
+        }
     }
 }

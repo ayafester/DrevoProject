@@ -65,11 +65,28 @@ namespace Drevo_Project
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-            comboBox1.DataSource = Names;
+            List<Person> Males = new List<Person>();
+            List<Person> Females = new List<Person>();
+            foreach (var item in Names) {
+                if (item.Gender==0)
+                {
+                    Females.Add(item);
+                }
+                else
+                {
+                    Males.Add(item);
+                }
+            };
+            comboBox1.DataSource = Females;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
 
+            comboBox2.DataSource = Males;
+            comboBox2.DisplayMember = "Name";
+            comboBox2.ValueMember = "Id";
+
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
+            comboBox2.SelectedIndexChanged += ComboBox2_SelectedIndexChanged;
 
         }
 
@@ -98,13 +115,14 @@ namespace Drevo_Project
 
             try
             {
-                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' , 'birthday' , 'deathday', 'number') VALUES ('" + //пока добавление связей нет
+                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number') VALUES ('" + //пока добавление связей нет
                     Surname + "' , '" +
                     NamePerson + "' , '" +
                     Middlename + "' , '" +
                     Gender + "' , '" +
                     BIO + "' , '" +
                     idMom +"' , '" +
+                    idDad + "' , '" +
                     DateBirthday + "' ,'" +
                     DateDeathday + "' , '" +
                     Number + "')";
@@ -124,6 +142,11 @@ namespace Drevo_Project
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             idMom = comboBox1.SelectedIndex + 1;
+        }
+
+        private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            idDad = comboBox2.SelectedIndex + 1;
         }
     }
     class Person
