@@ -88,7 +88,7 @@ namespace Drevo_Project
             this.tabMenu.Location = new System.Drawing.Point(12, 12);
             this.tabMenu.Name = "tabMenu";
             this.tabMenu.SelectedIndex = 0;
-            this.tabMenu.Size = new System.Drawing.Size(850, 711);
+            this.tabMenu.Size = new System.Drawing.Size(871, 711);
             this.tabMenu.TabIndex = 3;
             // 
             // tabMyProfile
@@ -104,7 +104,7 @@ namespace Drevo_Project
             this.tabMyProfile.Name = "tabMyProfile";
             this.tabMyProfile.Padding = new System.Windows.Forms.Padding(10);
             this.tabMyProfile.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabMyProfile.Size = new System.Drawing.Size(842, 678);
+            this.tabMyProfile.Size = new System.Drawing.Size(863, 678);
             this.tabMyProfile.TabIndex = 0;
             this.tabMyProfile.Text = "Мой профиль";
             // 
@@ -350,7 +350,7 @@ namespace Drevo_Project
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(874, 749);
+            this.ClientSize = new System.Drawing.Size(895, 749);
             this.Controls.Add(this.tabMenu);
             this.Controls.Add(this.labelChk);
             this.ForeColor = System.Drawing.SystemColors.ControlText;

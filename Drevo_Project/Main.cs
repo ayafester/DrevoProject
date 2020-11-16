@@ -25,7 +25,7 @@ namespace Drevo_Project
         public Main()
         {
             InitializeComponent();
-            
+            DrawTreeBmp();
 
 
         }
@@ -101,5 +101,10 @@ namespace Drevo_Project
         }
         
 
-    }
+
+
+
+
+
+
 }
