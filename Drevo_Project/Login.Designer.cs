@@ -75,6 +75,7 @@
             this.tbCheckMail.Name = "tbCheckMail";
             this.tbCheckMail.Size = new System.Drawing.Size(174, 26);
             this.tbCheckMail.TabIndex = 3;
+            this.tbCheckMail.Text = "2";
             // 
             // tbCheckPassword
             // 
@@ -85,6 +86,7 @@
             this.tbCheckPassword.Name = "tbCheckPassword";
             this.tbCheckPassword.Size = new System.Drawing.Size(174, 26);
             this.tbCheckPassword.TabIndex = 4;
+            this.tbCheckPassword.Text = "2";
             // 
             // btnCheckLogin
             // 

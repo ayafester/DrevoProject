@@ -33,6 +33,7 @@ namespace Drevo_Project
             this.labelChk = new System.Windows.Forms.Label();
             this.tabMenu = new System.Windows.Forms.TabControl();
             this.tabMyProfile = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.labelDataBorn = new System.Windows.Forms.Label();
             this.labelFio = new System.Windows.Forms.Label();
@@ -47,14 +48,15 @@ namespace Drevo_Project
             this.tabDrevo = new System.Windows.Forms.TabPage();
             this.panelTree = new System.Windows.Forms.Panel();
             this.pictureBoxTree = new System.Windows.Forms.PictureBox();
+            this.tabRelatives = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddCard = new System.Windows.Forms.Button();
-            this.tabSearch = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tabPhotoAlbum = new System.Windows.Forms.TabPage();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -65,7 +67,7 @@ namespace Drevo_Project
             this.tabDrevo.SuspendLayout();
             this.panelTree.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTree)).BeginInit();
-            this.tabSearch.SuspendLayout();
+            this.tabRelatives.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelChk
@@ -84,12 +86,13 @@ namespace Drevo_Project
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMenu.Controls.Add(this.tabMyProfile);
             this.tabMenu.Controls.Add(this.tabDrevo);
-            this.tabMenu.Controls.Add(this.tabSearch);
+            this.tabMenu.Controls.Add(this.tabRelatives);
+            this.tabMenu.Controls.Add(this.tabPhotoAlbum);
             this.tabMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabMenu.Location = new System.Drawing.Point(12, 12);
             this.tabMenu.Name = "tabMenu";
             this.tabMenu.SelectedIndex = 0;
-            this.tabMenu.Size = new System.Drawing.Size(871, 711);
+            this.tabMenu.Size = new System.Drawing.Size(850, 711);
             this.tabMenu.TabIndex = 3;
             // 
             // tabMyProfile
@@ -106,9 +109,22 @@ namespace Drevo_Project
             this.tabMyProfile.Name = "tabMyProfile";
             this.tabMyProfile.Padding = new System.Windows.Forms.Padding(10);
             this.tabMyProfile.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabMyProfile.Size = new System.Drawing.Size(863, 678);
+            this.tabMyProfile.Size = new System.Drawing.Size(842, 678);
             this.tabMyProfile.TabIndex = 0;
             this.tabMyProfile.Text = "Мой профиль";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(570, 608);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(163, 38);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Выход";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonEdit
             // 
@@ -242,8 +258,6 @@ namespace Drevo_Project
             this.tabDrevo.BackColor = System.Drawing.Color.White;
             this.tabDrevo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabDrevo.Controls.Add(this.panelTree);
-            this.tabDrevo.Controls.Add(this.buttonDelete);
-            this.tabDrevo.Controls.Add(this.buttonAddCard);
             this.tabDrevo.Location = new System.Drawing.Point(4, 29);
             this.tabDrevo.Name = "tabDrevo";
             this.tabDrevo.Padding = new System.Windows.Forms.Padding(10, 10, 10, 3);
@@ -253,19 +267,56 @@ namespace Drevo_Project
             // 
             // panelTree
             // 
+            this.panelTree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelTree.Controls.Add(this.pictureBoxTree);
-            this.panelTree.Location = new System.Drawing.Point(9, 63);
+            this.panelTree.Location = new System.Drawing.Point(9, 13);
             this.panelTree.Name = "panelTree";
-            this.panelTree.Size = new System.Drawing.Size(809, 600);
+            this.panelTree.Size = new System.Drawing.Size(809, 650);
             this.panelTree.TabIndex = 6;
             // 
             // pictureBoxTree
             // 
-            this.pictureBoxTree.Location = new System.Drawing.Point(11, 12);
+            this.pictureBoxTree.Location = new System.Drawing.Point(4, 3);
             this.pictureBoxTree.Name = "pictureBoxTree";
-            this.pictureBoxTree.Size = new System.Drawing.Size(785, 587);
+            this.pictureBoxTree.Size = new System.Drawing.Size(802, 634);
             this.pictureBoxTree.TabIndex = 0;
             this.pictureBoxTree.TabStop = false;
+            // 
+            // tabRelatives
+            // 
+            this.tabRelatives.BackColor = System.Drawing.Color.White;
+            this.tabRelatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabRelatives.Controls.Add(this.label3);
+            this.tabRelatives.Controls.Add(this.label2);
+            this.tabRelatives.Controls.Add(this.buttonDelete);
+            this.tabRelatives.Controls.Add(this.buttonAddCard);
+            this.tabRelatives.Controls.Add(this.label1);
+            this.tabRelatives.Controls.Add(this.textBox1);
+            this.tabRelatives.Controls.Add(this.buttonSearch);
+            this.tabRelatives.Location = new System.Drawing.Point(4, 29);
+            this.tabRelatives.Name = "tabRelatives";
+            this.tabRelatives.Padding = new System.Windows.Forms.Padding(3);
+            this.tabRelatives.Size = new System.Drawing.Size(842, 678);
+            this.tabRelatives.TabIndex = 2;
+            this.tabRelatives.Text = "Родственники";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(42, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 20);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Поиск:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(48, 249);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(188, 20);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Список родственников:";
             // 
             // buttonDelete
             // 
@@ -273,10 +324,10 @@ namespace Drevo_Project
             this.buttonDelete.FlatAppearance.BorderSize = 0;
             this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelete.Location = new System.Drawing.Point(677, 13);
+            this.buttonDelete.Location = new System.Drawing.Point(46, 366);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(142, 31);
-            this.buttonDelete.TabIndex = 3;
+            this.buttonDelete.Size = new System.Drawing.Size(154, 31);
+            this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = false;
             // 
@@ -286,84 +337,60 @@ namespace Drevo_Project
             this.buttonAddCard.FlatAppearance.BorderSize = 0;
             this.buttonAddCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAddCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddCard.Location = new System.Drawing.Point(517, 13);
+            this.buttonAddCard.Location = new System.Drawing.Point(46, 319);
             this.buttonAddCard.Name = "buttonAddCard";
             this.buttonAddCard.Size = new System.Drawing.Size(154, 31);
-            this.buttonAddCard.TabIndex = 1;
+            this.buttonAddCard.TabIndex = 8;
             this.buttonAddCard.Text = "Добавить";
             this.buttonAddCard.UseVisualStyleBackColor = false;
             this.buttonAddCard.Click += new System.EventHandler(this.buttonAddCard_Click);
             // 
-            // tabSearch
-            // 
-            this.tabSearch.BackColor = System.Drawing.Color.White;
-            this.tabSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabSearch.Controls.Add(this.label1);
-            this.tabSearch.Controls.Add(this.panel1);
-            this.tabSearch.Controls.Add(this.textBox1);
-            this.tabSearch.Controls.Add(this.buttonSearch);
-            this.tabSearch.Location = new System.Drawing.Point(4, 29);
-            this.tabSearch.Name = "tabSearch";
-            this.tabSearch.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSearch.Size = new System.Drawing.Size(842, 678);
-            this.tabSearch.TabIndex = 2;
-            this.tabSearch.Text = "Поиск";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 67);
+            this.label1.Location = new System.Drawing.Point(42, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(160, 20);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 7;
             this.label1.Text = "Результаты поиска:";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(38, 90);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(752, 570);
-            this.panel1.TabIndex = 2;
             // 
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(38, 25);
+            this.textBox1.Location = new System.Drawing.Point(107, 21);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(616, 28);
-            this.textBox1.TabIndex = 1;
+            this.textBox1.Size = new System.Drawing.Size(555, 27);
+            this.textBox1.TabIndex = 5;
             // 
             // buttonSearch
             // 
             this.buttonSearch.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.buttonSearch.FlatAppearance.BorderSize = 0;
             this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSearch.Location = new System.Drawing.Point(671, 24);
+            this.buttonSearch.Location = new System.Drawing.Point(679, 20);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(119, 29);
-            this.buttonSearch.TabIndex = 0;
+            this.buttonSearch.Size = new System.Drawing.Size(119, 28);
+            this.buttonSearch.TabIndex = 4;
             this.buttonSearch.Text = "Искать";
             this.buttonSearch.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // tabPhotoAlbum
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.button1.Location = new System.Drawing.Point(570, 608);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(163, 38);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Выход";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tabPhotoAlbum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPhotoAlbum.Location = new System.Drawing.Point(4, 29);
+            this.tabPhotoAlbum.Name = "tabPhotoAlbum";
+            this.tabPhotoAlbum.Size = new System.Drawing.Size(842, 678);
+            this.tabPhotoAlbum.TabIndex = 3;
+            this.tabPhotoAlbum.Text = "Общий фотоальбом";
+            this.tabPhotoAlbum.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(895, 749);
+            this.ClientSize = new System.Drawing.Size(874, 749);
             this.Controls.Add(this.tabMenu);
             this.Controls.Add(this.labelChk);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -382,8 +409,8 @@ namespace Drevo_Project
             this.tabDrevo.ResumeLayout(false);
             this.panelTree.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTree)).EndInit();
-            this.tabSearch.ResumeLayout(false);
-            this.tabSearch.PerformLayout();
+            this.tabRelatives.ResumeLayout(false);
+            this.tabRelatives.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -407,18 +434,20 @@ namespace Drevo_Project
         private System.Windows.Forms.TabPage tabPhotoCard;
         private System.Windows.Forms.TabPage tabContactsCard;
         private System.Windows.Forms.TabPage tabDrevo;
-        private System.Windows.Forms.TabPage tabSearch;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button buttonAddCard;
-        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.TabPage tabRelatives;
         private Panel panelTree;
         private PictureBox pictureBoxTree;
         private ListBox listBoxBio;
         private ListBox listBoxPhoto;
         private ListBox listBoxContacts;
         private Button button1;
+        private Label label3;
+        private Label label2;
+        private Button buttonDelete;
+        private Button buttonAddCard;
+        private Label label1;
+        private TextBox textBox1;
+        private Button buttonSearch;
+        private TabPage tabPhotoAlbum;
     }
 }
