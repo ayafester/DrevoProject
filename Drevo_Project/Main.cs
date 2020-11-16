@@ -121,6 +121,7 @@ namespace Drevo_Project
             if (newCard.ShowDialog() == DialogResult.OK)
             {
                 newCard.Close();
+                DrawTreeBmp();
                 //вызвать новую отрисовку древа
             }
 
@@ -172,35 +173,6 @@ namespace Drevo_Project
 
         }
 
-        /*private List<String> GetNames() создать класс и изменить всё
-        {
-            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender FROM Card WHERE id >= 1";
-            List<String> Names = new List<String>();
-            try
-            {
-                SQLiteDataReader r = sql.command.ExecuteReader();
-
-                while (r.Read())
-                {
-                    Person entity = new Person
-                    {
-                        Id = r.GetInt32(0),
-                        Name = r.GetString(1),
-                        Gender = r.GetInt32(2)
-                    };
-                    Names.Add(entity);
-                }
-                r.Close();
-                sql.command.ExecuteNonQuery();
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-
-            return Names;
-        }*/
-
         private List<List<int[]>> SortDataToGeneration() //преобразование в список по поколениям
         {
             int[][] values = GetData();
@@ -236,13 +208,58 @@ namespace Drevo_Project
 
             return generation;
         }
+        class Card //человек (ребята обратите внимание сюда. может будем одним классом пользоваться?
+        {
+            public int Gener { get; set; }
+            public int Id { get; set; }
+            public int IdPartner { get; set; }
+            public int IdMom { get; set; }
+            public int IdDad { get; set; }
+            public string FIO { get; set; }
 
+            public string Age { get; set; }
+
+        }
+        private List<Card> GetDataFromBD() //считывание персон с таблицы
+        {
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename FROM Card WHERE id >= 1";
+            List<Card> Cards = new List<Card>();
+            try
+            {
+                SQLiteDataReader r = sql.command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    Card entity = new Card
+                    {
+                        Gener = r.GetInt32(0),
+                        Id = r.GetInt32(1),
+                        IdPartner = r.GetInt32(2),
+                        IdMom = r.GetInt32(3),
+                        IdDad = r.GetInt32(4),
+                        FIO = r.GetString(5),
+                        
+                    };
+                    Cards.Add(entity);
+                }
+                r.Close();
+                sql.command.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return Cards;
+        }
         private void DrawTreeBmp()
         {
             List<List<int[]>> gener = SortDataToGeneration(); //[generation, id, idPartner, idMom, idDad]
-
             int length = gener.Count; //количество поколений 3
             int[] temp = new int[length];
+
+
+            List<Card> persones = GetDataFromBD();
 
             for (int i = 0; i < length; i++)
             {
@@ -254,47 +271,55 @@ namespace Drevo_Project
             panelTree.AutoScroll = true; //автоскролл
             pictureBoxTree.SizeMode = PictureBoxSizeMode.AutoSize;
 
-            Bitmap bmp = new Bitmap(maxCounGen * 320, length * 220);//размер битмапа под количество элементов
+            Bitmap bmp = new Bitmap(maxCounGen * 320, length * 300);//размер битмапа под количество элементов
             Graphics graph = Graphics.FromImage(bmp);
             Pen pen = new Pen(Color.Gray, 1f);
             Pen pen1 = new Pen(Color.Black, 2f);
+            Font fnt = new System.Drawing.Font("Arial", (int)11);
+            Brush br = new SolidBrush(Color.Black);
 
 
-            int x = 10, y = 10; //положение точки для верхнего поколения
-            int stepHor = 250; //блок для одного чела с партнером
-            int stepVert = 200; //блок для пары в высоту
+            int x = 10, y = 30; //положение точки для верхнего поколения
+            int stepHor = 300; //блок для одного чела с партнером
+            int stepVert = 250; //блок для пары в высоту
+
             pictureBoxTree.Image = bmp;
 
-            Font fnt = new System.Drawing.Font("Arial", (float)10);
-            Brush br = new SolidBrush(Color.Red);
-            
-            
-            
-
+            int count = persones.Count; //количество людей
             for (int i = length - 1; i >= 0; i--) //прорисовка блоков цикл по поколениям
             {
+
                 for (int k = 0; k < gener[i].Count; k++) //цикл по массивам внутри поколений
                 {
 
-                    //graph.DrawRectangle(pen, x, y, 300, 200);
-                    string m = k.ToString();
-                    graph.DrawEllipse(pen1, x, y, 100, 100);
-                    graph.DrawString(m, fnt, br, x + 20, y - 10);
+                    graph.DrawRectangle(pen, x, y, 300, 250);
+                   
+                    graph.DrawEllipse(pen1, x, y + 80, 100, 100);
+                    count--;
+                    //graph.DrawString(persones[count].FIO, fnt, br, x, y - 15 + 80);
 
-                    /*if (gener[i][0][1] == gener[i][1][2])
+                   
+                    if (count != 0 && persones[count].Id == persones[count - 1].IdPartner && count !=0)
                     {
-                        graph.DrawLine(pen1, x + 100, y + 50, x + stepHor, y + 50);
-                    }*/
+                       //graph.DrawLine(pen1, x + 100, y + 50 + 80, x + stepHor, y + 50 + 80);
+                        
+                     //graph.DrawLine(pen1, x + 170, y + 50 + 80, x + 170, y + 200 + 80);
+                    }
+
+                    
+                    
                     x += stepHor;
 
                 }
                 x = 10;
                 y += stepVert;
             }
-
-
-
+            
         }
+
+        
+
+        
 
         
     }
