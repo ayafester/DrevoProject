@@ -99,12 +99,20 @@ namespace Drevo_Project
             }
 
         }
-        
+
+<<<<<<< HEAD
 
 
 
 
 
 
-
+=======
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Application.Exit();
+        }
+    }
+>>>>>>> 53122504eedb574971db2b166841079ae3297631
 }
