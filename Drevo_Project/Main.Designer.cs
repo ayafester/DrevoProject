@@ -44,6 +44,11 @@ namespace Drevo_Project
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
             this.listBoxPhoto = new System.Windows.Forms.ListBox();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
+            this.ChangeContactsButton = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.MailBox = new System.Windows.Forms.TextBox();
+            this.NumberBox = new System.Windows.Forms.TextBox();
             this.listBoxContacts = new System.Windows.Forms.ListBox();
             this.tabDrevo = new System.Windows.Forms.TabPage();
             this.panelTree = new System.Windows.Forms.Panel();
@@ -235,12 +240,62 @@ namespace Drevo_Project
             // 
             this.tabContactsCard.BackColor = System.Drawing.Color.White;
             this.tabContactsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabContactsCard.Controls.Add(this.ChangeContactsButton);
+            this.tabContactsCard.Controls.Add(this.label5);
+            this.tabContactsCard.Controls.Add(this.label4);
+            this.tabContactsCard.Controls.Add(this.MailBox);
+            this.tabContactsCard.Controls.Add(this.NumberBox);
             this.tabContactsCard.Controls.Add(this.listBoxContacts);
             this.tabContactsCard.Location = new System.Drawing.Point(4, 29);
             this.tabContactsCard.Name = "tabContactsCard";
             this.tabContactsCard.Size = new System.Drawing.Size(453, 602);
             this.tabContactsCard.TabIndex = 2;
             this.tabContactsCard.Text = "Контакты";
+            // 
+            // ChangeContactsButton
+            // 
+            this.ChangeContactsButton.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.ChangeContactsButton.FlatAppearance.BorderSize = 0;
+            this.ChangeContactsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChangeContactsButton.Location = new System.Drawing.Point(90, 135);
+            this.ChangeContactsButton.Name = "ChangeContactsButton";
+            this.ChangeContactsButton.Size = new System.Drawing.Size(97, 33);
+            this.ChangeContactsButton.TabIndex = 8;
+            this.ChangeContactsButton.Text = "Изменить";
+            this.ChangeContactsButton.UseVisualStyleBackColor = false;
+            this.ChangeContactsButton.Click += new System.EventHandler(this.ChangeContactsButton_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 89);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 20);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Почта: ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 20);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Номер: ";
+            // 
+            // MailBox
+            // 
+            this.MailBox.Location = new System.Drawing.Point(101, 86);
+            this.MailBox.Name = "MailBox";
+            this.MailBox.Size = new System.Drawing.Size(170, 26);
+            this.MailBox.TabIndex = 7;
+            // 
+            // NumberBox
+            // 
+            this.NumberBox.Location = new System.Drawing.Point(101, 36);
+            this.NumberBox.Name = "NumberBox";
+            this.NumberBox.Size = new System.Drawing.Size(170, 26);
+            this.NumberBox.TabIndex = 4;
             // 
             // listBoxContacts
             // 
@@ -406,6 +461,7 @@ namespace Drevo_Project
             this.tabBioProfile.ResumeLayout(false);
             this.tabPhotoCard.ResumeLayout(false);
             this.tabContactsCard.ResumeLayout(false);
+            this.tabContactsCard.PerformLayout();
             this.tabDrevo.ResumeLayout(false);
             this.panelTree.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTree)).EndInit();
@@ -449,5 +505,10 @@ namespace Drevo_Project
         private TextBox textBox1;
         private Button buttonSearch;
         private TabPage tabPhotoAlbum;
+        private Button ChangeContactsButton;
+        private Label label5;
+        private Label label4;
+        private TextBox MailBox;
+        private TextBox NumberBox;
     }
 }

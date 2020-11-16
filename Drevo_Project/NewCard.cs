@@ -42,7 +42,7 @@ namespace Drevo_Project
 
         private void NewCard_Load(object sender, EventArgs e)
         {
-            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename,gender FROM Card WHERE id >= 1";
+            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender FROM Card WHERE id >= 1";
             List<Person> Names = new List<Person>();
             try
             {
@@ -138,7 +138,7 @@ namespace Drevo_Project
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            idMom = comboBox1.SelectedIndex + 1;
+            idMom = comboBox1.SelectedIndex + 1; //тут не так, они могут быть не по очереди добавлены. надо брать айди у выбранного чувака и сюда присваивать
         }
 
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)

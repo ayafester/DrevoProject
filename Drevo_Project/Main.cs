@@ -19,7 +19,8 @@ namespace Drevo_Project
 {
     public partial class Main : Form
     {
-        
+        public String ContNum { get; set; }
+        public String ContMail { get; set; }
 
         ConnectBD sql = new ConnectBD();
         public Main()
@@ -50,7 +51,7 @@ namespace Drevo_Project
                 while (read2.Read())
                 {
                     labelFio.Text = read2["surname"].ToString() + " " + read2["name"].ToString() + " " + read2["middlename"].ToString();
-                   
+
                     listBoxBio.Items.Add(Convert.ToString(read2["bio"]));
                     if (read2["deathday"].ToString() == "")
                     {
@@ -63,6 +64,18 @@ namespace Drevo_Project
                 }
                 read2.Close();
 
+                sql.command.CommandText = "SELECT * FROM Card WHERE id = '" + DataClass.CardID + "' ";
+                SQLiteDataReader read3 = sql.command.ExecuteReader();
+
+                while (read3.Read())
+                {
+                    NumberBox.Text = read3["number"].ToString();
+                    ContNum = read3["number"].ToString();
+                    MailBox.Text = read3["mail"].ToString();
+                    ContMail = read3["mail"].ToString();
+
+                }
+                read3.Close();
 
 
             }
@@ -72,6 +85,24 @@ namespace Drevo_Project
                 MessageBox.Show("Error: стр рег" + ex.Message);
             }
         }
+
+        private void ChangeContactsButton_Click(object sender, EventArgs e)
+        {
+            if (NumberBox.Text != ContNum || MailBox.Text != ContMail)
+            {
+                try
+                {
+                    sql.command.CommandText = "UPDATE Card SET number= '" + NumberBox.Text + "', mail='" + MailBox.Text + "' WHERE id = '" + DataClass.CardID + "'  ";
+                    sql.command.ExecuteNonQuery();
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: стр рег" + ex.Message);
+                }
+            }
+        }
+
+
         private void buttonEdit_Click(object sender, EventArgs e) //реализовать после вывода данных в БИО табличку админа
         {
             EditCard editCard = new EditCard();
@@ -126,7 +157,6 @@ namespace Drevo_Project
             int[][] arr = new int[rows][];
 
 
-
             for (int i = 0; i < rows; i++)
             {
                 DataRow row = dt.Rows[i];
@@ -142,7 +172,36 @@ namespace Drevo_Project
 
         }
 
-        private List<List<int[]>> SortDataToGeneration() //преобразование в список список по поколениям
+        /*private List<String> GetNames() создать класс и изменить всё
+        {
+            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender FROM Card WHERE id >= 1";
+            List<String> Names = new List<String>();
+            try
+            {
+                SQLiteDataReader r = sql.command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    Person entity = new Person
+                    {
+                        Id = r.GetInt32(0),
+                        Name = r.GetString(1),
+                        Gender = r.GetInt32(2)
+                    };
+                    Names.Add(entity);
+                }
+                r.Close();
+                sql.command.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return Names;
+        }*/
+
+        private List<List<int[]>> SortDataToGeneration() //преобразование в список по поколениям
         {
             int[][] values = GetData();
             int rowsVal = values.Length;
@@ -195,30 +254,45 @@ namespace Drevo_Project
             panelTree.AutoScroll = true; //автоскролл
             pictureBoxTree.SizeMode = PictureBoxSizeMode.AutoSize;
 
-            Bitmap bmp = new Bitmap(maxCounGen * 320, length * 200);//размер битмапа под количество элементов
+            Bitmap bmp = new Bitmap(maxCounGen * 320, length * 220);//размер битмапа под количество элементов
             Graphics graph = Graphics.FromImage(bmp);
-            Pen pen = new Pen(Color.Black, 3f);
+            Pen pen = new Pen(Color.Gray, 1f);
+            Pen pen1 = new Pen(Color.Black, 2f);
 
 
-            int x = 0, y = 0; //положение точки для верхнего поколения
-            int stepHor = 300; //блок для одного чела с партнером
+            int x = 10, y = 10; //положение точки для верхнего поколения
+            int stepHor = 250; //блок для одного чела с партнером
             int stepVert = 200; //блок для пары в высоту
             pictureBoxTree.Image = bmp;
 
+            Font fnt = new System.Drawing.Font("Arial", (float)10);
+            Brush br = new SolidBrush(Color.Red);
+            
+            
+            
 
-
-            for (int i = length - 1; i >= 0; i--) //прорисовка блоков 
+            for (int i = length - 1; i >= 0; i--) //прорисовка блоков цикл по поколениям
             {
-                for (int k = 0; k < gener[i].Count; k++)
+                for (int k = 0; k < gener[i].Count; k++) //цикл по массивам внутри поколений
                 {
-                    graph.DrawRectangle(pen, x, y, 300, 200);
 
+                    //graph.DrawRectangle(pen, x, y, 300, 200);
+                    string m = k.ToString();
+                    graph.DrawEllipse(pen1, x, y, 100, 100);
+                    graph.DrawString(m, fnt, br, x + 20, y - 10);
+
+                    /*if (gener[i][0][1] == gener[i][1][2])
+                    {
+                        graph.DrawLine(pen1, x + 100, y + 50, x + stepHor, y + 50);
+                    }*/
                     x += stepHor;
 
                 }
-                x = 0;
+                x = 10;
                 y += stepVert;
             }
+
+
 
         }
 

@@ -61,7 +61,7 @@ namespace Drevo_Project
 
                 if (db2.Rows.Count > 0)
                 {
-                    MessageBox.Show("Вы успешно вошли");
+                    //MessageBox.Show("Вы успешно вошли");
 
                     DialogResult = DialogResult.OK; //Переход к след файлу
 
