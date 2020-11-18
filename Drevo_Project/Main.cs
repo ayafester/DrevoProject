@@ -19,6 +19,7 @@ namespace Drevo_Project
 {
     public partial class Main : Form
     {
+        public string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); // путь к папке
         public String ContNum { get; set; }
         public String ContMail { get; set; }
 
@@ -286,9 +287,9 @@ namespace Drevo_Project
             Font fnt = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             Brush br = new SolidBrush(Color.Black);
 
-            string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            
 
-            Image image1 = Image.FromFile("" + path + "\\img\\logoLogo.png"); ;
+            Image image1 = Image.FromFile("" + path + "\\img\\logoLogo.png");
             int x = 10, y = 30; //положение точки для верхнего поколения
             int stepHor = 350; //блок для одного чела с партн11ером 50 отступ 100 эллипс 50 отступ справа снова 100 эллипс 50 отступ
             int stepVert = 200; //блок для пары в высоту 50 100 50 
