@@ -182,6 +182,7 @@ namespace Drevo_Project
             List<List<int[]>> generation = new List<List<int[]>> { //количество поколений 3 например. сделать динамические изменения поколений
                 new List<int[]>(),
                 new List<int[]>(),
+                new List<int[]>(),
                 new List<int[]>()
             };
 
@@ -203,12 +204,16 @@ namespace Drevo_Project
                 {
                     generation[3].Add(values[i]);
                 }
+                else if (values[i][0] == 4)
+                {
+                    generation[4].Add(values[i]);
+                }
 
             }
 
             return generation;
         }
-        class Card //человек (ребята обратите внимание сюда. может будем одним классом пользоваться?
+        class Card //человек (ребята обратите внимание сюда. может будем одним классом пользоваться? дополняйте как нужно
         {
             public int Gener { get; set; }
             public int Id { get; set; }
@@ -217,12 +222,13 @@ namespace Drevo_Project
             public int IdDad { get; set; }
             public string FIO { get; set; }
 
-            public string Age { get; set; }
+           
+            public int isDelete { get; set; }
 
         }
-        private List<Card> GetDataFromBD() //считывание персон с таблицы
+        private List<Card> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename FROM Card WHERE id >= 1";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete FROM Card WHERE id >= 1";
             List<Card> Cards = new List<Card>();
             try
             {
@@ -238,6 +244,7 @@ namespace Drevo_Project
                         IdMom = r.GetInt32(3),
                         IdDad = r.GetInt32(4),
                         FIO = r.GetString(5),
+                        isDelete = r.GetInt32(6),
                         
                     };
                     Cards.Add(entity);
@@ -254,13 +261,10 @@ namespace Drevo_Project
         }
         private void DrawTreeBmp()
         {
+
             List<List<int[]>> gener = SortDataToGeneration(); //[generation, id, idPartner, idMom, idDad]
             int length = gener.Count; //количество поколений 3
             int[] temp = new int[length];
-
-
-            List<Card> persones = GetDataFromBD();
-
             for (int i = 0; i < length; i++)
             {
                 temp[i] = gener[i].Count;
@@ -268,53 +272,103 @@ namespace Drevo_Project
 
             int maxCounGen = temp.Max(); //максимальная длина поколения
 
+            List<Card> persones = GetDataFromBD();
+
+            
+
             panelTree.AutoScroll = true; //автоскролл
             pictureBoxTree.SizeMode = PictureBoxSizeMode.AutoSize;
 
-            Bitmap bmp = new Bitmap(maxCounGen * 320, length * 300);//размер битмапа под количество элементов
+            Bitmap bmp = new Bitmap(maxCounGen * 380, length * 250);//размер битмапа под количество элементов
             Graphics graph = Graphics.FromImage(bmp);
             Pen pen = new Pen(Color.Gray, 1f);
-            Pen pen1 = new Pen(Color.Black, 2f);
-            Font fnt = new System.Drawing.Font("Arial", (int)11);
+            Pen pen1 = new Pen(Color.Black, 1.8f);
+            Font fnt = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             Brush br = new SolidBrush(Color.Black);
 
+            string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
+            Image image1 = Image.FromFile("" + path + "\\img\\logoLogo.png"); ;
             int x = 10, y = 30; //положение точки для верхнего поколения
-            int stepHor = 300; //блок для одного чела с партнером
-            int stepVert = 250; //блок для пары в высоту
-
-            pictureBoxTree.Image = bmp;
+            int stepHor = 350; //блок для одного чела с партн11ером 50 отступ 100 эллипс 50 отступ справа снова 100 эллипс 50 отступ
+            int stepVert = 200; //блок для пары в высоту 50 100 50 
 
             int count = persones.Count; //количество людей
+
+            List<int> usedId = new List<int>(); //список нарисованных людей
+
             for (int i = length - 1; i >= 0; i--) //прорисовка блоков цикл по поколениям
             {
 
                 for (int k = 0; k < gener[i].Count; k++) //цикл по массивам внутри поколений
                 {
 
-                    graph.DrawRectangle(pen, x, y, 300, 250);
-                   
-                    graph.DrawEllipse(pen1, x, y + 80, 100, 100);
-                    count--;
-                    //graph.DrawString(persones[count].FIO, fnt, br, x, y - 15 + 80);
+                    //graph.DrawRectangle(pen, x, y, stepHor, stepVert);
 
-                   
-                    if (count != 0 && persones[count].Id == persones[count - 1].IdPartner && count !=0)
+                    int idTemp = gener[i][k][1]; //текущий человек
+ 
+                    foreach (var item in persones)
                     {
-                       //graph.DrawLine(pen1, x + 100, y + 50 + 80, x + stepHor, y + 50 + 80);
-                        
-                     //graph.DrawLine(pen1, x + 170, y + 50 + 80, x + 170, y + 200 + 80);
-                    }
+                        if(item.Id == idTemp && item.isDelete == 1) //если такой существует и не удален
+                        {
+                            if (!usedId.Exists(value => value == idTemp)) //проверка если он уже нарисован
+                            {
+                                graph.DrawLine(pen1, x, y + stepVert, x + length * 250, y + stepVert);
 
-                    
-                    
+                                if (item.IdPartner != 0) //пара
+                                {
+                                    Card partnerTemp = persones.Find(find => find.IdPartner == item.Id);
+
+                                    //graph.DrawEllipse(pen1, x, y + 50, 100, 100);
+                                    graph.DrawImage(image1, x, y + 50);
+                                    graph.DrawString(item.FIO, fnt, br, x, y + 30);
+
+                                    if(item.IdMom != 0)
+                                    {
+                                        graph.DrawLine(pen1, x + 50, y + 50, x + 50, y);
+                                    }
+
+                                    //graph.DrawEllipse(pen1, x + 150, y + 50, 100, 100);
+                                    graph.DrawImage(image1, x + 150, y + 50);
+                                    graph.DrawString(partnerTemp.FIO, fnt, br, x + 200, y + 30);
+                                    
+
+                                    if (partnerTemp.IdMom != 0)
+                                    {
+                                        graph.DrawLine(pen1, x + 200, y + 50, x + 200, y);
+                                    }
+
+                                    graph.DrawLine(pen1, x+100, y + 100, x + 150, y +100); //линия между супругами
+                                    graph.DrawLine(pen1, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+
+                                    
+
+                                    usedId.Add(idTemp);
+                                    usedId.Add(partnerTemp.Id);
+                                }
+                                if (item.IdPartner == 0) //одинокий человек
+                                {
+                                    //graph.DrawEllipse(pen1, x, y + 50, 100, 100);
+                                    graph.DrawImage(image1, x, y + 50);
+                                    graph.DrawString(item.FIO, fnt, br, x, y + 30); //добавить фото
+                                    if (item.IdMom != 0)
+                                    {
+                                        graph.DrawLine(pen1, x + 50, y + 50, x + 50, y);
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
                     x += stepHor;
 
                 }
                 x = 10;
                 y += stepVert;
             }
-            
+
+            pictureBoxTree.Image = bmp;
         }
 
         
