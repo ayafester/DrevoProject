@@ -20,7 +20,7 @@ namespace Drevo_Project
 
         ConnectBD sql = new ConnectBD();
         public String Mail { get; set; }
-
+        public String Number { get; set; }
         public String Password { get; set; }
         public String Surname { get; set; }
         public String NamePerson { get; set; }
@@ -44,6 +44,7 @@ namespace Drevo_Project
 
         private void btOK_Click(object sender, EventArgs e)
         {
+            Number = NumberBox.Text;
             Mail = textBoxMail.Text;
             Password = textBoxPassword.Text;
             Surname = textBoxSurname.Text;
@@ -51,10 +52,11 @@ namespace Drevo_Project
             Middlename = textBoxMiddlename.Text;
             DateBirthday = dttBirthday.Value.ToString("dd/MM/yyyy");
 
-            if(radioButtonFemale.Checked == true)
+            if (radioButtonFemale.Checked == true)
             {
                 Gender = 0;
-            } else if(radioButtonMen.Checked == true)
+            }
+            else if (radioButtonMen.Checked == true)
             {
                 Gender = 1;
             }
@@ -62,22 +64,32 @@ namespace Drevo_Project
             if (Surname == "")
             {
                 MessageBox.Show("Введите фамилию!");
-            } else if (NamePerson == "")
+            }
+            else if (NamePerson == "")
             {
                 MessageBox.Show("Введите имя!");
-            } else if (Middlename == "")
+            }
+            else if (Middlename == "")
             {
                 MessageBox.Show("Введите отчество!");
-            } else if (DateBirthday == "")
+            }
+            else if (DateBirthday == "")
             {
                 MessageBox.Show("Введите дату рождения!");
-            } else if (Mail == "")
+            }
+            else if (Number == "")
+            {
+                MessageBox.Show("Введите номер!");
+            }
+            else if (Mail == "")
             {
                 MessageBox.Show("Введите почту!");
-            } else if (Password == "")
+            }
+            else if (Password == "")
             {
                 MessageBox.Show("Введите пароль!");
-            } else if (radioButtonFemale.Checked == false && radioButtonMen.Checked == false)
+            }
+            else if (radioButtonFemale.Checked == false && radioButtonMen.Checked == false)
             {
                 MessageBox.Show("Выберите пол!");
             }
@@ -89,18 +101,40 @@ namespace Drevo_Project
             {
                 sql.command.CommandText = "INSERT INTO User ('mail', 'password') VALUES ('" +
                     Mail + "' , '" +
-                    Password + "')";
+                    Password + "') ";
 
                 sql.command.ExecuteNonQuery();
 
-                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'birthday') VALUES ('" +
+                sql.command.CommandText = "SELECT * FROM User WHERE mail ='" + Mail + "' AND password ='" + Password + "' ";
+                SQLiteDataReader read = sql.command.ExecuteReader();
+                while (read.Read())
+                {
+                    DataClass.ID = read["id"].ToString(); //Забрали и записали ID юзера
+                }
+                read.Close();
+
+                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'birthday', 'number', 'mail', 'idCreator') VALUES ('" +
                     Surname + "' , '" +
                     NamePerson + "' , '" +
                     Middlename + "' , '" +
                     Gender + "' , '" +
-                    DateBirthday + "')";
+                    DateBirthday + "' , '" +
+                    Number + "' , '" +
+                    Mail + "' , '" +
+                    DataClass.ID + "')";
 
                 sql.command.ExecuteNonQuery();
+
+                sql.command.CommandText = "SELECT * FROM Card WHERE  idCreator = '" + DataClass.ID + "' ";
+                SQLiteDataReader read2 = sql.command.ExecuteReader();
+                while (read2.Read())
+                {
+                    DataClass.CardID = read2["id"].ToString();
+                }
+                read2.Close();
+
+                sql.command.CommandText = " UPDATE User SET idCard = '" + DataClass.CardID + "' WHERE id = '" + DataClass.ID + "' ";
+                sql.command.ExecuteNonQuery(); // Записали ID его карты
             }
             catch (SQLiteException ex)
             {
@@ -109,7 +143,7 @@ namespace Drevo_Project
 
 
             DialogResult = DialogResult.OK;
-            
+
         }
     }
 }

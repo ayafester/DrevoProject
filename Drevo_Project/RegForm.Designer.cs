@@ -45,13 +45,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.radioButtonFemale = new System.Windows.Forms.RadioButton();
             this.radioButtonMen = new System.Windows.Forms.RadioButton();
+            this.NumberBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPassword.Location = new System.Drawing.Point(189, 475);
+            this.textBoxPassword.Location = new System.Drawing.Point(189, 514);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(198, 26);
             this.textBoxPassword.TabIndex = 25;
@@ -60,7 +62,7 @@
             // 
             this.textBoxMail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxMail.Location = new System.Drawing.Point(189, 423);
+            this.textBoxMail.Location = new System.Drawing.Point(189, 462);
             this.textBoxMail.Name = "textBoxMail";
             this.textBoxMail.Size = new System.Drawing.Size(198, 26);
             this.textBoxMail.TabIndex = 24;
@@ -69,7 +71,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(100, 481);
+            this.label7.Location = new System.Drawing.Point(100, 520);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(71, 20);
             this.label7.TabIndex = 20;
@@ -79,7 +81,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(109, 429);
+            this.label6.Location = new System.Drawing.Point(109, 468);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(61, 20);
             this.label6.TabIndex = 19;
@@ -102,7 +104,7 @@
             this.btOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btOK.ForeColor = System.Drawing.Color.Black;
-            this.btOK.Location = new System.Drawing.Point(189, 552);
+            this.btOK.Location = new System.Drawing.Point(189, 591);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(97, 46);
             this.btOK.TabIndex = 29;
@@ -221,12 +223,33 @@
             this.radioButtonMen.Text = "мужской";
             this.radioButtonMen.UseVisualStyleBackColor = true;
             // 
+            // NumberBox
+            // 
+            this.NumberBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NumberBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.NumberBox.Location = new System.Drawing.Point(189, 412);
+            this.NumberBox.Name = "NumberBox";
+            this.NumberBox.Size = new System.Drawing.Size(198, 26);
+            this.NumberBox.TabIndex = 41;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(109, 412);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 20);
+            this.label9.TabIndex = 42;
+            this.label9.Text = "Номер:";
+            // 
             // RegForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(474, 620);
+            this.ClientSize = new System.Drawing.Size(474, 709);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.NumberBox);
             this.Controls.Add(this.radioButtonMen);
             this.Controls.Add(this.radioButtonFemale);
             this.Controls.Add(this.label8);
@@ -271,5 +294,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.RadioButton radioButtonFemale;
         private System.Windows.Forms.RadioButton radioButtonMen;
+        private System.Windows.Forms.TextBox NumberBox;
+        private System.Windows.Forms.Label label9;
     }
 }

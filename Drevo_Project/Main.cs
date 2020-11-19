@@ -180,7 +180,7 @@ namespace Drevo_Project
             int rowsVal = values.Length;
             int columnsVal = values[0].Length;
 
-            List<List<int[]>> generation = new List<List<int[]>> { //количество поколений 3 например. сделать динамические изменения поколений
+            List<List<int[]>> generation = new List<List<int[]>> { //количество поколений 4 например. сделать динамические изменения поколений
                 new List<int[]>(),
                 new List<int[]>(),
                 new List<int[]>(),
@@ -225,6 +225,8 @@ namespace Drevo_Project
 
            
             public int isDelete { get; set; }
+
+            public SolidBrush colorLine { get; set; } //для дерева
 
         }
         private List<Card> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
@@ -282,14 +284,24 @@ namespace Drevo_Project
 
             Bitmap bmp = new Bitmap(maxCounGen * 380, length * 250);//размер битмапа под количество элементов
             Graphics graph = Graphics.FromImage(bmp);
-            Pen pen = new Pen(Color.Gray, 1f);
-            Pen pen1 = new Pen(Color.Black, 1.8f);
+
+            List<SolidBrush> pens = new List<SolidBrush>() { 
+                new SolidBrush(Color.Blue),
+                new SolidBrush(Color.Red),
+                new SolidBrush(Color.Green),
+                new SolidBrush(Color.Yellow),
+                new SolidBrush(Color.Orange),
+                new SolidBrush(Color.Pink),
+                new SolidBrush(Color.Lavender),
+            };
+           
+            Pen penLine = new Pen(Color.Gray, 1.5f);
             Font fnt = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             Brush br = new SolidBrush(Color.Black);
 
             
 
-            Image image1 = Image.FromFile("" + path + "\\img\\logoLogo.png");
+            Image image1 = Image.FromFile("" + path + "\\img\\logoLogo.png"); //просто лого-заглушка
             int x = 10, y = 30; //положение точки для верхнего поколения
             int stepHor = 350; //блок для одного чела с партн11ером 50 отступ 100 эллипс 50 отступ справа снова 100 эллипс 50 отступ
             int stepVert = 200; //блок для пары в высоту 50 100 50 
@@ -301,7 +313,7 @@ namespace Drevo_Project
             for (int i = length - 1; i >= 0; i--) //прорисовка блоков цикл по поколениям
             {
 
-                for (int k = 0; k < gener[i].Count; k++) //цикл по массивам внутри поколений
+                for (int k = 0; k < gener[i].Count; k++) //цикл по массивам внутри поколений 
                 {
 
                     //graph.DrawRectangle(pen, x, y, stepHor, stepVert);
@@ -314,33 +326,42 @@ namespace Drevo_Project
                         {
                             if (!usedId.Exists(value => value == idTemp)) //проверка если он уже нарисован
                             {
-                                graph.DrawLine(pen1, x, y + stepVert, x + length * 250, y + stepVert);
+                                graph.DrawLine(penLine, x, y + stepVert, x + length * 250, y + stepVert);
 
                                 if (item.IdPartner != 0) //пара
                                 {
                                     Card partnerTemp = persones.Find(find => find.IdPartner == item.Id);
+                                    item.colorLine = pens[k];
+                                    partnerTemp.colorLine = pens[k];
 
-                                    //graph.DrawEllipse(pen1, x, y + 50, 100, 100);
+                                    if(item.IdMom != 0) //мать
+                                    {
+                                        graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
+                                        Card momTemp = persones.Find(find => find.Id == item.IdMom);
+                                        item.colorLine = momTemp.colorLine;
+                                    }
+
+                                    graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 115);
                                     graph.DrawImage(image1, x, y + 50);
                                     graph.DrawString(item.FIO, fnt, br, x, y + 30);
 
-                                    if(item.IdMom != 0)
+                                    if (partnerTemp.IdMom != 0)
                                     {
-                                        graph.DrawLine(pen1, x + 50, y + 50, x + 50, y);
+                                        Card momPartnerTemp = persones.Find(find => find.Id == partnerTemp.IdMom);
+                                        partnerTemp.colorLine = momPartnerTemp.colorLine;
                                     }
-
-                                    //graph.DrawEllipse(pen1, x + 150, y + 50, 100, 100);
+                                    graph.FillEllipse(partnerTemp.colorLine, x + 145, y + 45, 110, 115);
                                     graph.DrawImage(image1, x + 150, y + 50);
                                     graph.DrawString(partnerTemp.FIO, fnt, br, x + 200, y + 30);
                                     
 
                                     if (partnerTemp.IdMom != 0)
                                     {
-                                        graph.DrawLine(pen1, x + 200, y + 50, x + 200, y);
+                                        graph.DrawLine(penLine, x + 200, y + 50, x + 200, y);
                                     }
 
-                                    graph.DrawLine(pen1, x+100, y + 100, x + 150, y +100); //линия между супругами
-                                    graph.DrawLine(pen1, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+                                    graph.DrawLine(penLine, x+100, y + 100, x + 150, y +100); //линия между супругами
+                                    graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
 
                                     
 
@@ -349,12 +370,18 @@ namespace Drevo_Project
                                 }
                                 if (item.IdPartner == 0) //одинокий человек
                                 {
-                                    //graph.DrawEllipse(pen1, x, y + 50, 100, 100);
+                                    if (item.IdMom != 0)
+                                    {
+                                        graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
+                                        Card momTemp = persones.Find(find => find.Id == item.IdMom);
+                                        item.colorLine = momTemp.colorLine;
+                                    }
+                                    graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 115);
                                     graph.DrawImage(image1, x, y + 50);
                                     graph.DrawString(item.FIO, fnt, br, x, y + 30); //добавить фото
                                     if (item.IdMom != 0)
                                     {
-                                        graph.DrawLine(pen1, x + 50, y + 50, x + 50, y);
+                                        graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
                                     }
                                 }
 
