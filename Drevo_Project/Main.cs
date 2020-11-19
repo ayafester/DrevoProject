@@ -53,10 +53,10 @@ namespace Drevo_Project
                 {
                     labelFio.Text = read2["surname"].ToString() + " " + read2["name"].ToString() + " " + read2["middlename"].ToString();
 
-                    listBoxBio.Items.Add(Convert.ToString(read2["bio"]));
+                    labelBIO.Text = Convert.ToString(read2["bio"]);
                     if (read2["deathday"].ToString() == "")
                     {
-                        labelDataBorn.Text = read2["birthday"].ToString() + "-...";
+                        labelDataBorn.Text = read2["birthday"].ToString() + "";
                     }
                     else
                     {
@@ -214,7 +214,7 @@ namespace Drevo_Project
 
             return generation;
         }
-        class Card //человек (ребята обратите внимание сюда. может будем одним классом пользоваться? дополняйте как нужно
+        class Cards //человек (ребята обратите внимание сюда. может будем одним классом пользоваться? дополняйте как нужно
         {
             public int Gener { get; set; }
             public int Id { get; set; }
@@ -223,34 +223,34 @@ namespace Drevo_Project
             public int IdDad { get; set; }
             public string FIO { get; set; }
 
-           
+            
             public int isDelete { get; set; }
 
             public SolidBrush colorLine { get; set; } //для дерева
 
         }
-        private List<Card> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
+        private List<Cards> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
         {
             sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete FROM Card WHERE id >= 1";
-            List<Card> Cards = new List<Card>();
+            List<Cards> CardsTemp = new List<Cards>();
             try
             {
                 SQLiteDataReader r = sql.command.ExecuteReader();
 
                 while (r.Read())
                 {
-                    Card entity = new Card
+                    Cards entity = new Cards
                     {
                         Gener = r.GetInt32(0),
                         Id = r.GetInt32(1),
                         IdPartner = r.GetInt32(2),
                         IdMom = r.GetInt32(3),
                         IdDad = r.GetInt32(4),
-                        FIO = r.GetString(5),
+                        FIO = r.GetString(5),     
                         isDelete = r.GetInt32(6),
                         
                     };
-                    Cards.Add(entity);
+                    CardsTemp.Add(entity);
                 }
                 r.Close();
                 sql.command.ExecuteNonQuery();
@@ -260,7 +260,7 @@ namespace Drevo_Project
                 MessageBox.Show("Error: " + ex.Message);
             }
 
-            return Cards;
+            return CardsTemp;
         }
         private void DrawTreeBmp()
         {
@@ -275,7 +275,7 @@ namespace Drevo_Project
 
             int maxCounGen = temp.Max(); //максимальная длина поколения
 
-            List<Card> persones = GetDataFromBD();
+            List<Cards> persones = GetDataFromBD();
 
             
 
@@ -330,14 +330,14 @@ namespace Drevo_Project
 
                                 if (item.IdPartner != 0) //пара
                                 {
-                                    Card partnerTemp = persones.Find(find => find.IdPartner == item.Id);
+                                    Cards partnerTemp = persones.Find(find => find.IdPartner == item.Id);
                                     item.colorLine = pens[k];
                                     partnerTemp.colorLine = pens[k];
 
                                     if(item.IdMom != 0) //мать
                                     {
                                         graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
-                                        Card momTemp = persones.Find(find => find.Id == item.IdMom);
+                                        Cards momTemp = persones.Find(find => find.Id == item.IdMom);
                                         item.colorLine = momTemp.colorLine;
                                     }
 
@@ -347,7 +347,7 @@ namespace Drevo_Project
 
                                     if (partnerTemp.IdMom != 0)
                                     {
-                                        Card momPartnerTemp = persones.Find(find => find.Id == partnerTemp.IdMom);
+                                        Cards momPartnerTemp = persones.Find(find => find.Id == partnerTemp.IdMom);
                                         partnerTemp.colorLine = momPartnerTemp.colorLine;
                                     }
                                     graph.FillEllipse(partnerTemp.colorLine, x + 145, y + 45, 110, 115);
@@ -373,7 +373,7 @@ namespace Drevo_Project
                                     if (item.IdMom != 0)
                                     {
                                         graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
-                                        Card momTemp = persones.Find(find => find.Id == item.IdMom);
+                                        Cards momTemp = persones.Find(find => find.Id == item.IdMom);
                                         item.colorLine = momTemp.colorLine;
                                     }
                                     graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 115);
@@ -399,8 +399,14 @@ namespace Drevo_Project
             pictureBoxTree.Image = bmp;
         }
 
-        
 
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+             
+
+        }
+       
+        
         
 
         

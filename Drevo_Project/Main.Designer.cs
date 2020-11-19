@@ -40,7 +40,7 @@ namespace Drevo_Project
             this.pictureBoxAva = new System.Windows.Forms.PictureBox();
             this.tabInfoCard = new System.Windows.Forms.TabControl();
             this.tabBioProfile = new System.Windows.Forms.TabPage();
-            this.listBoxBio = new System.Windows.Forms.ListBox();
+            this.labelBIO = new System.Windows.Forms.Label();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
             this.listBoxPhoto = new System.Windows.Forms.ListBox();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
@@ -54,12 +54,13 @@ namespace Drevo_Project
             this.panelTree = new System.Windows.Forms.Panel();
             this.pictureBoxTree = new System.Windows.Forms.PictureBox();
             this.tabRelatives = new System.Windows.Forms.TabPage();
+            this.listBoxSearch = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchBox = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.tabPhotoAlbum = new System.Windows.Forms.TabPage();
             this.tabMenu.SuspendLayout();
@@ -189,9 +190,10 @@ namespace Drevo_Project
             // 
             // tabBioProfile
             // 
+            this.tabBioProfile.AutoScroll = true;
             this.tabBioProfile.BackColor = System.Drawing.Color.White;
             this.tabBioProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabBioProfile.Controls.Add(this.listBoxBio);
+            this.tabBioProfile.Controls.Add(this.labelBIO);
             this.tabBioProfile.Location = new System.Drawing.Point(4, 29);
             this.tabBioProfile.Name = "tabBioProfile";
             this.tabBioProfile.Padding = new System.Windows.Forms.Padding(3);
@@ -199,19 +201,16 @@ namespace Drevo_Project
             this.tabBioProfile.TabIndex = 0;
             this.tabBioProfile.Text = "Биография";
             // 
-            // listBoxBio
+            // labelBIO
             // 
-            this.listBoxBio.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBoxBio.ColumnWidth = 50;
-            this.listBoxBio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxBio.FormattingEnabled = true;
-            this.listBoxBio.HorizontalScrollbar = true;
-            this.listBoxBio.ItemHeight = 20;
-            this.listBoxBio.Location = new System.Drawing.Point(3, 3);
-            this.listBoxBio.Name = "listBoxBio";
-            this.listBoxBio.ScrollAlwaysVisible = true;
-            this.listBoxBio.Size = new System.Drawing.Size(445, 594);
-            this.listBoxBio.TabIndex = 0;
+            this.labelBIO.AutoEllipsis = true;
+            this.labelBIO.AutoSize = true;
+            this.labelBIO.Location = new System.Drawing.Point(6, 12);
+            this.labelBIO.MaximumSize = new System.Drawing.Size(400, 0);
+            this.labelBIO.Name = "labelBIO";
+            this.labelBIO.Size = new System.Drawing.Size(70, 20);
+            this.labelBIO.TabIndex = 0;
+            this.labelBIO.Text = "labelBIO";
             // 
             // tabPhotoCard
             // 
@@ -341,12 +340,13 @@ namespace Drevo_Project
             // 
             this.tabRelatives.BackColor = System.Drawing.Color.White;
             this.tabRelatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabRelatives.Controls.Add(this.listBoxSearch);
             this.tabRelatives.Controls.Add(this.label3);
             this.tabRelatives.Controls.Add(this.label2);
             this.tabRelatives.Controls.Add(this.buttonDelete);
             this.tabRelatives.Controls.Add(this.buttonAddCard);
             this.tabRelatives.Controls.Add(this.label1);
-            this.tabRelatives.Controls.Add(this.textBox1);
+            this.tabRelatives.Controls.Add(this.searchBox);
             this.tabRelatives.Controls.Add(this.buttonSearch);
             this.tabRelatives.Location = new System.Drawing.Point(4, 29);
             this.tabRelatives.Name = "tabRelatives";
@@ -354,6 +354,18 @@ namespace Drevo_Project
             this.tabRelatives.Size = new System.Drawing.Size(842, 678);
             this.tabRelatives.TabIndex = 2;
             this.tabRelatives.Text = "Родственники";
+            // 
+            // listBoxSearch
+            // 
+            this.listBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxSearch.FormattingEnabled = true;
+            this.listBoxSearch.HorizontalScrollbar = true;
+            this.listBoxSearch.ItemHeight = 20;
+            this.listBoxSearch.Location = new System.Drawing.Point(46, 101);
+            this.listBoxSearch.Name = "listBoxSearch";
+            this.listBoxSearch.ScrollAlwaysVisible = true;
+            this.listBoxSearch.Size = new System.Drawing.Size(748, 62);
+            this.listBoxSearch.TabIndex = 12;
             // 
             // label3
             // 
@@ -367,7 +379,7 @@ namespace Drevo_Project
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(48, 249);
+            this.label2.Location = new System.Drawing.Point(42, 185);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(188, 20);
             this.label2.TabIndex = 10;
@@ -379,7 +391,7 @@ namespace Drevo_Project
             this.buttonDelete.FlatAppearance.BorderSize = 0;
             this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelete.Location = new System.Drawing.Point(46, 366);
+            this.buttonDelete.Location = new System.Drawing.Point(215, 621);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(154, 31);
             this.buttonDelete.TabIndex = 9;
@@ -392,7 +404,7 @@ namespace Drevo_Project
             this.buttonAddCard.FlatAppearance.BorderSize = 0;
             this.buttonAddCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAddCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddCard.Location = new System.Drawing.Point(46, 319);
+            this.buttonAddCard.Location = new System.Drawing.Point(46, 621);
             this.buttonAddCard.Name = "buttonAddCard";
             this.buttonAddCard.Size = new System.Drawing.Size(154, 31);
             this.buttonAddCard.TabIndex = 8;
@@ -409,14 +421,14 @@ namespace Drevo_Project
             this.label1.TabIndex = 7;
             this.label1.Text = "Результаты поиска:";
             // 
-            // textBox1
+            // searchBox
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(107, 21);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(555, 27);
-            this.textBox1.TabIndex = 5;
+            this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBox.Location = new System.Drawing.Point(107, 21);
+            this.searchBox.Multiline = true;
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(555, 27);
+            this.searchBox.TabIndex = 5;
             // 
             // buttonSearch
             // 
@@ -429,6 +441,7 @@ namespace Drevo_Project
             this.buttonSearch.TabIndex = 4;
             this.buttonSearch.Text = "Искать";
             this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
             // tabPhotoAlbum
             // 
@@ -459,6 +472,7 @@ namespace Drevo_Project
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).EndInit();
             this.tabInfoCard.ResumeLayout(false);
             this.tabBioProfile.ResumeLayout(false);
+            this.tabBioProfile.PerformLayout();
             this.tabPhotoCard.ResumeLayout(false);
             this.tabContactsCard.ResumeLayout(false);
             this.tabContactsCard.PerformLayout();
@@ -493,7 +507,6 @@ namespace Drevo_Project
         private System.Windows.Forms.TabPage tabRelatives;
         private Panel panelTree;
         private PictureBox pictureBoxTree;
-        private ListBox listBoxBio;
         private ListBox listBoxPhoto;
         private ListBox listBoxContacts;
         private Button button1;
@@ -502,7 +515,7 @@ namespace Drevo_Project
         private Button buttonDelete;
         private Button buttonAddCard;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox searchBox;
         private Button buttonSearch;
         private TabPage tabPhotoAlbum;
         private Button ChangeContactsButton;
@@ -510,5 +523,7 @@ namespace Drevo_Project
         private Label label4;
         private TextBox MailBox;
         private TextBox NumberBox;
+        private ListBox listBoxSearch;
+        private Label labelBIO;
     }
 }

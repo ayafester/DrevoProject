@@ -36,8 +36,16 @@
             this.tabBioCard = new System.Windows.Forms.TabPage();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
+            this.labelBio = new System.Windows.Forms.Label();
+            this.labelBioCard = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.NumberBoxCard = new System.Windows.Forms.Label();
+            this.MailBoxCard = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCard)).BeginInit();
             this.tabInfoCard.SuspendLayout();
+            this.tabBioCard.SuspendLayout();
+            this.tabContactsCard.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonEditCard
@@ -96,9 +104,12 @@
             // 
             // tabBioCard
             // 
+            this.tabBioCard.AutoScroll = true;
+            this.tabBioCard.Controls.Add(this.labelBioCard);
+            this.tabBioCard.Controls.Add(this.labelBio);
             this.tabBioCard.Location = new System.Drawing.Point(4, 29);
             this.tabBioCard.Name = "tabBioCard";
-            this.tabBioCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabBioCard.Padding = new System.Windows.Forms.Padding(3);
             this.tabBioCard.Size = new System.Drawing.Size(453, 614);
             this.tabBioCard.TabIndex = 0;
             this.tabBioCard.Text = "Биография";
@@ -108,7 +119,7 @@
             // 
             this.tabPhotoCard.Location = new System.Drawing.Point(4, 29);
             this.tabPhotoCard.Name = "tabPhotoCard";
-            this.tabPhotoCard.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPhotoCard.Padding = new System.Windows.Forms.Padding(3);
             this.tabPhotoCard.Size = new System.Drawing.Size(453, 614);
             this.tabPhotoCard.TabIndex = 1;
             this.tabPhotoCard.Text = "Фотоальбом";
@@ -116,12 +127,71 @@
             // 
             // tabContactsCard
             // 
+            this.tabContactsCard.Controls.Add(this.MailBoxCard);
+            this.tabContactsCard.Controls.Add(this.NumberBoxCard);
+            this.tabContactsCard.Controls.Add(this.label5);
+            this.tabContactsCard.Controls.Add(this.label4);
             this.tabContactsCard.Location = new System.Drawing.Point(4, 29);
             this.tabContactsCard.Name = "tabContactsCard";
             this.tabContactsCard.Size = new System.Drawing.Size(453, 614);
             this.tabContactsCard.TabIndex = 2;
             this.tabContactsCard.Text = "Контакты";
             this.tabContactsCard.UseVisualStyleBackColor = true;
+            // 
+            // labelBio
+            // 
+            this.labelBio.AutoSize = true;
+            this.labelBio.Location = new System.Drawing.Point(16, 17);
+            this.labelBio.MaximumSize = new System.Drawing.Size(500, 0);
+            this.labelBio.Name = "labelBio";
+            this.labelBio.Size = new System.Drawing.Size(0, 20);
+            this.labelBio.TabIndex = 0;
+            // 
+            // labelBioCard
+            // 
+            this.labelBioCard.AutoSize = true;
+            this.labelBioCard.Location = new System.Drawing.Point(16, 17);
+            this.labelBioCard.MaximumSize = new System.Drawing.Size(500, 0);
+            this.labelBioCard.Name = "labelBioCard";
+            this.labelBioCard.Size = new System.Drawing.Size(51, 20);
+            this.labelBioCard.TabIndex = 1;
+            this.labelBioCard.Text = "label1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Номер: ";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(19, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 20);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Почта: ";
+            // 
+            // NumberBoxCard
+            // 
+            this.NumberBoxCard.AutoSize = true;
+            this.NumberBoxCard.Location = new System.Drawing.Point(107, 27);
+            this.NumberBoxCard.Name = "NumberBoxCard";
+            this.NumberBoxCard.Size = new System.Drawing.Size(13, 20);
+            this.NumberBoxCard.TabIndex = 10;
+            this.NumberBoxCard.Text = " ";
+            // 
+            // MailBoxCard
+            // 
+            this.MailBoxCard.AutoSize = true;
+            this.MailBoxCard.Location = new System.Drawing.Point(107, 72);
+            this.MailBoxCard.Name = "MailBoxCard";
+            this.MailBoxCard.Size = new System.Drawing.Size(13, 20);
+            this.MailBoxCard.TabIndex = 11;
+            this.MailBoxCard.Text = " ";
             // 
             // Card
             // 
@@ -137,8 +207,13 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.Name = "Card";
             this.ShowIcon = false;
+            this.Load += new System.EventHandler(this.Card_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureCard)).EndInit();
             this.tabInfoCard.ResumeLayout(false);
+            this.tabBioCard.ResumeLayout(false);
+            this.tabBioCard.PerformLayout();
+            this.tabContactsCard.ResumeLayout(false);
+            this.tabContactsCard.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +229,11 @@
         private System.Windows.Forms.TabPage tabBioCard;
         private System.Windows.Forms.TabPage tabPhotoCard;
         private System.Windows.Forms.TabPage tabContactsCard;
+        private System.Windows.Forms.Label labelBio;
+        private System.Windows.Forms.Label labelBioCard;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label MailBoxCard;
+        private System.Windows.Forms.Label NumberBoxCard;
     }
 }
