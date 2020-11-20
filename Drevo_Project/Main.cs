@@ -134,16 +134,19 @@ namespace Drevo_Project
             Application.Exit();
         }
 
-        public int[][] GetData() //получение данных в таблицу
+        public int[][] GetData() //получение данных в таблицу только для поколений
         {
             DataTable dt = new DataTable();
             String sqlQuery;
+            
 
             try
             {
                 sqlQuery = "SELECT Generation, id, idPartner, idMom, idDad FROM Card ORDER BY Generation";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, sql.connect);
                 adapter.Fill(dt);
+
+                
 
             }
             catch (SQLiteException ex)
@@ -178,13 +181,21 @@ namespace Drevo_Project
         {
             int[][] values = GetData();
             int rowsVal = values.Length;
-            int columnsVal = values[0].Length;
+            int maxGen;
+
+            sql.command.CommandText = "SELECT MAX(Generation) FROM Card";
+            SQLiteDataReader read = sql.command.ExecuteReader();
+            while (read.Read())
+            {
+                maxGen = read.GetInt32(0);
+            }
+            read.Close();
 
             List<List<int[]>> generation = new List<List<int[]>> { //количество поколений 4 например. сделать динамические изменения поколений
                 new List<int[]>(),
                 new List<int[]>(),
-                new List<int[]>(),
                 new List<int[]>()
+                
             };
 
             for (int i = 1; i < rowsVal; i++)
@@ -205,10 +216,7 @@ namespace Drevo_Project
                 {
                     generation[3].Add(values[i]);
                 }
-                else if (values[i][0] == 4)
-                {
-                    generation[4].Add(values[i]);
-                }
+                
 
             }
 
@@ -361,9 +369,11 @@ namespace Drevo_Project
                                     }
 
                                     graph.DrawLine(penLine, x+100, y + 100, x + 150, y +100); //линия между супругами
-                                    graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
 
-                                    
+                                    if(persones.Exists(find => find.IdDad== item.Id) == true)
+                                    {
+                                        graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+                                    }
 
                                     usedId.Add(idTemp);
                                     usedId.Add(partnerTemp.Id);
@@ -402,14 +412,62 @@ namespace Drevo_Project
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-             
+            int idCardtoShow = SearchCard();
+            showCard(idCardtoShow);
 
         }
-       
-        
-        
+        private void showCard(int MyId)
+        {
+            if (MyId != 0)
+            {
+                Card cardShow = new Card(MyId);
+                cardShow.ShowDialog();
+            }
 
-        
+
+        }
+        private int SearchCard()
+        {
+            List<Cards> persones = GetDataFromBD();
+
+            if (searchBox.Text == "")
+            {
+
+                MessageBox.Show("Введите ФИО");
+            }
+            else
+            {
+                bool check = persones.Exists(find => find.FIO == searchBox.Text);
+
+                if (check == true)
+                {
+                    
+                    Cards searchPersona = persones.Find(find => find.FIO == searchBox.Text);
+                    if (searchPersona.isDelete != 0)
+                    {   
+                        return searchPersona.Id;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Такого человека нет в древе");
+                    }
+                 
+                }
+                else
+                {
+                    
+                    MessageBox.Show("Такого человека нет в древе");
+                    
+                }
+            }
+
+            return 0;
+        }
+
+
+
+
+
     }
 
 }

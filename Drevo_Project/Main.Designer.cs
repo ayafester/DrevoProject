@@ -54,12 +54,10 @@ namespace Drevo_Project
             this.panelTree = new System.Windows.Forms.Panel();
             this.pictureBoxTree = new System.Windows.Forms.PictureBox();
             this.tabRelatives = new System.Windows.Forms.TabPage();
-            this.listBoxSearch = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddCard = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.tabPhotoAlbum = new System.Windows.Forms.TabPage();
@@ -340,12 +338,10 @@ namespace Drevo_Project
             // 
             this.tabRelatives.BackColor = System.Drawing.Color.White;
             this.tabRelatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabRelatives.Controls.Add(this.listBoxSearch);
             this.tabRelatives.Controls.Add(this.label3);
             this.tabRelatives.Controls.Add(this.label2);
             this.tabRelatives.Controls.Add(this.buttonDelete);
             this.tabRelatives.Controls.Add(this.buttonAddCard);
-            this.tabRelatives.Controls.Add(this.label1);
             this.tabRelatives.Controls.Add(this.searchBox);
             this.tabRelatives.Controls.Add(this.buttonSearch);
             this.tabRelatives.Location = new System.Drawing.Point(4, 29);
@@ -354,18 +350,6 @@ namespace Drevo_Project
             this.tabRelatives.Size = new System.Drawing.Size(842, 678);
             this.tabRelatives.TabIndex = 2;
             this.tabRelatives.Text = "Родственники";
-            // 
-            // listBoxSearch
-            // 
-            this.listBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBoxSearch.FormattingEnabled = true;
-            this.listBoxSearch.HorizontalScrollbar = true;
-            this.listBoxSearch.ItemHeight = 20;
-            this.listBoxSearch.Location = new System.Drawing.Point(46, 101);
-            this.listBoxSearch.Name = "listBoxSearch";
-            this.listBoxSearch.ScrollAlwaysVisible = true;
-            this.listBoxSearch.Size = new System.Drawing.Size(748, 62);
-            this.listBoxSearch.TabIndex = 12;
             // 
             // label3
             // 
@@ -379,7 +363,7 @@ namespace Drevo_Project
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 185);
+            this.label2.Location = new System.Drawing.Point(42, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(188, 20);
             this.label2.TabIndex = 10;
@@ -411,15 +395,6 @@ namespace Drevo_Project
             this.buttonAddCard.Text = "Добавить";
             this.buttonAddCard.UseVisualStyleBackColor = false;
             this.buttonAddCard.Click += new System.EventHandler(this.buttonAddCard_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(42, 63);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 20);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Результаты поиска:";
             // 
             // searchBox
             // 
@@ -514,7 +489,6 @@ namespace Drevo_Project
         private Label label2;
         private Button buttonDelete;
         private Button buttonAddCard;
-        private Label label1;
         private TextBox searchBox;
         private Button buttonSearch;
         private TabPage tabPhotoAlbum;
@@ -523,7 +497,6 @@ namespace Drevo_Project
         private Label label4;
         private TextBox MailBox;
         private TextBox NumberBox;
-        private ListBox listBoxSearch;
         private Label labelBIO;
     }
 }
