@@ -71,7 +71,7 @@ namespace Drevo_Project
                     MiddlenameBox.Text = read2["middlename"].ToString();
                     Middlename = read2["middlename"].ToString();
 
-                    textBoxBio.Text = Convert.ToString(read2["bio"]);//Вывод биографии TO DO
+                    textBoxBio.Text = Convert.ToString(read2["bio"]);//Вывод биографии с изменением
 
                     if (read2["deathday"].ToString() == "")// Вывод дат жизни и возраста
                     {
@@ -82,7 +82,7 @@ namespace Drevo_Project
                         //И возраст
 
                         String str = read2["birthday"].ToString();
-                        // обрезаем начиная с седьмого символа
+                        // обрезаем начиная с седьмого символа 
                         Year = Convert.ToInt32(str.Substring(6));                       
 
                         str = read2["birthday"].ToString();
