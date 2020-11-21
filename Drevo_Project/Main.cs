@@ -28,7 +28,7 @@ namespace Drevo_Project
         {
             InitializeComponent();
             DrawTreeBmp();
-
+            SortListFam();
 
         }
 
@@ -124,15 +124,10 @@ namespace Drevo_Project
                 newCard.Close();
                 DrawTreeBmp();
                 //вызвать новую отрисовку древа
+                SortListFam();
             }
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
-            Application.Exit();
-        }
+        }        
 
         public int[][] GetData() //получение данных в таблицу только для поколений
         {
@@ -175,7 +170,7 @@ namespace Drevo_Project
 
             return arr;
 
-        }
+        }        
 
         private List<List<int[]>> SortDataToGeneration() //преобразование в список по поколениям
         {
@@ -230,6 +225,7 @@ namespace Drevo_Project
             public int IdMom { get; set; }
             public int IdDad { get; set; }
             public string FIO { get; set; }
+            public string BirthDay { get; set; }
 
             
             public int isDelete { get; set; }
@@ -239,7 +235,7 @@ namespace Drevo_Project
         }
         private List<Cards> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete FROM Card WHERE id >= 1";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0";
             List<Cards> CardsTemp = new List<Cards>();
             try
             {
@@ -256,7 +252,8 @@ namespace Drevo_Project
                         IdDad = r.GetInt32(4),
                         FIO = r.GetString(5),     
                         isDelete = r.GetInt32(6),
-                        
+                        BirthDay = r.GetString(7),
+
                     };
                     CardsTemp.Add(entity);
                 }
@@ -270,6 +267,50 @@ namespace Drevo_Project
 
             return CardsTemp;
         }
+
+        private List<Cards> GetSortedFioDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
+        {
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0 ORDER BY surname|| ' ' || name || ' ' || middlename";
+            List<Cards> CardsTemp = new List<Cards>();
+            try
+            {
+                SQLiteDataReader r = sql.command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    Cards entity = new Cards
+                    {
+                        Gener = r.GetInt32(0),
+                        Id = r.GetInt32(1),
+                        IdPartner = r.GetInt32(2),
+                        IdMom = r.GetInt32(3),
+                        IdDad = r.GetInt32(4),
+                        FIO = r.GetString(5),
+                        isDelete = r.GetInt32(6),
+                        BirthDay = r.GetString(7),
+
+                    };
+                    CardsTemp.Add(entity);
+                }
+                r.Close();
+                sql.command.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return CardsTemp;
+        }
+
+        private void SortListFam()
+        {
+            List<Cards> personesL = GetSortedFioDataFromBD();
+            listBox1.DataSource = personesL;
+            listBox1.DisplayMember = "FIO";
+            listBox1.ValueMember = "Id";
+        }
+
         private void DrawTreeBmp()
         {
 
@@ -464,10 +505,41 @@ namespace Drevo_Project
             return 0;
         }
 
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Application.Exit();
+        }
 
+        private void listBox1_Format(object sender, ListControlConvertEventArgs e)
+        {
+            string fio = ((Cards)e.ListItem).FIO.ToString();
+            string data = ((Cards)e.ListItem).BirthDay.ToString();
 
+            e.Value = fio + " ; " + data;
+        }
+        
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+                      
+        }
 
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            Cards Person = listBox1.SelectedItem as Cards;
+            if (listBox1.SelectedIndex != -1)
+            //    listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            {
+                Person.isDelete = 0;
+                sql.command.CommandText = "UPDATE Card SET isDelete = '" + Person.isDelete + "' WHERE id = '" + Person.Id + "'  ";
+                sql.command.ExecuteNonQuery();
+            }
+            else
+                MessageBox.Show("выберите элемент");
 
+            DrawTreeBmp();
+            SortListFam();
+        }
     }
 
 }

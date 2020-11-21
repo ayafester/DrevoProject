@@ -33,7 +33,6 @@ namespace Drevo_Project
             this.labelChk = new System.Windows.Forms.Label();
             this.tabMenu = new System.Windows.Forms.TabControl();
             this.tabMyProfile = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.labelDataBorn = new System.Windows.Forms.Label();
             this.labelFio = new System.Windows.Forms.Label();
@@ -61,6 +60,7 @@ namespace Drevo_Project
             this.searchBox = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.tabPhotoAlbum = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -103,7 +103,6 @@ namespace Drevo_Project
             // 
             this.tabMyProfile.BackColor = System.Drawing.Color.White;
             this.tabMyProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabMyProfile.Controls.Add(this.button1);
             this.tabMyProfile.Controls.Add(this.buttonEdit);
             this.tabMyProfile.Controls.Add(this.labelDataBorn);
             this.tabMyProfile.Controls.Add(this.labelFio);
@@ -116,19 +115,6 @@ namespace Drevo_Project
             this.tabMyProfile.Size = new System.Drawing.Size(842, 678);
             this.tabMyProfile.TabIndex = 0;
             this.tabMyProfile.Text = "Мой профиль";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(570, 608);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(163, 38);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Выход";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonEdit
             // 
@@ -338,6 +324,7 @@ namespace Drevo_Project
             // 
             this.tabRelatives.BackColor = System.Drawing.Color.White;
             this.tabRelatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabRelatives.Controls.Add(this.listBox1);
             this.tabRelatives.Controls.Add(this.label3);
             this.tabRelatives.Controls.Add(this.label2);
             this.tabRelatives.Controls.Add(this.buttonDelete);
@@ -381,6 +368,7 @@ namespace Drevo_Project
             this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonAddCard
             // 
@@ -428,6 +416,17 @@ namespace Drevo_Project
             this.tabPhotoAlbum.Text = "Общий фотоальбом";
             this.tabPhotoAlbum.UseVisualStyleBackColor = true;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(46, 120);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(752, 484);
+            this.listBox1.TabIndex = 12;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.listBox1_Format);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -440,6 +439,7 @@ namespace Drevo_Project
             this.Name = "Main";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             this.tabMenu.ResumeLayout(false);
             this.tabMyProfile.ResumeLayout(false);
@@ -484,7 +484,6 @@ namespace Drevo_Project
         private PictureBox pictureBoxTree;
         private ListBox listBoxPhoto;
         private ListBox listBoxContacts;
-        private Button button1;
         private Label label3;
         private Label label2;
         private Button buttonDelete;
@@ -498,5 +497,6 @@ namespace Drevo_Project
         private TextBox MailBox;
         private TextBox NumberBox;
         private Label labelBIO;
+        private ListBox listBox1;
     }
 }
