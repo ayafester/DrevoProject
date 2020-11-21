@@ -33,10 +33,6 @@ namespace Drevo_Project
         public int idDad { get; set; }
         public int idPartner{ get; set; }
         public int Gender { get; set; }
-        public String idCreator { get; set; }
-        public int Gener { get; set; }
-        public int isDelete { get; set; }
-        
 
 
         public NewCard()
@@ -46,7 +42,7 @@ namespace Drevo_Project
 
         private void NewCard_Load(object sender, EventArgs e)
         {
-            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender, Generation FROM Card WHERE id >= 1";
+            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender FROM Card WHERE id >= 1";
             List<Person> Names = new List<Person>();
             try
             {
@@ -58,8 +54,7 @@ namespace Drevo_Project
                     {
                         Id = r.GetInt32(0),
                         Name = r.GetString(1),
-                        Gender = r.GetInt32(2),
-                        Generation = r.GetInt32(3),
+                        Gender = r.GetInt32(2)
                     };
                     Names.Add(entity);
                 }
@@ -83,22 +78,16 @@ namespace Drevo_Project
                     Males.Add(item);
                 }
             };
-
             comboBox1.DataSource = Females;
             comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "Generation";
-            
+            comboBox1.ValueMember = "Id";
+
             comboBox2.DataSource = Males;
             comboBox2.DisplayMember = "Name";
-            comboBox2.ValueMember = "Generation";
-
-            comboBox3.DataSource = Names;
-            comboBox3.DisplayMember = "Name";
-            comboBox3.ValueMember = "Generation";
+            comboBox2.ValueMember = "Id";
 
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged += ComboBox2_SelectedIndexChanged;
-            comboBox3.SelectedIndexChanged += ComboBox3_SelectedIndexChanged;
         }
 
         private void buttonSaveInfoAdd_Click(object sender, EventArgs e)
@@ -110,9 +99,7 @@ namespace Drevo_Project
             DateBirthday = dateTimePickerBirthdayAdd.Value.ToString("dd/MM/yyyy");
             DateDeathday = dateTimePickerDeathdayAdd.Value.ToString("dd/MM/yyyy");
             BIO = textBoxBioAdd.Text;
-            Number = textBoxNumberAdd.Text;
-            idCreator = DataClass.ID;
-            isDelete = 1;
+            Number = textBoxNumberAdd.Text;            
 
             if (radioButtonFemaleAdd.Checked == true)
             {
@@ -125,7 +112,7 @@ namespace Drevo_Project
 
             try
             {
-                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number', 'mail', 'idCreator', 'isDelete', 'Generation', 'idPartner') VALUES ('" + //пока добавление связей нет
+                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number') VALUES ('" + //пока добавление связей нет
                     Surname + "' , '" +
                     NamePerson + "' , '" +
                     Middlename + "' , '" +
@@ -135,12 +122,7 @@ namespace Drevo_Project
                     idDad + "' , '" +
                     DateBirthday + "' ,'" +
                     DateDeathday + "' , '" +
-                    Number + "' , '" +
-                    Mail + "' , '" +
-                    idCreator + "' , '" +
-                    isDelete + "' , '" +
-                    Gener + "' , '" +
-                    idPartner + "')";
+                    Number + "')";
                     ;
 
                 sql.command.ExecuteNonQuery();
@@ -155,30 +137,21 @@ namespace Drevo_Project
         }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {             
-            Person Female = comboBox1.SelectedItem as Person;
-            idMom = Female.Id+1;
-            Gener = Female.Generation - 1;
+        {
+            idMom = comboBox1.SelectedIndex + 1; //тут не так, они могут быть не по очереди добавлены. надо брать айди у выбранного чувака и сюда присваивать
         }
 
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Person Male = comboBox2.SelectedItem as Person;
-            idDad = Male.Id+1;
-            Gener = Male.Generation - 1;
+            idDad = comboBox2.SelectedIndex + 1;
         }
 
-        private void ComboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Person Person = comboBox3.SelectedItem as Person;
-            idPartner = Person.Id;
-        }
+        
     }
     class Person
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int Gender { get; set; }
-        public int Generation { get; set; }
     }
 }

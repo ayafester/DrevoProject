@@ -30,16 +30,22 @@ namespace Drevo_Project
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelChk = new System.Windows.Forms.Label();
             this.tabMenu = new System.Windows.Forms.TabControl();
             this.tabMyProfile = new System.Windows.Forms.TabPage();
-            this.buttonEdit = new System.Windows.Forms.Button();
-            this.labelDataBorn = new System.Windows.Forms.Label();
-            this.labelFio = new System.Windows.Forms.Label();
+            this.ChangeNameAndYearsButton = new System.Windows.Forms.Button();
+            this.MiddlenameBox = new System.Windows.Forms.TextBox();
+            this.NameBox = new System.Windows.Forms.TextBox();
+            this.DeathdayBox = new System.Windows.Forms.TextBox();
+            this.AgeLabel = new System.Windows.Forms.Label();
+            this.BirthdayBox = new System.Windows.Forms.TextBox();
+            this.SurnameBox = new System.Windows.Forms.TextBox();
             this.pictureBoxAva = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.tabInfoCard = new System.Windows.Forms.TabControl();
             this.tabBioProfile = new System.Windows.Forms.TabPage();
-            this.labelBIO = new System.Windows.Forms.Label();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
             this.listBoxPhoto = new System.Windows.Forms.ListBox();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
@@ -60,7 +66,9 @@ namespace Drevo_Project
             this.searchBox = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.tabPhotoAlbum = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.textBoxBio = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ChangeBioButton = new System.Windows.Forms.Button();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -103,10 +111,16 @@ namespace Drevo_Project
             // 
             this.tabMyProfile.BackColor = System.Drawing.Color.White;
             this.tabMyProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabMyProfile.Controls.Add(this.buttonEdit);
-            this.tabMyProfile.Controls.Add(this.labelDataBorn);
-            this.tabMyProfile.Controls.Add(this.labelFio);
+            this.tabMyProfile.Controls.Add(this.ChangeNameAndYearsButton);
+            this.tabMyProfile.Controls.Add(this.MiddlenameBox);
+            this.tabMyProfile.Controls.Add(this.NameBox);
+            this.tabMyProfile.Controls.Add(this.DeathdayBox);
+            this.tabMyProfile.Controls.Add(this.AgeLabel);
+            this.tabMyProfile.Controls.Add(this.BirthdayBox);
+            this.tabMyProfile.Controls.Add(this.SurnameBox);
             this.tabMyProfile.Controls.Add(this.pictureBoxAva);
+            this.tabMyProfile.Controls.Add(this.button1);
+            this.tabMyProfile.Controls.Add(this.buttonEdit);
             this.tabMyProfile.Controls.Add(this.tabInfoCard);
             this.tabMyProfile.Location = new System.Drawing.Point(4, 29);
             this.tabMyProfile.Name = "tabMyProfile";
@@ -115,6 +129,88 @@ namespace Drevo_Project
             this.tabMyProfile.Size = new System.Drawing.Size(842, 678);
             this.tabMyProfile.TabIndex = 0;
             this.tabMyProfile.Text = "Мой профиль";
+            // 
+            // ChangeNameAndYearsButton
+            // 
+            this.ChangeNameAndYearsButton.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.ChangeNameAndYearsButton.FlatAppearance.BorderSize = 0;
+            this.ChangeNameAndYearsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChangeNameAndYearsButton.Location = new System.Drawing.Point(485, 178);
+            this.ChangeNameAndYearsButton.Name = "ChangeNameAndYearsButton";
+            this.ChangeNameAndYearsButton.Size = new System.Drawing.Size(97, 33);
+            this.ChangeNameAndYearsButton.TabIndex = 27;
+            this.ChangeNameAndYearsButton.Text = "Изменить";
+            this.ChangeNameAndYearsButton.UseVisualStyleBackColor = false;
+            // 
+            // MiddlenameBox
+            // 
+            this.MiddlenameBox.Location = new System.Drawing.Point(485, 134);
+            this.MiddlenameBox.Name = "MiddlenameBox";
+            this.MiddlenameBox.Size = new System.Drawing.Size(153, 26);
+            this.MiddlenameBox.TabIndex = 32;
+            // 
+            // NameBox
+            // 
+            this.NameBox.Location = new System.Drawing.Point(485, 102);
+            this.NameBox.Name = "NameBox";
+            this.NameBox.Size = new System.Drawing.Size(153, 26);
+            this.NameBox.TabIndex = 31;
+            // 
+            // DeathdayBox
+            // 
+            this.DeathdayBox.Location = new System.Drawing.Point(668, 102);
+            this.DeathdayBox.Name = "DeathdayBox";
+            this.DeathdayBox.Size = new System.Drawing.Size(87, 26);
+            this.DeathdayBox.TabIndex = 30;
+            // 
+            // AgeLabel
+            // 
+            this.AgeLabel.AutoSize = true;
+            this.AgeLabel.Location = new System.Drawing.Point(664, 137);
+            this.AgeLabel.Name = "AgeLabel";
+            this.AgeLabel.Size = new System.Drawing.Size(0, 20);
+            this.AgeLabel.TabIndex = 29;
+            // 
+            // BirthdayBox
+            // 
+            this.BirthdayBox.Location = new System.Drawing.Point(668, 71);
+            this.BirthdayBox.Name = "BirthdayBox";
+            this.BirthdayBox.Size = new System.Drawing.Size(87, 26);
+            this.BirthdayBox.TabIndex = 28;
+            // 
+            // SurnameBox
+            // 
+            this.SurnameBox.Location = new System.Drawing.Point(485, 70);
+            this.SurnameBox.Name = "SurnameBox";
+            this.SurnameBox.Size = new System.Drawing.Size(153, 26);
+            this.SurnameBox.TabIndex = 26;
+            // 
+            // pictureBoxAva
+            // 
+            this.pictureBoxAva.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxAva.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pictureBoxAva.ErrorImage = null;
+            this.pictureBoxAva.Image = global::Drevo_Project.Properties.Resources.logo;
+            this.pictureBoxAva.InitialImage = null;
+            this.pictureBoxAva.Location = new System.Drawing.Point(530, 239);
+            this.pictureBoxAva.Name = "pictureBoxAva";
+            this.pictureBoxAva.Size = new System.Drawing.Size(249, 280);
+            this.pictureBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxAva.TabIndex = 25;
+            this.pictureBoxAva.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(570, 608);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(163, 38);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Выход";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonEdit
             // 
@@ -128,38 +224,6 @@ namespace Drevo_Project
             this.buttonEdit.Text = "Редактировать";
             this.buttonEdit.UseVisualStyleBackColor = false;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
-            // 
-            // labelDataBorn
-            // 
-            this.labelDataBorn.AutoSize = true;
-            this.labelDataBorn.Location = new System.Drawing.Point(493, 106);
-            this.labelDataBorn.Name = "labelDataBorn";
-            this.labelDataBorn.Size = new System.Drawing.Size(86, 20);
-            this.labelDataBorn.TabIndex = 3;
-            this.labelDataBorn.Text = "1900-2000";
-            // 
-            // labelFio
-            // 
-            this.labelFio.AutoSize = true;
-            this.labelFio.Location = new System.Drawing.Point(493, 71);
-            this.labelFio.Name = "labelFio";
-            this.labelFio.Size = new System.Drawing.Size(194, 20);
-            this.labelFio.TabIndex = 2;
-            this.labelFio.Text = "Фамилия Имя Отчество";
-            // 
-            // pictureBoxAva
-            // 
-            this.pictureBoxAva.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxAva.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pictureBoxAva.ErrorImage = null;
-            this.pictureBoxAva.Image = global::Drevo_Project.Properties.Resources.logo;
-            this.pictureBoxAva.InitialImage = null;
-            this.pictureBoxAva.Location = new System.Drawing.Point(497, 142);
-            this.pictureBoxAva.Name = "pictureBoxAva";
-            this.pictureBoxAva.Size = new System.Drawing.Size(305, 357);
-            this.pictureBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxAva.TabIndex = 1;
-            this.pictureBoxAva.TabStop = false;
             // 
             // tabInfoCard
             // 
@@ -177,24 +241,15 @@ namespace Drevo_Project
             this.tabBioProfile.AutoScroll = true;
             this.tabBioProfile.BackColor = System.Drawing.Color.White;
             this.tabBioProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabBioProfile.Controls.Add(this.labelBIO);
+            this.tabBioProfile.Controls.Add(this.ChangeBioButton);
+            this.tabBioProfile.Controls.Add(this.textBoxBio);
             this.tabBioProfile.Location = new System.Drawing.Point(4, 29);
             this.tabBioProfile.Name = "tabBioProfile";
             this.tabBioProfile.Padding = new System.Windows.Forms.Padding(3);
+            this.tabBioProfile.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabBioProfile.Size = new System.Drawing.Size(453, 602);
             this.tabBioProfile.TabIndex = 0;
             this.tabBioProfile.Text = "Биография";
-            // 
-            // labelBIO
-            // 
-            this.labelBIO.AutoEllipsis = true;
-            this.labelBIO.AutoSize = true;
-            this.labelBIO.Location = new System.Drawing.Point(6, 12);
-            this.labelBIO.MaximumSize = new System.Drawing.Size(400, 0);
-            this.labelBIO.Name = "labelBIO";
-            this.labelBIO.Size = new System.Drawing.Size(70, 20);
-            this.labelBIO.TabIndex = 0;
-            this.labelBIO.Text = "labelBIO";
             // 
             // tabPhotoCard
             // 
@@ -324,7 +379,6 @@ namespace Drevo_Project
             // 
             this.tabRelatives.BackColor = System.Drawing.Color.White;
             this.tabRelatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabRelatives.Controls.Add(this.listBox1);
             this.tabRelatives.Controls.Add(this.label3);
             this.tabRelatives.Controls.Add(this.label2);
             this.tabRelatives.Controls.Add(this.buttonDelete);
@@ -368,7 +422,6 @@ namespace Drevo_Project
             this.buttonDelete.TabIndex = 9;
             this.buttonDelete.Text = "Удалить";
             this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonAddCard
             // 
@@ -416,16 +469,32 @@ namespace Drevo_Project
             this.tabPhotoAlbum.Text = "Общий фотоальбом";
             this.tabPhotoAlbum.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // textBoxBio
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(46, 120);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(752, 484);
-            this.listBox1.TabIndex = 12;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            this.listBox1.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.listBox1_Format);
+            this.textBoxBio.Location = new System.Drawing.Point(-1, -1);
+            this.textBoxBio.Multiline = true;
+            this.textBoxBio.Name = "textBoxBio";
+            this.textBoxBio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxBio.Size = new System.Drawing.Size(447, 554);
+            this.textBoxBio.TabIndex = 2;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // ChangeBioButton
+            // 
+            this.ChangeBioButton.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.ChangeBioButton.FlatAppearance.BorderSize = 0;
+            this.ChangeBioButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChangeBioButton.Location = new System.Drawing.Point(6, 560);
+            this.ChangeBioButton.Name = "ChangeBioButton";
+            this.ChangeBioButton.Size = new System.Drawing.Size(97, 33);
+            this.ChangeBioButton.TabIndex = 33;
+            this.ChangeBioButton.Text = "Изменить";
+            this.ChangeBioButton.UseVisualStyleBackColor = false;
+            this.ChangeBioButton.Click += new System.EventHandler(this.ChangeBioButton_Click);
             // 
             // Main
             // 
@@ -439,7 +508,6 @@ namespace Drevo_Project
             this.Name = "Main";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.Load += new System.EventHandler(this.Main_Load);
             this.tabMenu.ResumeLayout(false);
             this.tabMyProfile.ResumeLayout(false);
@@ -471,9 +539,6 @@ namespace Drevo_Project
         private System.Windows.Forms.TabControl tabMenu;
         private System.Windows.Forms.TabPage tabMyProfile;
         private System.Windows.Forms.Button buttonEdit;
-        private System.Windows.Forms.Label labelDataBorn;
-        private System.Windows.Forms.Label labelFio;
-        private System.Windows.Forms.PictureBox pictureBoxAva;
         private System.Windows.Forms.TabControl tabInfoCard;
         private System.Windows.Forms.TabPage tabBioProfile;
         private System.Windows.Forms.TabPage tabPhotoCard;
@@ -484,6 +549,7 @@ namespace Drevo_Project
         private PictureBox pictureBoxTree;
         private ListBox listBoxPhoto;
         private ListBox listBoxContacts;
+        private Button button1;
         private Label label3;
         private Label label2;
         private Button buttonDelete;
@@ -496,7 +562,16 @@ namespace Drevo_Project
         private Label label4;
         private TextBox MailBox;
         private TextBox NumberBox;
-        private Label labelBIO;
-        private ListBox listBox1;
+        private Button ChangeNameAndYearsButton;
+        private TextBox MiddlenameBox;
+        private TextBox NameBox;
+        private TextBox DeathdayBox;
+        private Label AgeLabel;
+        private TextBox BirthdayBox;
+        private TextBox SurnameBox;
+        private PictureBox pictureBoxAva;
+        private TextBox textBoxBio;
+        private ContextMenuStrip contextMenuStrip1;
+        private Button ChangeBioButton;
     }
 }

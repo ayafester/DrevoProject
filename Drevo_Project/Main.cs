@@ -22,13 +22,26 @@ namespace Drevo_Project
         public string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location); // путь к папке
         public String ContNum { get; set; }
         public String ContMail { get; set; }
+        public String Surname { get; set; }
+        public String Name { get; set; }
+        public String Middlename { get; set; }
+        public String Birthday { get; set; }
+        public String Deathday { get; set; }
+        public int Age { get; set; }
+        public int Year { get; set; }
+        public int Mounth { get; set; }
+        public int Day { get; set; }
+        public int Yeartd { get; set; }
+        public int Mounthtd { get; set; }
+        public int Daytd { get; set; }
+        public String Try { get; set; }
 
         ConnectBD sql = new ConnectBD();
         public Main()
         {
             InitializeComponent();
             DrawTreeBmp();
-            SortListFam();
+
 
         }
 
@@ -51,16 +64,98 @@ namespace Drevo_Project
                 SQLiteDataReader read2 = sql.command.ExecuteReader();
                 while (read2.Read())
                 {
-                    labelFio.Text = read2["surname"].ToString() + " " + read2["name"].ToString() + " " + read2["middlename"].ToString();
+                    SurnameBox.Text = read2["surname"].ToString();// Вывод имени
+                    Surname = read2["surname"].ToString();
+                    NameBox.Text = read2["name"].ToString();
+                    Name = read2["name"].ToString();
+                    MiddlenameBox.Text = read2["middlename"].ToString();
+                    Middlename = read2["middlename"].ToString();
 
-                    labelBIO.Text = Convert.ToString(read2["bio"]);
-                    if (read2["deathday"].ToString() == "")
+                    textBoxBio.Text = Convert.ToString(read2["bio"]);//Вывод биографии TO DO
+
+                    if (read2["deathday"].ToString() == "")// Вывод дат жизни и возраста
                     {
-                        labelDataBorn.Text = read2["birthday"].ToString() + "";
+                        BirthdayBox.Text = read2["birthday"].ToString();
+                        Birthday = read2["birthday"].ToString();
+                        Deathday = "";
+
+                        //И возраст
+
+                        String str = read2["birthday"].ToString();
+                        // обрезаем начиная с седьмого символа
+                        Year = Convert.ToInt32(str.Substring(6));                       
+
+                        str = read2["birthday"].ToString();
+                        // обрезаем начиная с четвертого до последних пяти символов
+                        Mounth = Convert.ToInt32(str.Substring(3, 2));
+                        
+                        str = read2["birthday"].ToString();
+                        // обрезаем сначала до последних восьми символов
+                        Day = Convert.ToInt32(str.Substring(0, 2));
+                        
+
+                        string date = "";
+                        DateTime datetime = DateTime.Now; //Добавление настоящей даты 
+                        string dateSave = Convert.ToString(datetime);
+                        date = dateSave;
+                        Daytd = Convert.ToInt32(dateSave.Substring(0, 2));
+                        dateSave = date;
+                        Mounthtd = Convert.ToInt32(dateSave.Substring(3, 2));
+                        dateSave = date;
+                        Yeartd = Convert.ToInt32(dateSave.Substring(6, 4));
+                        dateSave = date;                       
+
+                        Age = Yeartd - Year;
+                        if (Age == 0)
+                        {
+                            AgeLabel.Text = "Возраст: \nМеньше года";
+                        }
+                        else
+                        {
+                            if (Mounthtd < Mounth)
+                            {
+                                Age -= 1;
+                                if (Age == 0)
+                                {
+                                    AgeLabel.Text = "Возраст: \nМеньше года";
+                                }
+                                else
+                                {
+                                    AgeLabel.Text = "Возраст: " + Age.ToString();
+                                }
+                            }
+                            else
+                            {
+                                if (Mounthtd > Mounth)
+                                {
+                                    AgeLabel.Text = "Возраст: " + Age.ToString();
+                                }
+                                else
+                                {
+                                    if (Daytd < Day)
+                                    {
+                                        Age -= 1;
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                    else
+                                    {
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                }
+                            }
+                        }
+
+
                     }
                     else
                     {
-                        labelDataBorn.Text = read2["birthday"].ToString() + "-" + read2["deathday"].ToString();
+                        BirthdayBox.Text = read2["birthday"].ToString();
+                        DeathdayBox.Text = read2["deathday"].ToString();
+                        //возраст не вывожу
+                        Birthday = read2["birthday"].ToString();
+                        Deathday = read2["deathday"].ToString();
+
+
                     }
                 }
                 read2.Close();
@@ -77,8 +172,6 @@ namespace Drevo_Project
 
                 }
                 read3.Close();
-
-
             }
 
             catch (SQLiteException ex)
@@ -124,10 +217,15 @@ namespace Drevo_Project
                 newCard.Close();
                 DrawTreeBmp();
                 //вызвать новую отрисовку древа
-                SortListFam();
             }
 
-        }        
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Application.Exit();
+        }
 
         public int[][] GetData() //получение данных в таблицу только для поколений
         {
@@ -170,7 +268,7 @@ namespace Drevo_Project
 
             return arr;
 
-        }        
+        }
 
         private List<List<int[]>> SortDataToGeneration() //преобразование в список по поколениям
         {
@@ -225,7 +323,6 @@ namespace Drevo_Project
             public int IdMom { get; set; }
             public int IdDad { get; set; }
             public string FIO { get; set; }
-            public string BirthDay { get; set; }
 
             
             public int isDelete { get; set; }
@@ -235,7 +332,7 @@ namespace Drevo_Project
         }
         private List<Cards> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete FROM Card WHERE id >= 1";
             List<Cards> CardsTemp = new List<Cards>();
             try
             {
@@ -252,8 +349,7 @@ namespace Drevo_Project
                         IdDad = r.GetInt32(4),
                         FIO = r.GetString(5),     
                         isDelete = r.GetInt32(6),
-                        BirthDay = r.GetString(7),
-
+                        
                     };
                     CardsTemp.Add(entity);
                 }
@@ -267,50 +363,6 @@ namespace Drevo_Project
 
             return CardsTemp;
         }
-
-        private List<Cards> GetSortedFioDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
-        {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0 ORDER BY surname|| ' ' || name || ' ' || middlename";
-            List<Cards> CardsTemp = new List<Cards>();
-            try
-            {
-                SQLiteDataReader r = sql.command.ExecuteReader();
-
-                while (r.Read())
-                {
-                    Cards entity = new Cards
-                    {
-                        Gener = r.GetInt32(0),
-                        Id = r.GetInt32(1),
-                        IdPartner = r.GetInt32(2),
-                        IdMom = r.GetInt32(3),
-                        IdDad = r.GetInt32(4),
-                        FIO = r.GetString(5),
-                        isDelete = r.GetInt32(6),
-                        BirthDay = r.GetString(7),
-
-                    };
-                    CardsTemp.Add(entity);
-                }
-                r.Close();
-                sql.command.ExecuteNonQuery();
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-
-            return CardsTemp;
-        }
-
-        private void SortListFam()
-        {
-            List<Cards> personesL = GetSortedFioDataFromBD();
-            listBox1.DataSource = personesL;
-            listBox1.DisplayMember = "FIO";
-            listBox1.ValueMember = "Id";
-        }
-
         private void DrawTreeBmp()
         {
 
@@ -504,41 +556,52 @@ namespace Drevo_Project
 
             return 0;
         }
-
-        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        private void ChangeNameAndYearsButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
-            Application.Exit();
-        }
-
-        private void listBox1_Format(object sender, ListControlConvertEventArgs e)
-        {
-            string fio = ((Cards)e.ListItem).FIO.ToString();
-            string data = ((Cards)e.ListItem).BirthDay.ToString();
-
-            e.Value = fio + " ; " + data;
-        }
-        
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-                      
-        }
-
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            Cards Person = listBox1.SelectedItem as Cards;
-            if (listBox1.SelectedIndex != -1)
-            //    listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            if (SurnameBox.Text != Surname || NameBox.Text != Name || MiddlenameBox.Text != Middlename || BirthdayBox.Text != Birthday || DeathdayBox.Text != Deathday)
             {
-                Person.isDelete = 0;
-                sql.command.CommandText = "UPDATE Card SET isDelete = '" + Person.isDelete + "' WHERE id = '" + Person.Id + "'  ";
-                sql.command.ExecuteNonQuery();
+                try
+                {
+                    sql.command.CommandText = "UPDATE Card SET surname= '" + SurnameBox.Text + "', name= '" +
+                        NameBox.Text + "', middlename= '" +
+                        MiddlenameBox.Text + "', birthday= '" +
+                        BirthdayBox.Text + "', deathday = '" +
+                        DeathdayBox.Text + "' WHERE id ='" + DataClass.CardID + "'  ";
+                    sql.command.ExecuteNonQuery();
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: стр рег" + ex.Message);
+                }
             }
-            else
-                MessageBox.Show("выберите элемент");
+        }
 
-            DrawTreeBmp();
-            SortListFam();
+        private void ChangeBioButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                sql.command.CommandText = "SELECT * FROM Card WHERE id='" + DataClass.CardID + "' ";
+                SQLiteDataReader read0 = sql.command.ExecuteReader();
+                int q = 0;
+                while (read0.Read())
+                {
+                    if (Convert.ToString(read0["bio"]) != textBoxBio.Text)
+                    {
+                        q = 1;
+                    }
+                }
+                read0.Close();
+                if (q==1)
+                {
+                    sql.command.CommandText = "UPDATE Card SET bio = '" + textBoxBio.Text + "' WHERE id = '" + DataClass.CardID + "' ";
+                    sql.command.ExecuteNonQuery();
+                }
+
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: стр рег" + ex.Message);
+            }
         }
     }
 
