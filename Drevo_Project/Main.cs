@@ -35,6 +35,7 @@ namespace Drevo_Project
         public int Mounthtd { get; set; }
         public int Daytd { get; set; }
         public String Try { get; set; }
+        public String PathSave { get; set; }
 
         ConnectBD sql = new ConnectBD();
         public Main()
@@ -157,7 +158,14 @@ namespace Drevo_Project
 
 
                     }
+                    if (Convert.ToInt32(read2["ifAva"]) == 1)
+                    {
+                        byte[] imgg = (byte[])(read2["PhotoOnAva"]);
+                        MemoryStream mstream = new MemoryStream(imgg);
+                        pictureBoxAva.Image = Image.FromStream(mstream);
+                    }
                 }
+
                 read2.Close();
 
                 sql.command.CommandText = "SELECT * FROM Card WHERE id = '" + DataClass.CardID + "' ";
@@ -170,8 +178,9 @@ namespace Drevo_Project
                     MailBox.Text = read3["mail"].ToString();
                     ContMail = read3["mail"].ToString();
 
-                }
-                read3.Close();
+                }               
+
+                    read3.Close();
             }
 
             catch (SQLiteException ex)
@@ -188,6 +197,7 @@ namespace Drevo_Project
                 {
                     sql.command.CommandText = "UPDATE Card SET number= '" + NumberBox.Text + "', mail='" + MailBox.Text + "' WHERE id = '" + DataClass.CardID + "'  ";
                     sql.command.ExecuteNonQuery();
+                    MessageBox.Show("Контакты успешно изменены");
                 }
                 catch (SQLiteException ex)
                 {
@@ -568,6 +578,7 @@ namespace Drevo_Project
                         BirthdayBox.Text + "', deathday = '" +
                         DeathdayBox.Text + "' WHERE id ='" + DataClass.CardID + "'  ";
                     sql.command.ExecuteNonQuery();
+                    MessageBox.Show("Данные успешно изменены");
                 }
                 catch (SQLiteException ex)
                 {
@@ -595,6 +606,7 @@ namespace Drevo_Project
                 {
                     sql.command.CommandText = "UPDATE Card SET bio = '" + textBoxBio.Text + "' WHERE id = '" + DataClass.CardID + "' ";
                     sql.command.ExecuteNonQuery();
+                    MessageBox.Show("Биография успешно изменена");
                 }
 
             }
@@ -603,6 +615,43 @@ namespace Drevo_Project
                 MessageBox.Show("Error: стр рег" + ex.Message);
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files(*.BPM;*.JPG;*.GIF;*.PNG)|*.BPM;*.JPG;*.GIF;*.PNG|All Files (*.*)|*.*";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBoxAva.Image = new Bitmap(ofd.FileName);
+                    PathSave = ofd.FileName.ToString();
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (PathSave != "")
+            {
+                byte[] ImageBt = null;
+                FileStream fstream = new FileStream(this.PathSave, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fstream);
+                ImageBt = br.ReadBytes((int)fstream.Length);
+
+                sql.command.CommandText = "UPDATE Card SET PhotoOnAva =@img , ifAva = 1 WHERE id= '" + DataClass.CardID + "'";
+                sql.command.Parameters.AddWithValue("@img", ImageBt);
+                sql.command.ExecuteNonQuery();
+
+                MessageBox.Show("Фото успешно изменено");
+            }
+        }
+
     }
 
 }

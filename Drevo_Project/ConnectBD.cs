@@ -21,7 +21,7 @@ namespace Drevo_Project
         public String dbName;
         public SQLiteConnection connect;
         public SQLiteCommand command;
-        public ConnectBD ()
+        public ConnectBD()
         {
             connect = new SQLiteConnection();
             command = new SQLiteCommand();
@@ -43,10 +43,10 @@ namespace Drevo_Project
 
                 command.CommandText = "CREATE TABLE IF NOT EXISTS Card (id INTEGER PRIMARY KEY AUTOINCREMENT, surname TEXT, name TEXT, middlename TEXT, gender INTEGER, " +
                     "bio TEXT, birthday TEXT, deathday TEXT, number TEXT, mail TEXT, idCreator INTEGER REFERENCES User(id), idMom INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, " +
-                    "idDad INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, idPartner INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, PhotoOnAva TEXT, Generation INTEGER NOT NULL DEFAULT 0, isDelete INTEGER NOT NULL DEFAULT 1)";// 1-существует. 0- удален
+                    "idDad INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, idPartner INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, PhotoOnAva BLOB, Generation INTEGER NOT NULL DEFAULT 0, isDelete INTEGER NOT NULL DEFAULT 1, ifAva INT DEFAULT (0))";// 1-существует. 0- удален
                 command.ExecuteNonQuery();
 
-                command.CommandText = "CREATE TABLE IF NOT EXISTS Photos (id INTEGER PRIMARY KEY AUTOINCREMENT, link TEXT, idCard INTEGER REFERENCES Card(id) DEFAULT 0, idLink TEXT NOT NULL DEFAULT 0)";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS Photos (id INTEGER PRIMARY KEY AUTOINCREMENT, link TEXT, idCard INTEGER REFERENCES Card(id) DEFAULT 0, idLink TEXT NOT NULL DEFAULT 0, ListID TEXT)";
                 command.ExecuteNonQuery();
 
 
