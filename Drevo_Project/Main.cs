@@ -42,7 +42,7 @@ namespace Drevo_Project
         {
             InitializeComponent();
             DrawTreeBmp();
-
+            SortListFam();
 
         }
 
@@ -289,15 +289,10 @@ namespace Drevo_Project
                 newCard.Close();
                 DrawTreeBmp();
                 //вызвать новую отрисовку древа
+                SortListFam();
             }
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
-            Application.Exit();
-        }
+        }        
 
         public int[][] GetData() //получение данных в таблицу только для поколений
         {
@@ -395,8 +390,9 @@ namespace Drevo_Project
             public int IdMom { get; set; }
             public int IdDad { get; set; }
             public string FIO { get; set; }
+            public string BirthDay { get; set; }
 
-            
+
             public int isDelete { get; set; }
 
             public SolidBrush colorLine { get; set; } //для дерева
@@ -404,7 +400,7 @@ namespace Drevo_Project
         }
         private List<Cards> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete FROM Card WHERE id >= 1";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0";
             List<Cards> CardsTemp = new List<Cards>();
             try
             {
@@ -419,9 +415,10 @@ namespace Drevo_Project
                         IdPartner = r.GetInt32(2),
                         IdMom = r.GetInt32(3),
                         IdDad = r.GetInt32(4),
-                        FIO = r.GetString(5),     
+                        FIO = r.GetString(5),
                         isDelete = r.GetInt32(6),
-                        
+                        BirthDay = r.GetString(7),
+
                     };
                     CardsTemp.Add(entity);
                 }
@@ -434,6 +431,49 @@ namespace Drevo_Project
             }
 
             return CardsTemp;
+        }
+
+        private List<Cards> GetSortedFioDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
+        {
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0 ORDER BY surname|| ' ' || name || ' ' || middlename";
+            List<Cards> CardsTemp = new List<Cards>();
+            try
+            {
+                SQLiteDataReader r = sql.command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    Cards entity = new Cards
+                    {
+                        Gener = r.GetInt32(0),
+                        Id = r.GetInt32(1),
+                        IdPartner = r.GetInt32(2),
+                        IdMom = r.GetInt32(3),
+                        IdDad = r.GetInt32(4),
+                        FIO = r.GetString(5),
+                        isDelete = r.GetInt32(6),
+                        BirthDay = r.GetString(7),
+
+                    };
+                    CardsTemp.Add(entity);
+                }
+                r.Close();
+                sql.command.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return CardsTemp;
+        }
+
+        private void SortListFam()
+        {
+            List<Cards> personesL = GetSortedFioDataFromBD();
+            listBox1.DataSource = personesL;
+            listBox1.DisplayMember = "FIO";
+            listBox1.ValueMember = "Id";
         }
         private void DrawTreeBmp()
         {
@@ -450,7 +490,7 @@ namespace Drevo_Project
 
             List<Cards> persones = GetDataFromBD();
 
-            
+
 
             panelTree.AutoScroll = true; //автоскролл
             pictureBoxTree.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -458,7 +498,7 @@ namespace Drevo_Project
             Bitmap bmp = new Bitmap(maxCounGen * 380, length * 250);//размер битмапа под количество элементов
             Graphics graph = Graphics.FromImage(bmp);
 
-            List<SolidBrush> pens = new List<SolidBrush>() { 
+            List<SolidBrush> pens = new List<SolidBrush>() {
                 new SolidBrush(Color.Blue),
                 new SolidBrush(Color.Red),
                 new SolidBrush(Color.Green),
@@ -467,12 +507,12 @@ namespace Drevo_Project
                 new SolidBrush(Color.Pink),
                 new SolidBrush(Color.Lavender),
             };
-           
+
             Pen penLine = new Pen(Color.Gray, 1.5f);
             Font fnt = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             Brush br = new SolidBrush(Color.Black);
 
-            
+
 
             Image image1 = Image.FromFile("" + path + "\\img\\logoLogo.png"); //просто лого-заглушка
             int x = 10, y = 30; //положение точки для верхнего поколения
@@ -492,10 +532,10 @@ namespace Drevo_Project
                     //graph.DrawRectangle(pen, x, y, stepHor, stepVert);
 
                     int idTemp = gener[i][k][1]; //текущий человек
- 
+
                     foreach (var item in persones)
                     {
-                        if(item.Id == idTemp && item.isDelete == 1) //если такой существует и не удален
+                        if (item.Id == idTemp && item.isDelete == 1) //если такой существует и не удален
                         {
                             if (!usedId.Exists(value => value == idTemp)) //проверка если он уже нарисован
                             {
@@ -507,7 +547,7 @@ namespace Drevo_Project
                                     item.colorLine = pens[k];
                                     partnerTemp.colorLine = pens[k];
 
-                                    if(item.IdMom != 0) //мать
+                                    if (item.IdMom != 0) //мать
                                     {
                                         graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
                                         Cards momTemp = persones.Find(find => find.Id == item.IdMom);
@@ -526,16 +566,16 @@ namespace Drevo_Project
                                     graph.FillEllipse(partnerTemp.colorLine, x + 145, y + 45, 110, 115);
                                     graph.DrawImage(image1, x + 150, y + 50);
                                     graph.DrawString(partnerTemp.FIO, fnt, br, x + 200, y + 30);
-                                    
+
 
                                     if (partnerTemp.IdMom != 0)
                                     {
                                         graph.DrawLine(penLine, x + 200, y + 50, x + 200, y);
                                     }
 
-                                    graph.DrawLine(penLine, x+100, y + 100, x + 150, y +100); //линия между супругами
+                                    graph.DrawLine(penLine, x + 100, y + 100, x + 150, y + 100); //линия между супругами
 
-                                    if(persones.Exists(find => find.IdDad== item.Id) == true)
+                                    if (persones.Exists(find => find.IdDad == item.Id) == true)
                                     {
                                         graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
                                     }
@@ -875,6 +915,30 @@ namespace Drevo_Project
         }
 
         private void listBoxPhoto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            Application.Exit();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_Format(object sender, ListControlConvertEventArgs e)
+        {
+            string fio = ((Cards)e.ListItem).FIO.ToString();
+            string data = ((Cards)e.ListItem).BirthDay.ToString();
+
+            e.Value = fio + " ; " + data;
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
         {
 
         }
