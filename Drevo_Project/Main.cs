@@ -940,7 +940,19 @@ namespace Drevo_Project
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            Cards Person = listBox1.SelectedItem as Cards;
+            if (listBox1.SelectedIndex != -1)
+            //    listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            {
+                Person.isDelete = 0;
+                sql.command.CommandText = "UPDATE Card SET isDelete = '" + Person.isDelete + "' WHERE id = '" + Person.Id + "'  ";
+                sql.command.ExecuteNonQuery();
+            }
+            else
+                MessageBox.Show("выберите элемент");
 
+            DrawTreeBmp();
+            SortListFam();
         }
     }
 
