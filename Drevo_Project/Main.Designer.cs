@@ -191,6 +191,7 @@ namespace Drevo_Project
             this.ChangeNameAndYearsButton.TabIndex = 27;
             this.ChangeNameAndYearsButton.Text = "Изменить";
             this.ChangeNameAndYearsButton.UseVisualStyleBackColor = false;
+            this.ChangeNameAndYearsButton.Click += new System.EventHandler(this.ChangeNameAndYearsButton_Click_1);
             // 
             // MiddlenameBox
             // 
@@ -332,6 +333,7 @@ namespace Drevo_Project
             this.listBoxPhoto.Name = "listBoxPhoto";
             this.listBoxPhoto.Size = new System.Drawing.Size(445, 594);
             this.listBoxPhoto.TabIndex = 3;
+            this.listBoxPhoto.SelectedIndexChanged += new System.EventHandler(this.listBoxPhoto_SelectedIndexChanged);
             // 
             // tabContactsCard
             // 

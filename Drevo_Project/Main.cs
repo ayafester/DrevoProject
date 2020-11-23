@@ -151,19 +151,81 @@ namespace Drevo_Project
                     else
                     {
                         BirthdayBox.Text = read2["birthday"].ToString();
-                        DeathdayBox.Text = read2["deathday"].ToString();
-                        //возраст не вывожу
+                        DeathdayBox.Text = read2["deathday"].ToString();                        
                         Birthday = read2["birthday"].ToString();
                         Deathday = read2["deathday"].ToString();
 
+                        //Возраст человека в день смерти
+                        String str = read2["birthday"].ToString();
+                        Year = Convert.ToInt32(str.Substring(6));
+                        str = read2["birthday"].ToString();
+                        Mounth = Convert.ToInt32(str.Substring(3, 2));
+                        str = read2["birthday"].ToString();
+                        Day = Convert.ToInt32(str.Substring(0, 2));
+
+                        string date = "";                       
+                        string dateSave = Deathday;
+                        date = dateSave;
+                        Daytd = Convert.ToInt32(dateSave.Substring(0, 2));
+                        dateSave = date;
+                        Mounthtd = Convert.ToInt32(dateSave.Substring(3, 2));
+                        dateSave = date;
+                        Yeartd = Convert.ToInt32(dateSave.Substring(6, 4));
+                        dateSave = date;
+
+
+                        Age = Yeartd - Year;
+                        if (Age == 0)
+                        {
+                            AgeLabel.Text = "Возраст: \nМеньше года";
+                        }
+                        else
+                        {
+                            if (Mounthtd < Mounth)
+                            {
+                                Age -= 1;
+                                if (Age == 0)
+                                {
+                                    AgeLabel.Text = "Возраст: \nМеньше года";
+                                }
+                                else
+                                {
+                                    AgeLabel.Text = "Возраст: " + Age.ToString();
+                                }
+                            }
+                            else
+                            {
+                                if (Mounthtd > Mounth)
+                                {
+                                    AgeLabel.Text = "Возраст: " + Age.ToString();
+                                }
+                                else
+                                {
+                                    if (Daytd < Day)
+                                    {
+                                        Age -= 1;
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                    else
+                                    {
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                }
+                            }
+                        }
+
+
 
                     }
-                    if (Convert.ToInt32(read2["ifAva"]) == 1)
+                    if (Convert.ToInt32(read2["ifAva"]) == 1)//Вывод Аватарки
                     {
                         byte[] imgg = (byte[])(read2["PhotoOnAva"]);
                         MemoryStream mstream = new MemoryStream(imgg);
                         pictureBoxAva.Image = Image.FromStream(mstream);
                     }
+
+                    //Вывод фотоальбома TO DO
+
                 }
 
                 read2.Close();
@@ -376,7 +438,7 @@ namespace Drevo_Project
         private void DrawTreeBmp()
         {
 
-            List<List<int[]>> gener = SortDataToGeneration(); //[generation, id, idPartner, idMom, idDad]
+            /*List<List<int[]>> gener = SortDataToGeneration(); //[generation, id, idPartner, idMom, idDad]
             int length = gener.Count; //количество поколений 3
             int[] temp = new int[length];
             for (int i = 0; i < length; i++)
@@ -509,7 +571,7 @@ namespace Drevo_Project
                 y += stepVert;
             }
 
-            pictureBoxTree.Image = bmp;
+            pictureBoxTree.Image = bmp;*/
         }
 
 
@@ -566,27 +628,6 @@ namespace Drevo_Project
 
             return 0;
         }
-        private void ChangeNameAndYearsButton_Click(object sender, EventArgs e)
-        {
-            if (SurnameBox.Text != Surname || NameBox.Text != Name || MiddlenameBox.Text != Middlename || BirthdayBox.Text != Birthday || DeathdayBox.Text != Deathday)
-            {
-                try
-                {
-                    sql.command.CommandText = "UPDATE Card SET surname= '" + SurnameBox.Text + "', name= '" +
-                        NameBox.Text + "', middlename= '" +
-                        MiddlenameBox.Text + "', birthday= '" +
-                        BirthdayBox.Text + "', deathday = '" +
-                        DeathdayBox.Text + "' WHERE id ='" + DataClass.CardID + "'  ";
-                    sql.command.ExecuteNonQuery();
-                    MessageBox.Show("Данные успешно изменены");
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: стр рег" + ex.Message);
-                }
-            }
-        }
-
         private void ChangeBioButton_Click(object sender, EventArgs e)
         {
             try
@@ -652,6 +693,191 @@ namespace Drevo_Project
             }
         }
 
+        private void ChangeNameAndYearsButton_Click_1(object sender, EventArgs e)
+        {
+            if (SurnameBox.Text != Surname || NameBox.Text != Name || MiddlenameBox.Text != Middlename || BirthdayBox.Text != Birthday || DeathdayBox.Text != Deathday)
+            {
+                try
+                {
+                    sql.command.CommandText = "UPDATE Card SET surname= '" + SurnameBox.Text + "', name= '" +
+                        NameBox.Text + "', middlename= '" +
+                        MiddlenameBox.Text + "', birthday= '" +
+                        BirthdayBox.Text + "', deathday = '" +
+                        DeathdayBox.Text + "' WHERE id ='" + DataClass.CardID + "'  ";
+                    sql.command.ExecuteNonQuery();
+                    MessageBox.Show("Данные успешно изменены");
+
+                    sql.command.CommandText = "SELECT * FROM Card WHERE id = '" + DataClass.CardID + "' ";
+                    SQLiteDataReader read2 = sql.command.ExecuteReader();
+                    while (read2.Read())
+                    {
+                        SurnameBox.Text = read2["surname"].ToString();// Вывод имени
+                        Surname = read2["surname"].ToString();
+                        NameBox.Text = read2["name"].ToString();
+                        Name = read2["name"].ToString();
+                        MiddlenameBox.Text = read2["middlename"].ToString();
+                        Middlename = read2["middlename"].ToString();
+
+                        if (read2["deathday"].ToString() == "")// Вывод дат жизни и возраста
+                        {
+                            BirthdayBox.Text = read2["birthday"].ToString();
+                            Birthday = read2["birthday"].ToString();
+                            Deathday = "";
+
+                            //И возраст
+
+                            String str = read2["birthday"].ToString();
+                            // обрезаем начиная с седьмого символа 
+                            Year = Convert.ToInt32(str.Substring(6));
+
+                            str = read2["birthday"].ToString();
+                            // обрезаем начиная с четвертого до последних пяти символов
+                            Mounth = Convert.ToInt32(str.Substring(3, 2));
+
+                            str = read2["birthday"].ToString();
+                            // обрезаем сначала до последних восьми символов
+                            Day = Convert.ToInt32(str.Substring(0, 2));
+
+
+                            string date = "";
+                            DateTime datetime = DateTime.Now; //Добавление настоящей даты 
+                            string dateSave = Convert.ToString(datetime);
+                            date = dateSave;
+                            Daytd = Convert.ToInt32(dateSave.Substring(0, 2));
+                            dateSave = date;
+                            Mounthtd = Convert.ToInt32(dateSave.Substring(3, 2));
+                            dateSave = date;
+                            Yeartd = Convert.ToInt32(dateSave.Substring(6, 4));
+                            dateSave = date;
+
+                            Age = Yeartd - Year;
+                            if (Age == 0)
+                            {
+                                AgeLabel.Text = "Возраст: \nМеньше года";
+                            }
+                            else
+                            {
+                                if (Mounthtd < Mounth)
+                                {
+                                    Age -= 1;
+                                    if (Age == 0)
+                                    {
+                                        AgeLabel.Text = "Возраст: \nМеньше года";
+                                    }
+                                    else
+                                    {
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    if (Mounthtd > Mounth)
+                                    {
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                    else
+                                    {
+                                        if (Daytd < Day)
+                                        {
+                                            Age -= 1;
+                                            AgeLabel.Text = "Возраст: " + Age.ToString();
+                                        }
+                                        else
+                                        {
+                                            AgeLabel.Text = "Возраст: " + Age.ToString();
+                                        }
+                                    }
+                                }
+                            }
+
+
+                        }
+                        else
+                        {
+                            BirthdayBox.Text = read2["birthday"].ToString();
+                            DeathdayBox.Text = read2["deathday"].ToString();
+                            Birthday = read2["birthday"].ToString();
+                            Deathday = read2["deathday"].ToString();
+
+                            //Возраст человека в день смерти
+                            String str = read2["birthday"].ToString();
+                            Year = Convert.ToInt32(str.Substring(6));
+                            str = read2["birthday"].ToString();
+                            Mounth = Convert.ToInt32(str.Substring(3, 2));
+                            str = read2["birthday"].ToString();
+                            Day = Convert.ToInt32(str.Substring(0, 2));
+
+                            string date = "";
+                            string dateSave = Deathday;
+                            date = dateSave;
+                            Daytd = Convert.ToInt32(dateSave.Substring(0, 2));
+                            dateSave = date;
+                            Mounthtd = Convert.ToInt32(dateSave.Substring(3, 2));
+                            dateSave = date;
+                            Yeartd = Convert.ToInt32(dateSave.Substring(6, 4));
+                            dateSave = date;
+
+
+                            Age = Yeartd - Year;
+                            if (Age == 0)
+                            {
+                                AgeLabel.Text = "Возраст: \nМеньше года";
+                            }
+                            else
+                            {
+                                if (Mounthtd < Mounth)
+                                {
+                                    Age -= 1;
+                                    if (Age == 0)
+                                    {
+                                        AgeLabel.Text = "Возраст: \nМеньше года";
+                                    }
+                                    else
+                                    {
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                }
+                                else
+                                {
+                                    if (Mounthtd > Mounth)
+                                    {
+                                        AgeLabel.Text = "Возраст: " + Age.ToString();
+                                    }
+                                    else
+                                    {
+                                        if (Daytd < Day)
+                                        {
+                                            Age -= 1;
+                                            AgeLabel.Text = "Возраст: " + Age.ToString();
+                                        }
+                                        else
+                                        {
+                                            AgeLabel.Text = "Возраст: " + Age.ToString();
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+                        }
+
+                    }
+
+                    read2.Close();
+
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: стр рег" + ex.Message);
+                }
+            }
+        }
+
+        private void listBoxPhoto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
