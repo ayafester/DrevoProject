@@ -46,7 +46,7 @@ namespace Drevo_Project
                     "idDad INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, idPartner INTEGER REFERENCES Card(id) NOT NULL DEFAULT 0, PhotoOnAva BLOB, Generation INTEGER NOT NULL DEFAULT 0, isDelete INTEGER NOT NULL DEFAULT 1, ifAva INT DEFAULT (0))";// 1-существует. 0- удален
                 command.ExecuteNonQuery();
 
-                command.CommandText = "CREATE TABLE IF NOT EXISTS Photos (id INTEGER PRIMARY KEY AUTOINCREMENT, link TEXT, idCard INTEGER REFERENCES Card(id) DEFAULT 0, idLink TEXT NOT NULL DEFAULT 0, ListID TEXT)";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS Photos (id INTEGER PRIMARY KEY AUTOINCREMENT, photo BLOB, idCard INTEGER REFERENCES Card(id) DEFAULT 0, idLink TEXT NOT NULL DEFAULT 0, ListID TEXT, ifEx   INT     DEFAULT (0))";
                 command.ExecuteNonQuery();
 
 
