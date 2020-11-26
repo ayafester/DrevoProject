@@ -44,11 +44,12 @@ namespace Drevo_Project
             InitializeComponent();
             DrawTreeBmp();
             SortListFam();
-
+            SearchCard();
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
+          
             PathSave = "q";
             PathSave2 = "q";
             try
@@ -353,9 +354,9 @@ namespace Drevo_Project
             public SolidBrush colorLine { get; set; } //для дерева
 
         }
-        private List<Cards> GetDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
+        private List<Cards> GetDataFromBD() 
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1";
             List<Cards> CardsTemp = new List<Cards>();
             try
             {
@@ -388,7 +389,7 @@ namespace Drevo_Project
             return CardsTemp;
         }
 
-        private List<Cards> GetSortedFioDataFromBD() //считывание персон с таблицы эту функцию можно вызывать где надо пример строка 270
+        private List<Cards> GetSortedFioDataFromBD() 
         {
             sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0 ORDER BY surname|| ' ' || name || ' ' || middlename";
             List<Cards> CardsTemp = new List<Cards>();
@@ -484,8 +485,6 @@ namespace Drevo_Project
                 for (int k = 0; k < gener[i].Count; k++) //цикл по массивам внутри поколений 
                 {
 
-                    //graph.DrawRectangle(pen, x, y, stepHor, stepVert);
-
                     int idTemp = gener[i][k][1]; //текущий человек
 
                     foreach (var item in persones)
@@ -494,65 +493,77 @@ namespace Drevo_Project
                         {
                             if (!usedId.Exists(value => value == idTemp)) //проверка если он уже нарисован
                             {
-                                graph.DrawLine(penLine, x, y + stepVert, x + length * 250, y + stepVert);
+                                graph.DrawLine(penLine, x, y + stepVert, x + length * 250, y + stepVert); //вертикальная линия
 
-                                if (item.IdPartner != 0) //пара
+                                if (item.IdPartner != 0) //пара 
                                 {
+                                    
                                     Cards partnerTemp = persones.Find(find => find.IdPartner == item.Id);
-                                    item.colorLine = pens[k];
-                                    partnerTemp.colorLine = pens[k];
 
-                                    if (item.IdMom != 0) //мать
+                                    if (partnerTemp.isDelete == 1) //
                                     {
-                                        graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
-                                        Cards momTemp = persones.Find(find => find.Id == item.IdMom);
-                                        item.colorLine = momTemp.colorLine;
+                                        item.colorLine = pens[k];
+                                        partnerTemp.colorLine = pens[k];
+                                    
+
+                                        if (item.IdMom != 0) //мать
+                                        {
+                                            graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
+                                            Cards momTemp = persones.Find(find => find.Id == item.IdMom);
+                                            item.colorLine = momTemp.colorLine;
+                                        }
+
+                                        graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 115);
+                                        graph.DrawImage(image1, x, y + 50);
+                                        graph.DrawString(item.FIO, fnt, br, x, y + 30);
+
+                                        if (partnerTemp.IdMom != 0)
+                                        {
+                                            Cards momPartnerTemp = persones.Find(find => find.Id == partnerTemp.IdMom);
+                                            partnerTemp.colorLine = momPartnerTemp.colorLine;
+                                        }
+                                        graph.FillEllipse(partnerTemp.colorLine, x + 145, y + 45, 110, 115);
+                                        graph.DrawImage(image1, x + 150, y + 50);
+                                        graph.DrawString(partnerTemp.FIO, fnt, br, x + 200, y + 30);
+
+
+                                        if (partnerTemp.IdMom != 0)
+                                        {
+                                            graph.DrawLine(penLine, x + 200, y + 50, x + 200, y);
+                                        }
+
+                                        graph.DrawLine(penLine, x + 100, y + 100, x + 150, y + 100); //линия между супругами
+
+                                        if (persones.Exists(find => find.IdDad == item.Id) == true)
+                                        {
+                                            graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+                                        }
+
+                                        usedId.Add(idTemp);
+                                        usedId.Add(partnerTemp.Id);
                                     }
-
-                                    graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 115);
-                                    graph.DrawImage(image1, x, y + 50);
-                                    graph.DrawString(item.FIO, fnt, br, x, y + 30);
-
-                                    if (partnerTemp.IdMom != 0)
-                                    {
-                                        Cards momPartnerTemp = persones.Find(find => find.Id == partnerTemp.IdMom);
-                                        partnerTemp.colorLine = momPartnerTemp.colorLine;
-                                    }
-                                    graph.FillEllipse(partnerTemp.colorLine, x + 145, y + 45, 110, 115);
-                                    graph.DrawImage(image1, x + 150, y + 50);
-                                    graph.DrawString(partnerTemp.FIO, fnt, br, x + 200, y + 30);
-
-
-                                    if (partnerTemp.IdMom != 0)
-                                    {
-                                        graph.DrawLine(penLine, x + 200, y + 50, x + 200, y);
-                                    }
-
-                                    graph.DrawLine(penLine, x + 100, y + 100, x + 150, y + 100); //линия между супругами
-
-                                    if (persones.Exists(find => find.IdDad == item.Id) == true)
-                                    {
-                                        graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
-                                    }
-
-                                    usedId.Add(idTemp);
-                                    usedId.Add(partnerTemp.Id);
                                 }
                                 if (item.IdPartner == 0) //одинокий человек
                                 {
-                                    if (item.IdMom != 0)
+                                    Cards dadTemp = persones.Find(find => find.Id == item.IdDad);
+                                    Cards momTemp = persones.Find(find => find.Id == item.IdMom);
+
+                                    if (item.IdMom != 0 && item.IdDad != 0 && momTemp.isDelete == 1 && dadTemp.isDelete == 1)
                                     {
                                         graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
-                                        Cards momTemp = persones.Find(find => find.Id == item.IdMom);
                                         item.colorLine = momTemp.colorLine;
-                                    }
-                                    graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 115);
-                                    graph.DrawImage(image1, x, y + 50);
-                                    graph.DrawString(item.FIO, fnt, br, x, y + 30); //добавить фото
-                                    if (item.IdMom != 0)
-                                    {
+                                        item.colorLine = dadTemp.colorLine;
                                         graph.DrawLine(penLine, x + 50, y + 50, x + 50, y);
+
+                                    } else
+                                    {
+                                        item.colorLine = pens[0];
                                     }
+
+                                    graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 115); //залить эллипс
+                                    graph.DrawImage(image1, x, y + 50); //добавить фото
+                                    graph.DrawString(item.FIO, fnt, br, x, y + 30); //строчка внизу
+                                   
                                 }
 
                             }
@@ -572,10 +583,14 @@ namespace Drevo_Project
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            int idCardtoShow = SearchCard();
-            showCard(idCardtoShow);
+            List<Cards> persones = GetDataFromBD();
+            
+            string choseen = comboBoxSearch.SelectedItem.ToString();
 
+            Cards choseenPerson = persones.Find(find => find.FIO == choseen);
+            showCard(choseenPerson.Id);
         }
+
         private void showCard(int MyId)
         {
             if (MyId != 0)
@@ -583,45 +598,28 @@ namespace Drevo_Project
                 Card cardShow = new Card(MyId);
                 cardShow.ShowDialog();
             }
-
-
         }
-        private int SearchCard()
+
+        private void SearchCard()
         {
             List<Cards> persones = GetDataFromBD();
+            List<String> fioPersones = new List<String>();
 
-            if (searchBox.Text == "")
+            foreach(var item in persones)
             {
-
-                MessageBox.Show("Введите ФИО");
-            }
-            else
-            {
-                bool check = persones.Exists(find => find.FIO == searchBox.Text);
-
-                if (check == true)
+                if (item.isDelete == 1) //список из фамилий, которые не удалены
                 {
-
-                    Cards searchPersona = persones.Find(find => find.FIO == searchBox.Text);
-                    if (searchPersona.isDelete != 0)
-                    {
-                        return searchPersona.Id;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Такого человека нет в древе");
-                    }
-
+                    fioPersones.Add(item.FIO); 
                 }
-                else
-                {
-
-                    MessageBox.Show("Такого человека нет в древе");
-
-                }
+                
+                comboBoxSearch.Items.Add(item.FIO); //заполняем комбобокс
             }
 
-            return 0;
+            var values = new AutoCompleteStringCollection();
+            values.AddRange(fioPersones.ToArray());
+            comboBoxSearch.AutoCompleteCustomSource = values;
+            comboBoxSearch.AutoCompleteMode = AutoCompleteMode.Suggest;
+            comboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
         private void ChangeBioButton_Click(object sender, EventArgs e)
         {
@@ -783,7 +781,7 @@ namespace Drevo_Project
                 sql.command.ExecuteNonQuery();
             }
             else
-                MessageBox.Show("выберите элемент");
+                MessageBox.Show("Выберите элемент");
 
             DrawTreeBmp();
             SortListFam();

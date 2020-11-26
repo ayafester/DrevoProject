@@ -66,12 +66,12 @@ namespace Drevo_Project
             this.panelTree = new System.Windows.Forms.Panel();
             this.pictureBoxTree = new System.Windows.Forms.PictureBox();
             this.tabRelatives = new System.Windows.Forms.TabPage();
+            this.comboBoxSearch = new System.Windows.Forms.ComboBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddCard = new System.Windows.Forms.Button();
-            this.searchBox = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.tabPhotoAlbum = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -472,12 +472,12 @@ namespace Drevo_Project
             // 
             this.tabRelatives.BackColor = System.Drawing.Color.White;
             this.tabRelatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabRelatives.Controls.Add(this.comboBoxSearch);
             this.tabRelatives.Controls.Add(this.listBox1);
             this.tabRelatives.Controls.Add(this.label3);
             this.tabRelatives.Controls.Add(this.label2);
             this.tabRelatives.Controls.Add(this.buttonDelete);
             this.tabRelatives.Controls.Add(this.buttonAddCard);
-            this.tabRelatives.Controls.Add(this.searchBox);
             this.tabRelatives.Controls.Add(this.buttonSearch);
             this.tabRelatives.Location = new System.Drawing.Point(4, 29);
             this.tabRelatives.Name = "tabRelatives";
@@ -485,6 +485,14 @@ namespace Drevo_Project
             this.tabRelatives.Size = new System.Drawing.Size(842, 678);
             this.tabRelatives.TabIndex = 2;
             this.tabRelatives.Text = "Родственники";
+            // 
+            // comboBoxSearch
+            // 
+            this.comboBoxSearch.FormattingEnabled = true;
+            this.comboBoxSearch.Location = new System.Drawing.Point(117, 20);
+            this.comboBoxSearch.Name = "comboBoxSearch";
+            this.comboBoxSearch.Size = new System.Drawing.Size(543, 28);
+            this.comboBoxSearch.TabIndex = 13;
             // 
             // listBox1
             // 
@@ -500,7 +508,7 @@ namespace Drevo_Project
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 28);
+            this.label3.Location = new System.Drawing.Point(42, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 20);
             this.label3.TabIndex = 11;
@@ -509,7 +517,7 @@ namespace Drevo_Project
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 80);
+            this.label2.Location = new System.Drawing.Point(42, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(188, 20);
             this.label2.TabIndex = 10;
@@ -543,15 +551,6 @@ namespace Drevo_Project
             this.buttonAddCard.UseVisualStyleBackColor = false;
             this.buttonAddCard.Click += new System.EventHandler(this.buttonAddCard_Click);
             // 
-            // searchBox
-            // 
-            this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchBox.Location = new System.Drawing.Point(107, 21);
-            this.searchBox.Multiline = true;
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(555, 27);
-            this.searchBox.TabIndex = 5;
-            // 
             // buttonSearch
             // 
             this.buttonSearch.BackColor = System.Drawing.Color.DarkSeaGreen;
@@ -561,7 +560,7 @@ namespace Drevo_Project
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(119, 28);
             this.buttonSearch.TabIndex = 4;
-            this.buttonSearch.Text = "Искать";
+            this.buttonSearch.Text = "Показать";
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
@@ -636,7 +635,6 @@ namespace Drevo_Project
         private Label label2;
         private Button buttonDelete;
         private Button buttonAddCard;
-        private TextBox searchBox;
         private Button buttonSearch;
         private TabPage tabPhotoAlbum;
         private Button ChangeContactsButton;
@@ -665,5 +663,6 @@ namespace Drevo_Project
         private Button button1;
         private ListBox listBoxPhoto;
         private PictureBox pictureBox1;
+        private ComboBox comboBoxSearch;
     }
 }
