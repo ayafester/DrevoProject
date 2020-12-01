@@ -127,20 +127,34 @@ namespace Drevo_Project
 
                 sql.command.CommandText = "SELECT * FROM Photos WHERE idCard ='" + DataClass.CardID + "' ";
                 SQLiteDataReader read4 = sql.command.ExecuteReader();
+                ImageList ImageList = new ImageList();
+                ImageList.ImageSize = new Size( 225, 150);
                 while (read4.Read())//Вывод фотоальбома
                 {
                     if (Convert.ToInt32(read4["ifEx"]) != 0)
                     {
-                        if (Convert.ToInt32(read4["idLink"]) != 0)
+                        if (Convert.ToInt32(read4["idLink"]) == 0)
                         {
                             byte[] img = (byte[])(read4["photo"]);
                             MemoryStream mstr = new MemoryStream(img);
-                            listBoxPhoto.Items.Add(Image.FromStream(mstr));
+                            ImageList.Images.Add(Image.FromStream(mstr));
+                            ListViewItem listViewItem = new ListViewItem();
+                            listViewItem.ImageIndex = Convert.ToInt32(read4["id"]);
+                            listView1.Items.Add(listViewItem);
                         }
                     }
                 }
                 read4.Close();
+                listView1.SmallImageList = ImageList;
 
+                /*string[] index = { "1", "2", "3" };
+                for(int i = 0; i < index.Length; i++)
+                {
+                    ListViewItem listViewItem = new ListViewItem(new string[] { "", index[i]});
+                    listViewItem.ImageIndex = i;
+                    listView1.Items.Add(listViewItem);
+
+                }*/
             }
 
             catch (SQLiteException ex)

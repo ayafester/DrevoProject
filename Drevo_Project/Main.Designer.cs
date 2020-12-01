@@ -51,9 +51,10 @@ namespace Drevo_Project
             this.ChangeBioButton = new System.Windows.Forms.Button();
             this.textBoxBio = new System.Windows.Forms.TextBox();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button4 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.listBoxPhoto = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
             this.ChangeContactsButton = new System.Windows.Forms.Button();
@@ -303,9 +304,9 @@ namespace Drevo_Project
             // 
             this.tabPhotoCard.BackColor = System.Drawing.Color.White;
             this.tabPhotoCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPhotoCard.Controls.Add(this.listView1);
             this.tabPhotoCard.Controls.Add(this.button4);
             this.tabPhotoCard.Controls.Add(this.button1);
-            this.tabPhotoCard.Controls.Add(this.listBoxPhoto);
             this.tabPhotoCard.Controls.Add(this.pictureBox1);
             this.tabPhotoCard.Location = new System.Drawing.Point(4, 29);
             this.tabPhotoCard.Name = "tabPhotoCard";
@@ -313,6 +314,24 @@ namespace Drevo_Project
             this.tabPhotoCard.Size = new System.Drawing.Size(453, 602);
             this.tabPhotoCard.TabIndex = 1;
             this.tabPhotoCard.Text = "Фотоальбом";
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(-1, 164);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(453, 390);
+            this.listView1.TabIndex = 41;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.SmallIcon;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Изображение";
+            this.columnHeader1.Width = 150;
             // 
             // button4
             // 
@@ -339,17 +358,6 @@ namespace Drevo_Project
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // listBoxPhoto
-            // 
-            this.listBoxPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listBoxPhoto.FormattingEnabled = true;
-            this.listBoxPhoto.ItemHeight = 20;
-            this.listBoxPhoto.Location = new System.Drawing.Point(-1, 164);
-            this.listBoxPhoto.Name = "listBoxPhoto";
-            this.listBoxPhoto.ScrollAlwaysVisible = true;
-            this.listBoxPhoto.Size = new System.Drawing.Size(450, 382);
-            this.listBoxPhoto.TabIndex = 37;
             // 
             // pictureBox1
             // 
@@ -648,8 +656,9 @@ namespace Drevo_Project
         private TabPage tabPhotoCard;
         private Button button4;
         private Button button1;
-        private ListBox listBoxPhoto;
         private PictureBox pictureBox1;
         private ComboBox comboBoxSearch;
+        private ListView listView1;
+        private ColumnHeader columnHeader1;
     }
 }
