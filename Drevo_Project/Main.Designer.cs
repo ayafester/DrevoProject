@@ -73,7 +73,6 @@ namespace Drevo_Project
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.tabPhotoAlbum = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
@@ -106,7 +105,6 @@ namespace Drevo_Project
             this.tabMenu.Controls.Add(this.tabMyProfile);
             this.tabMenu.Controls.Add(this.tabDrevo);
             this.tabMenu.Controls.Add(this.tabRelatives);
-            this.tabMenu.Controls.Add(this.tabPhotoAlbum);
             this.tabMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabMenu.Location = new System.Drawing.Point(12, 12);
             this.tabMenu.Name = "tabMenu";
@@ -564,16 +562,6 @@ namespace Drevo_Project
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // tabPhotoAlbum
-            // 
-            this.tabPhotoAlbum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPhotoAlbum.Location = new System.Drawing.Point(4, 29);
-            this.tabPhotoAlbum.Name = "tabPhotoAlbum";
-            this.tabPhotoAlbum.Size = new System.Drawing.Size(842, 678);
-            this.tabPhotoAlbum.TabIndex = 3;
-            this.tabPhotoAlbum.Text = "Общий фотоальбом";
-            this.tabPhotoAlbum.UseVisualStyleBackColor = true;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
@@ -636,7 +624,6 @@ namespace Drevo_Project
         private Button buttonDelete;
         private Button buttonAddCard;
         private Button buttonSearch;
-        private TabPage tabPhotoAlbum;
         private Button ChangeContactsButton;
         private Label label5;
         private Label label4;
