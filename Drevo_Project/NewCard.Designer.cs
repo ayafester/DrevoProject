@@ -101,6 +101,7 @@
             this.dateTimePickerDeathdayAdd.Name = "dateTimePickerDeathdayAdd";
             this.dateTimePickerDeathdayAdd.Size = new System.Drawing.Size(405, 26);
             this.dateTimePickerDeathdayAdd.TabIndex = 23;
+            this.dateTimePickerDeathdayAdd.Value = new System.DateTime(2020, 7, 1, 0, 0, 0, 0);
             // 
             // dateTimePickerBirthdayAdd
             // 

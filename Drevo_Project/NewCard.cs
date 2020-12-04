@@ -85,19 +85,19 @@ namespace Drevo_Project
             };
 
 
-            Females.Insert(0, new Person() { Id = -1, Name = " " , Gender = 0 , Generation = 99 });
+            Females.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
             comboBox1.DataSource = Females;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
             comboBox1.SelectedIndex = 0;
 
-            Males.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 99 });
+            Males.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
             comboBox2.DataSource = Males;
             comboBox2.DisplayMember = "Name";
             comboBox2.ValueMember = "Id";
             comboBox2.SelectedIndex = 0;
 
-            Names.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 99 });
+            Names.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
             comboBox3.DataSource = Names;
             comboBox3.DisplayMember = "Name";
             comboBox3.ValueMember = "Id";
@@ -131,9 +131,6 @@ namespace Drevo_Project
             {
                 Gender = 1;
             }
-
-            
-
 
                 try
                 {

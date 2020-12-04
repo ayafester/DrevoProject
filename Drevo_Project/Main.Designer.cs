@@ -107,10 +107,10 @@ namespace Drevo_Project
             this.tabMenu.Controls.Add(this.tabDrevo);
             this.tabMenu.Controls.Add(this.tabRelatives);
             this.tabMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tabMenu.Location = new System.Drawing.Point(12, 12);
+            this.tabMenu.Location = new System.Drawing.Point(12, 5);
             this.tabMenu.Name = "tabMenu";
             this.tabMenu.SelectedIndex = 0;
-            this.tabMenu.Size = new System.Drawing.Size(850, 711);
+            this.tabMenu.Size = new System.Drawing.Size(850, 718);
             this.tabMenu.TabIndex = 3;
             // 
             // tabMyProfile
@@ -453,7 +453,7 @@ namespace Drevo_Project
             this.tabDrevo.Location = new System.Drawing.Point(4, 29);
             this.tabDrevo.Name = "tabDrevo";
             this.tabDrevo.Padding = new System.Windows.Forms.Padding(10, 10, 10, 3);
-            this.tabDrevo.Size = new System.Drawing.Size(842, 678);
+            this.tabDrevo.Size = new System.Drawing.Size(842, 685);
             this.tabDrevo.TabIndex = 1;
             this.tabDrevo.Text = "Древо семьи";
             // 
@@ -508,7 +508,6 @@ namespace Drevo_Project
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(752, 484);
             this.listBox1.TabIndex = 12;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.listBox1_Format);
             // 
             // label3

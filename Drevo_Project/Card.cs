@@ -90,11 +90,12 @@ namespace Drevo_Project
         private void buttonEditCard_Click(object sender, EventArgs e)
         {
             EditCard editCard = new EditCard(MyId);
-            //editCard.Show();
+            
 
             if (editCard.ShowDialog() == DialogResult.OK)
             {
-
+                editCard.Close();
+                DialogResult = DialogResult.OK;
             }
         }
     }
