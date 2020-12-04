@@ -34,7 +34,7 @@ namespace Drevo_Project
         public int idPartner { get; set; }
         public int Gender { get; set; }
         public String idCreator { get; set; }
-        public int Gener { get; set; }
+        public int Gener  { get; set; }
         public int isDelete { get; set; }
 
 
@@ -85,19 +85,19 @@ namespace Drevo_Project
             };
 
 
-            Females.Insert(0, new Person() { Id = -1, Name = " " , Gender = 0 , Generation = 0 });
+            Females.Insert(0, new Person() { Id = -1, Name = " " , Gender = 0 , Generation = 99 });
             comboBox1.DataSource = Females;
             comboBox1.DisplayMember = "Name";
             comboBox1.ValueMember = "Id";
             comboBox1.SelectedIndex = 0;
 
-            Males.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 0 });
+            Males.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 99 });
             comboBox2.DataSource = Males;
             comboBox2.DisplayMember = "Name";
             comboBox2.ValueMember = "Id";
             comboBox2.SelectedIndex = 0;
 
-            Names.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 0 });
+            Names.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 99 });
             comboBox3.DataSource = Names;
             comboBox3.DisplayMember = "Name";
             comboBox3.ValueMember = "Id";
@@ -106,6 +106,8 @@ namespace Drevo_Project
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged += ComboBox2_SelectedIndexChanged;
             comboBox3.SelectedIndexChanged += ComboBox3_SelectedIndexChanged;
+
+            Gener = 99;
         }
 
         private void buttonSaveInfoAdd_Click(object sender, EventArgs e)
@@ -130,44 +132,34 @@ namespace Drevo_Project
                 Gender = 1;
             }
 
-            /*if (comboBox1.SelectedValue != null && Convert.ToInt32(comboBox1.SelectedValue) == -1)
-                MessageBox.Show("Please select a person name");
-            else
-
-            if (comboBox2.SelectedValue != null && Convert.ToInt32(comboBox2.SelectedValue) == -1)
-                MessageBox.Show("Please select a person name");
-            else
-
-            if (comboBox3.SelectedValue != null && Convert.ToInt32(comboBox3.SelectedValue) == -1)
-                MessageBox.Show("Please select a person name");
-            else*/
+            
 
 
                 try
-            {
-                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number', 'mail', 'idCreator', 'isDelete', 'Generation', 'idPartner') VALUES ('" + //пока добавление связей нет
-                    Surname + "' , '" +
-                    NamePerson + "' , '" +
-                    Middlename + "' , '" +
-                    Gender + "' , '" +
-                    BIO + "' , '" +
-                    idMom + "' , '" +
-                    idDad + "' , '" +
-                    DateBirthday + "' ,'" +
-                    DateDeathday + "' , '" +
-                    Number + "' , '" +
-                    Mail + "' , '" +
-                    idCreator + "' , '" +
-                    isDelete + "' , '" +
-                    Gener + "' , '" +
-                    idPartner + "')";                
+                {
+                    sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number', 'mail', 'idCreator', 'isDelete', 'Generation', 'idPartner') VALUES ('" + //пока добавление связей нет
+                        Surname + "' , '" +
+                        NamePerson + "' , '" +
+                        Middlename + "' , '" +
+                        Gender + "' , '" +
+                        BIO + "' , '" +
+                        idMom + "' , '" +
+                        idDad + "' , '" +
+                        DateBirthday + "' ,'" +
+                        DateDeathday + "' , '" +
+                        Number + "' , '" +
+                        Mail + "' , '" +
+                        idCreator + "' , '" +
+                        isDelete + "' , '" +
+                        Gener + "' , '" +
+                        idPartner + "')";
 
-                sql.command.ExecuteNonQuery();
-            }
-            catch (SQLiteException ex)
-            {
-                MessageBox.Show("Error: стр рег" + ex.Message);
-            }
+                    sql.command.ExecuteNonQuery();
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: стр рег" + ex.Message);
+                }
 
 
             DialogResult = DialogResult.OK;
@@ -177,20 +169,30 @@ namespace Drevo_Project
         {
             Person Female = comboBox1.SelectedItem as Person;
             idMom = Female.Id;
-            Gener = Female.Generation - 1;
+            if (Female.Generation!=99)
+            {
+                Gener = Female.Generation - 1;
+            }
         }
 
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             Person Male = comboBox2.SelectedItem as Person;
             idDad = Male.Id;
-            Gener = Male.Generation - 1;
+            if(Male.Generation != 99)
+            {
+                Gener = Male.Generation - 1;
+            }
         }
 
         private void ComboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             Person Person = comboBox3.SelectedItem as Person;
             idPartner = Person.Id;
+            if(Person.Generation != 99)
+            {
+                Gener = Person.Generation;
+            }
         }
     }
     class Person
