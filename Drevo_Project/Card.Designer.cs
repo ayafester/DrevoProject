@@ -54,7 +54,7 @@
             this.buttonEditCard.FlatAppearance.BorderSize = 0;
             this.buttonEditCard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEditCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonEditCard.Location = new System.Drawing.Point(592, 537);
+            this.buttonEditCard.Location = new System.Drawing.Point(594, 600);
             this.buttonEditCard.Name = "buttonEditCard";
             this.buttonEditCard.Size = new System.Drawing.Size(163, 51);
             this.buttonEditCard.TabIndex = 9;
@@ -66,7 +66,7 @@
             // 
             this.labelDataBornCard.AutoSize = true;
             this.labelDataBornCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDataBornCard.Location = new System.Drawing.Point(524, 76);
+            this.labelDataBornCard.Location = new System.Drawing.Point(497, 88);
             this.labelDataBornCard.Name = "labelDataBornCard";
             this.labelDataBornCard.Size = new System.Drawing.Size(86, 20);
             this.labelDataBornCard.TabIndex = 8;
@@ -76,7 +76,7 @@
             // 
             this.labelFioCard.AutoSize = true;
             this.labelFioCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFioCard.Location = new System.Drawing.Point(524, 42);
+            this.labelFioCard.Location = new System.Drawing.Point(497, 49);
             this.labelFioCard.Name = "labelFioCard";
             this.labelFioCard.Size = new System.Drawing.Size(194, 20);
             this.labelFioCard.TabIndex = 7;
@@ -84,9 +84,12 @@
             // 
             // pictureCard
             // 
-            this.pictureCard.Location = new System.Drawing.Point(527, 121);
+            this.pictureCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureCard.Image = global::Drevo_Project.Properties.Resources.logo;
+            this.pictureCard.Location = new System.Drawing.Point(516, 186);
             this.pictureCard.Name = "pictureCard";
             this.pictureCard.Size = new System.Drawing.Size(305, 389);
+            this.pictureCard.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureCard.TabIndex = 6;
             this.pictureCard.TabStop = false;
             // 
@@ -225,7 +228,6 @@
         private System.Windows.Forms.Button buttonEditCard;
         private System.Windows.Forms.Label labelDataBornCard;
         private System.Windows.Forms.Label labelFioCard;
-        private System.Windows.Forms.PictureBox pictureCard;
         private System.Windows.Forms.TabControl tabInfoCard;
         private System.Windows.Forms.TabPage tabBioCard;
         private System.Windows.Forms.TabPage tabPhotoCard;
@@ -236,5 +238,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label MailBoxCard;
         private System.Windows.Forms.Label NumberBoxCard;
+        public System.Windows.Forms.PictureBox pictureCard;
     }
 }

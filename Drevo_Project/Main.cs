@@ -132,14 +132,7 @@ namespace Drevo_Project
 
 
                 ShowPhoto();
-                /*string[] index = { "1", "2", "3" };
-                for(int i = 0; i < index.Length; i++)
-                {
-                    ListViewItem listViewItem = new ListViewItem(new string[] { "", index[i]});
-                    listViewItem.ImageIndex = i;
-                    listView1.Items.Add(listViewItem);
-
-                }*/
+                
             }
 
             catch (SQLiteException ex)

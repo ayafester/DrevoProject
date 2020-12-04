@@ -134,7 +134,7 @@ namespace Drevo_Project
             this.tabMyProfile.Name = "tabMyProfile";
             this.tabMyProfile.Padding = new System.Windows.Forms.Padding(10);
             this.tabMyProfile.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabMyProfile.Size = new System.Drawing.Size(842, 678);
+            this.tabMyProfile.Size = new System.Drawing.Size(842, 685);
             this.tabMyProfile.TabIndex = 0;
             this.tabMyProfile.Text = "Мой профиль";
             // 
@@ -143,7 +143,7 @@ namespace Drevo_Project
             this.button3.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(539, 538);
+            this.button3.Location = new System.Drawing.Point(539, 637);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(108, 33);
             this.button3.TabIndex = 36;
@@ -156,7 +156,7 @@ namespace Drevo_Project
             this.button2.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(662, 538);
+            this.button2.Location = new System.Drawing.Point(662, 637);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(108, 33);
             this.button2.TabIndex = 35;
@@ -245,9 +245,9 @@ namespace Drevo_Project
             this.pictureBoxAva.ErrorImage = null;
             this.pictureBoxAva.Image = global::Drevo_Project.Properties.Resources.logo;
             this.pictureBoxAva.InitialImage = null;
-            this.pictureBoxAva.Location = new System.Drawing.Point(530, 239);
+            this.pictureBoxAva.Location = new System.Drawing.Point(515, 239);
             this.pictureBoxAva.Name = "pictureBoxAva";
-            this.pictureBoxAva.Size = new System.Drawing.Size(249, 280);
+            this.pictureBoxAva.Size = new System.Drawing.Size(280, 384);
             this.pictureBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxAva.TabIndex = 25;
             this.pictureBoxAva.TabStop = false;
@@ -488,7 +488,7 @@ namespace Drevo_Project
             this.tabRelatives.Location = new System.Drawing.Point(4, 29);
             this.tabRelatives.Name = "tabRelatives";
             this.tabRelatives.Padding = new System.Windows.Forms.Padding(3);
-            this.tabRelatives.Size = new System.Drawing.Size(842, 678);
+            this.tabRelatives.Size = new System.Drawing.Size(842, 685);
             this.tabRelatives.TabIndex = 2;
             this.tabRelatives.Text = "Родственники";
             // 

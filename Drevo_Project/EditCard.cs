@@ -8,7 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
-
+using System.IO;
+using System.Diagnostics;
+using System.Data.SqlClient;
+using System.Drawing.Text;
+using System.Windows.Markup;
 namespace Drevo_Project
 {
     public partial class EditCard : Form
@@ -31,6 +35,7 @@ namespace Drevo_Project
         public int GenerT { get; set; }
         public int Gener { get; set; }
 
+        public String PathSave { get; set; }
 
         public EditCard(int id)
         {
@@ -52,9 +57,9 @@ namespace Drevo_Project
                     textBoxDataNameEdit.Text = read["name"].ToString();
                     textBoxMiddlenameEdit.Text = read["middlename"].ToString();
 
-                    textBoxBioEdit.Text = Convert.ToString(read["bio"]);                    
-                    dateTimePickerBirthdayEdit.Text = read["birthday"].ToString();
-                    dateTimePickerDeathdayEdit.Text = read["deathday"].ToString();
+                    textBoxBioEdit.Text = Convert.ToString(read["bio"]);
+                    textBoxDateBirthday.Text = read["birthday"].ToString();
+                    textBoxDateDeathDay.Text = read["deathday"].ToString();
                     textBoxMailEdit.Text = read["mail"].ToString();
                     textBoxNumberEdit.Text = read["number"].ToString();                    
                 }
@@ -147,8 +152,8 @@ namespace Drevo_Project
             Surname = textBoxSurnameEdit.Text;
             NamePerson = textBoxDataNameEdit.Text;
             Middlename = textBoxMiddlenameEdit.Text;
-            DateBirthday = dateTimePickerBirthdayEdit.Value.ToString("dd/MM/yyyy");
-            DateDeathday = dateTimePickerDeathdayEdit.Value.ToString("dd/MM/yyyy");
+            DateBirthday = textBoxDateBirthday.Text;
+            DateDeathday = textBoxDateDeathDay.Text;
             BIO = textBoxBioEdit.Text;
             Number = textBoxNumberEdit.Text;
 
@@ -226,5 +231,39 @@ namespace Drevo_Project
             }
             else GenerT = Gener;
         }
+
+        private void buttonAddAva_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files(*.BPM;*.JPG;*.GIF;*.PNG)|*.BPM;*.JPG;*.GIF;*.PNG|All Files (*.*)|*.*";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    PathSave = ofd.FileName.ToString();
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            if (PathSave != "q")
+            {
+                byte[] ImageBt = null;
+                FileStream fstream = new FileStream(this.PathSave, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fstream);
+                ImageBt = br.ReadBytes((int)fstream.Length);
+
+                sql.command.CommandText = "UPDATE Card SET PhotoOnAva =@img , ifAva = 1 WHERE id= '" + MyId + "'";
+                sql.command.Parameters.AddWithValue("@img", ImageBt);
+                sql.command.ExecuteNonQuery();
+
+                MessageBox.Show("Фото успешно изменено");
+                PathSave = "";
+            }
+        }
+
+        
     }
 }

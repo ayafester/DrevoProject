@@ -78,7 +78,21 @@ namespace Drevo_Project
                 }
                 read3.Close();
 
+                sql.command.CommandText = "SELECT * FROM Card WHERE id = '" + MyId + "' ";
+                SQLiteDataReader read4 = sql.command.ExecuteReader();
 
+                while (read4.Read())
+                {
+                    if (Convert.ToInt32(read4["ifAva"]) == 1)//Вывод Аватарки
+                    {
+                        byte[] imgg = (byte[])(read4["PhotoOnAva"]);
+                        MemoryStream mstream = new MemoryStream(imgg);
+                        pictureCard.Image = Image.FromStream(mstream);
+                    }
+
+                }
+                read4.Close();
+                
             }
 
             catch (SQLiteException ex)

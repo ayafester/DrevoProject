@@ -12,6 +12,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Data.SqlClient;
 using System.Drawing.Text;
+using System.Windows.Markup;
 
 namespace Drevo_Project
 {
@@ -37,7 +38,7 @@ namespace Drevo_Project
         public int Gener  { get; set; }
         public int isDelete { get; set; }
 
-
+        public String PathSave { get; set; }
 
         public NewCard()
         {
@@ -46,6 +47,7 @@ namespace Drevo_Project
 
         private void NewCard_Load(object sender, EventArgs e)
         {
+            PathSave = "q";
             sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender, Generation FROM Card WHERE id >= 1";
             List<Person> Names = new List<Person>();
             try
@@ -116,8 +118,8 @@ namespace Drevo_Project
             Surname = textBoxSurnameAdd.Text;
             NamePerson = textBoxNameAdd.Text;
             Middlename = textBoxMiddlenameAdd.Text;
-            DateBirthday = dateTimePickerBirthdayAdd.Value.ToString("dd/MM/yyyy");
-            DateDeathday = dateTimePickerDeathdayAdd.Value.ToString("dd/MM/yyyy");
+            DateBirthday = textBoxDateBirthday.Text;
+            DateDeathday = textBoxDateDeathDay.Text;
             BIO = textBoxBioAdd.Text;
             Number = textBoxNumberAdd.Text;
             idCreator = DataClass.ID;
@@ -155,7 +157,7 @@ namespace Drevo_Project
                 }
                 catch (SQLiteException ex)
                 {
-                    MessageBox.Show("Error: стр рег" + ex.Message);
+                    MessageBox.Show("Error:" + ex.Message);
                 }
 
 
@@ -190,6 +192,38 @@ namespace Drevo_Project
             {
                 Gener = Person.Generation;
             }
+        }
+
+        private void buttonAddAva_Click(object sender, EventArgs e)
+        {
+            /*OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files(*.BPM;*.JPG;*.GIF;*.PNG)|*.BPM;*.JPG;*.GIF;*.PNG|All Files (*.*)|*.*";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    PathSave = ofd.FileName.ToString();
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            if (PathSave != "q")
+            {
+                byte[] ImageBt = null;
+                FileStream fstream = new FileStream(this.PathSave, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fstream);
+                ImageBt = br.ReadBytes((int)fstream.Length);
+
+                sql.command.CommandText = "UPDATE Card SET PhotoOnAva =@img , ifAva = 1 WHERE id= '" + MyId + "'";
+                sql.command.Parameters.AddWithValue("@img", ImageBt);
+                sql.command.ExecuteNonQuery();
+
+                MessageBox.Show("Фото успешно изменено");
+                PathSave = "";
+            }*/
         }
     }
     class Person

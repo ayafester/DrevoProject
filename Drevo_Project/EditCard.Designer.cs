@@ -36,9 +36,7 @@
             this.textBoxMailEdit = new System.Windows.Forms.TextBox();
             this.buttonSaveInfo = new System.Windows.Forms.Button();
             this.textBoxMiddlenameEdit = new System.Windows.Forms.TextBox();
-            this.dateTimePickerBirthdayEdit = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -48,7 +46,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.dateTimePickerDeathdayEdit = new System.Windows.Forms.DateTimePicker();
+            this.buttonAddAva = new System.Windows.Forms.Button();
+            this.textBoxDateDeathDay = new System.Windows.Forms.TextBox();
+            this.textBoxDateBirthday = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -90,7 +90,7 @@
             this.textBoxBioEdit.Multiline = true;
             this.textBoxBioEdit.Name = "textBoxBioEdit";
             this.textBoxBioEdit.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxBioEdit.Size = new System.Drawing.Size(406, 217);
+            this.textBoxBioEdit.Size = new System.Drawing.Size(406, 204);
             this.textBoxBioEdit.TabIndex = 3;
             this.textBoxBioEdit.Text = "Введите биографию";
             // 
@@ -109,7 +109,7 @@
             this.textBoxMailEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxMailEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxMailEdit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBoxMailEdit.Location = new System.Drawing.Point(56, 494);
+            this.textBoxMailEdit.Location = new System.Drawing.Point(56, 498);
             this.textBoxMailEdit.Name = "textBoxMailEdit";
             this.textBoxMailEdit.Size = new System.Drawing.Size(406, 26);
             this.textBoxMailEdit.TabIndex = 5;
@@ -139,14 +139,6 @@
             this.textBoxMiddlenameEdit.Size = new System.Drawing.Size(406, 26);
             this.textBoxMiddlenameEdit.TabIndex = 7;
             // 
-            // dateTimePickerBirthdayEdit
-            // 
-            this.dateTimePickerBirthdayEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePickerBirthdayEdit.Location = new System.Drawing.Point(56, 271);
-            this.dateTimePickerBirthdayEdit.Name = "dateTimePickerBirthdayEdit";
-            this.dateTimePickerBirthdayEdit.Size = new System.Drawing.Size(405, 26);
-            this.dateTimePickerBirthdayEdit.TabIndex = 8;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -157,21 +149,11 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Дата рождения:";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(633, 517);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(192, 20);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Добавить фотографии:";
-            // 
             // label
             // 
             this.label.AutoSize = true;
             this.label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label.Location = new System.Drawing.Point(633, 351);
+            this.label.Location = new System.Drawing.Point(633, 328);
             this.label.Name = "label";
             this.label.Size = new System.Drawing.Size(55, 20);
             this.label.TabIndex = 45;
@@ -180,7 +162,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(722, 353);
+            this.comboBox1.Location = new System.Drawing.Point(722, 330);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(241, 21);
             this.comboBox1.TabIndex = 49;
@@ -190,7 +172,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(633, 398);
+            this.label6.Location = new System.Drawing.Point(633, 375);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 20);
             this.label6.TabIndex = 50;
@@ -199,7 +181,7 @@
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(722, 400);
+            this.comboBox2.Location = new System.Drawing.Point(722, 377);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(241, 21);
             this.comboBox2.TabIndex = 51;
@@ -209,7 +191,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(633, 444);
+            this.label9.Location = new System.Drawing.Point(633, 421);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(79, 20);
             this.label9.TabIndex = 52;
@@ -218,7 +200,7 @@
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(722, 444);
+            this.comboBox3.Location = new System.Drawing.Point(722, 421);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(241, 21);
             this.comboBox3.TabIndex = 53;
@@ -238,7 +220,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(52, 471);
+            this.label5.Location = new System.Drawing.Point(52, 475);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(164, 20);
             this.label5.TabIndex = 55;
@@ -254,13 +236,40 @@
             this.label7.TabIndex = 56;
             this.label7.Text = "Дата смерти:";
             // 
-            // dateTimePickerDeathdayEdit
+            // buttonAddAva
             // 
-            this.dateTimePickerDeathdayEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePickerDeathdayEdit.Location = new System.Drawing.Point(56, 339);
-            this.dateTimePickerDeathdayEdit.Name = "dateTimePickerDeathdayEdit";
-            this.dateTimePickerDeathdayEdit.Size = new System.Drawing.Size(405, 26);
-            this.dateTimePickerDeathdayEdit.TabIndex = 57;
+            this.buttonAddAva.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.buttonAddAva.FlatAppearance.BorderSize = 0;
+            this.buttonAddAva.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddAva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddAva.ForeColor = System.Drawing.Color.Black;
+            this.buttonAddAva.Location = new System.Drawing.Point(722, 471);
+            this.buttonAddAva.Name = "buttonAddAva";
+            this.buttonAddAva.Size = new System.Drawing.Size(185, 53);
+            this.buttonAddAva.TabIndex = 58;
+            this.buttonAddAva.Text = "Добавить аватарку";
+            this.buttonAddAva.UseVisualStyleBackColor = false;
+            this.buttonAddAva.Click += new System.EventHandler(this.buttonAddAva_Click);
+            // 
+            // textBoxDateDeathDay
+            // 
+            this.textBoxDateDeathDay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxDateDeathDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxDateDeathDay.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.textBoxDateDeathDay.Location = new System.Drawing.Point(56, 350);
+            this.textBoxDateDeathDay.Name = "textBoxDateDeathDay";
+            this.textBoxDateDeathDay.Size = new System.Drawing.Size(406, 26);
+            this.textBoxDateDeathDay.TabIndex = 60;
+            // 
+            // textBoxDateBirthday
+            // 
+            this.textBoxDateBirthday.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxDateBirthday.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxDateBirthday.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.textBoxDateBirthday.Location = new System.Drawing.Point(56, 271);
+            this.textBoxDateBirthday.Name = "textBoxDateBirthday";
+            this.textBoxDateBirthday.Size = new System.Drawing.Size(406, 26);
+            this.textBoxDateBirthday.TabIndex = 59;
             // 
             // EditCard
             // 
@@ -268,7 +277,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1065, 670);
-            this.Controls.Add(this.dateTimePickerDeathdayEdit);
+            this.Controls.Add(this.textBoxDateDeathDay);
+            this.Controls.Add(this.textBoxDateBirthday);
+            this.Controls.Add(this.buttonAddAva);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -278,9 +289,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePickerBirthdayEdit);
             this.Controls.Add(this.textBoxMiddlenameEdit);
             this.Controls.Add(this.buttonSaveInfo);
             this.Controls.Add(this.textBoxMailEdit);
@@ -308,9 +317,7 @@
         private System.Windows.Forms.TextBox textBoxMailEdit;
         private System.Windows.Forms.Button buttonSaveInfo;
         private System.Windows.Forms.TextBox textBoxMiddlenameEdit;
-        private System.Windows.Forms.DateTimePicker dateTimePickerBirthdayEdit;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label6;
@@ -320,6 +327,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDeathdayEdit;
+        private System.Windows.Forms.Button buttonAddAva;
+        private System.Windows.Forms.TextBox textBoxDateDeathDay;
+        private System.Windows.Forms.TextBox textBoxDateBirthday;
     }
 }
