@@ -25,6 +25,10 @@ namespace Drevo_Project
         {
             MyId = id;
             InitializeComponent();
+            if (DataClass.ID != "1")
+            {
+                buttonEditCard.Enabled = false;
+            }
         }
 
 
@@ -85,7 +89,7 @@ namespace Drevo_Project
 
         private void buttonEditCard_Click(object sender, EventArgs e)
         {
-            EditCard editCard = new EditCard();
+            EditCard editCard = new EditCard(MyId);
             //editCard.Show();
 
             if (editCard.ShowDialog() == DialogResult.OK)

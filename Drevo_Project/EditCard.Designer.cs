@@ -39,6 +39,16 @@
             this.dateTimePickerBirthdayEdit = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dateTimePickerDeathdayEdit = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +70,6 @@
             this.textBoxSurnameEdit.Name = "textBoxSurnameEdit";
             this.textBoxSurnameEdit.Size = new System.Drawing.Size(406, 26);
             this.textBoxSurnameEdit.TabIndex = 1;
-            this.textBoxSurnameEdit.Text = "Введите фамилию";
             // 
             // textBoxDataNameEdit
             // 
@@ -71,7 +80,6 @@
             this.textBoxDataNameEdit.Name = "textBoxDataNameEdit";
             this.textBoxDataNameEdit.Size = new System.Drawing.Size(406, 26);
             this.textBoxDataNameEdit.TabIndex = 2;
-            this.textBoxDataNameEdit.Text = "Введите имя";
             // 
             // textBoxBioEdit
             // 
@@ -91,22 +99,20 @@
             this.textBoxNumberEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxNumberEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxNumberEdit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBoxNumberEdit.Location = new System.Drawing.Point(55, 348);
+            this.textBoxNumberEdit.Location = new System.Drawing.Point(55, 438);
             this.textBoxNumberEdit.Name = "textBoxNumberEdit";
             this.textBoxNumberEdit.Size = new System.Drawing.Size(406, 26);
             this.textBoxNumberEdit.TabIndex = 4;
-            this.textBoxNumberEdit.Text = "Введите номер телефона";
             // 
             // textBoxMailEdit
             // 
             this.textBoxMailEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxMailEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxMailEdit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textBoxMailEdit.Location = new System.Drawing.Point(56, 389);
+            this.textBoxMailEdit.Location = new System.Drawing.Point(56, 494);
             this.textBoxMailEdit.Name = "textBoxMailEdit";
             this.textBoxMailEdit.Size = new System.Drawing.Size(406, 26);
             this.textBoxMailEdit.TabIndex = 5;
-            this.textBoxMailEdit.Text = "Введите почту";
             // 
             // buttonSaveInfo
             // 
@@ -115,7 +121,7 @@
             this.buttonSaveInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSaveInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonSaveInfo.ForeColor = System.Drawing.Color.Black;
-            this.buttonSaveInfo.Location = new System.Drawing.Point(469, 455);
+            this.buttonSaveInfo.Location = new System.Drawing.Point(469, 605);
             this.buttonSaveInfo.Name = "buttonSaveInfo";
             this.buttonSaveInfo.Size = new System.Drawing.Size(162, 53);
             this.buttonSaveInfo.TabIndex = 6;
@@ -132,7 +138,6 @@
             this.textBoxMiddlenameEdit.Name = "textBoxMiddlenameEdit";
             this.textBoxMiddlenameEdit.Size = new System.Drawing.Size(406, 26);
             this.textBoxMiddlenameEdit.TabIndex = 7;
-            this.textBoxMiddlenameEdit.Text = "Введите отчество";
             // 
             // dateTimePickerBirthdayEdit
             // 
@@ -148,26 +153,131 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(52, 242);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(200, 20);
+            this.label2.Size = new System.Drawing.Size(132, 20);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Введите дату рождения:";
+            this.label2.Text = "Дата рождения:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(633, 348);
+            this.label4.Location = new System.Drawing.Point(633, 517);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(192, 20);
             this.label4.TabIndex = 12;
             this.label4.Text = "Добавить фотографии:";
+            // 
+            // label
+            // 
+            this.label.AutoSize = true;
+            this.label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label.Location = new System.Drawing.Point(633, 351);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(55, 20);
+            this.label.TabIndex = 45;
+            this.label.Text = "Мама:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(722, 353);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(241, 21);
+            this.comboBox1.TabIndex = 49;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(633, 398);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 20);
+            this.label6.TabIndex = 50;
+            this.label6.Text = "Папа:";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(722, 400);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(241, 21);
+            this.comboBox2.TabIndex = 51;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.ComboBox2_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(633, 444);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 20);
+            this.label9.TabIndex = 52;
+            this.label9.Text = "Партнер:";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(722, 444);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(241, 21);
+            this.comboBox3.TabIndex = 53;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.ComboBox3_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(52, 415);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(146, 20);
+            this.label3.TabIndex = 54;
+            this.label3.Text = "Номер телефона:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(52, 471);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(164, 20);
+            this.label5.TabIndex = 55;
+            this.label5.Text = "Электронная почта:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(52, 316);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(111, 20);
+            this.label7.TabIndex = 56;
+            this.label7.Text = "Дата смерти:";
+            // 
+            // dateTimePickerDeathdayEdit
+            // 
+            this.dateTimePickerDeathdayEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateTimePickerDeathdayEdit.Location = new System.Drawing.Point(56, 339);
+            this.dateTimePickerDeathdayEdit.Name = "dateTimePickerDeathdayEdit";
+            this.dateTimePickerDeathdayEdit.Size = new System.Drawing.Size(405, 26);
+            this.dateTimePickerDeathdayEdit.TabIndex = 57;
             // 
             // EditCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1065, 566);
+            this.ClientSize = new System.Drawing.Size(1065, 670);
+            this.Controls.Add(this.dateTimePickerDeathdayEdit);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePickerBirthdayEdit);
@@ -201,5 +311,15 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerBirthdayEdit;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDeathdayEdit;
     }
 }

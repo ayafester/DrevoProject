@@ -84,17 +84,24 @@ namespace Drevo_Project
                 }
             };
 
+
+            Females.Insert(0, new Person() { Id = -1, Name = " " , Gender = 0 , Generation = 0 });
             comboBox1.DataSource = Females;
             comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "Generation";
+            comboBox1.ValueMember = "Id";
+            comboBox1.SelectedIndex = 0;
 
+            Males.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 0 });
             comboBox2.DataSource = Males;
             comboBox2.DisplayMember = "Name";
-            comboBox2.ValueMember = "Generation";
+            comboBox2.ValueMember = "Id";
+            comboBox2.SelectedIndex = 0;
 
+            Names.Insert(0, new Person() { Id = -1, Name = " ", Gender = 0, Generation = 0 });
             comboBox3.DataSource = Names;
             comboBox3.DisplayMember = "Name";
-            comboBox3.ValueMember = "Generation";
+            comboBox3.ValueMember = "Id";
+            comboBox3.SelectedIndex = 0;
 
             comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
             comboBox2.SelectedIndexChanged += ComboBox2_SelectedIndexChanged;
@@ -123,7 +130,20 @@ namespace Drevo_Project
                 Gender = 1;
             }
 
-            try
+            /*if (comboBox1.SelectedValue != null && Convert.ToInt32(comboBox1.SelectedValue) == -1)
+                MessageBox.Show("Please select a person name");
+            else
+
+            if (comboBox2.SelectedValue != null && Convert.ToInt32(comboBox2.SelectedValue) == -1)
+                MessageBox.Show("Please select a person name");
+            else
+
+            if (comboBox3.SelectedValue != null && Convert.ToInt32(comboBox3.SelectedValue) == -1)
+                MessageBox.Show("Please select a person name");
+            else*/
+
+
+                try
             {
                 sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number', 'mail', 'idCreator', 'isDelete', 'Generation', 'idPartner') VALUES ('" + //пока добавление связей нет
                     Surname + "' , '" +
@@ -140,8 +160,7 @@ namespace Drevo_Project
                     idCreator + "' , '" +
                     isDelete + "' , '" +
                     Gener + "' , '" +
-                    idPartner + "')";
-                ;
+                    idPartner + "')";                
 
                 sql.command.ExecuteNonQuery();
             }
@@ -157,14 +176,14 @@ namespace Drevo_Project
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Person Female = comboBox1.SelectedItem as Person;
-            idMom = Female.Id + 1;
+            idMom = Female.Id;
             Gener = Female.Generation - 1;
         }
 
         private void ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             Person Male = comboBox2.SelectedItem as Person;
-            idDad = Male.Id + 1;
+            idDad = Male.Id;
             Gener = Male.Generation - 1;
         }
 

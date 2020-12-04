@@ -45,6 +45,11 @@ namespace Drevo_Project
             DrawTreeBmp();
             SortListFam();
             SearchCard();
+            if (DataClass.ID != "1")
+            {
+                buttonAddCard.Enabled = false;
+                buttonDelete.Enabled = false;
+            }
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -237,18 +242,7 @@ namespace Drevo_Project
                 }
             }
         }
-
-
-        private void buttonEdit_Click(object sender, EventArgs e) //реализовать после вывода данных в БИО табличку админа
-        {
-            EditCard editCard = new EditCard();
-
-
-            if (editCard.ShowDialog() == DialogResult.OK)
-            {
-                editCard.Close();
-            }
-        }
+              
 
         private void buttonAddCard_Click(object sender, EventArgs e) //кнопка добавления человека в дерево
         {
@@ -787,8 +781,7 @@ namespace Drevo_Project
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             Cards Person = listBox1.SelectedItem as Cards;
-            if (listBox1.SelectedIndex != -1)
-            //    listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+            if (listBox1.SelectedIndex != -1)            
             {
                 Person.isDelete = 0;
                 sql.command.CommandText = "UPDATE Card SET isDelete = '" + Person.isDelete + "' WHERE id = '" + Person.Id + "'  ";
