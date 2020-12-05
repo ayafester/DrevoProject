@@ -821,6 +821,7 @@ namespace Drevo_Project
 
             Cards choseenPerson = persones.Find(find => find.FIO == choseen);
             showCard(choseenPerson.Id);
+            comboBoxSearch.SelectedIndex = -1;
         }
 
         private void showCard(int MyId)
