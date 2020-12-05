@@ -48,7 +48,7 @@ namespace Drevo_Project
         private void NewCard_Load(object sender, EventArgs e)
         {
             PathSave = "q";
-            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender, Generation FROM Card WHERE id >= 1";
+            sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender, Generation FROM Card WHERE id >= 1 and isDelete!=0 ";
             List<Person> Names = new List<Person>();
             try
             {

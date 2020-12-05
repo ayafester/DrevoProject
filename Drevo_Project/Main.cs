@@ -352,16 +352,51 @@ namespace Drevo_Project
             public int IdDad { get; set; }
             public string FIO { get; set; }
             public string BirthDay { get; set; }
-
+            public int Gender { get; set; }
+            public string StepRod { get; set; } = "";
 
             public int isDelete { get; set; }
 
             public SolidBrush colorLine { get; set; } //для дерева
 
         }
+        private Cards GetUser()
+        {
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id ='" + DataClass.ID + "' ";
+            Cards UserT = new Cards();
+            try
+            {
+                SQLiteDataReader r = sql.command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    Cards entity = new Cards
+                    {
+                        Gener = r.GetInt32(0),
+                        Id = r.GetInt32(1),
+                        IdPartner = r.GetInt32(2),
+                        IdMom = r.GetInt32(3),
+                        IdDad = r.GetInt32(4),
+                        FIO = r.GetString(5),
+                        isDelete = r.GetInt32(6),
+                        BirthDay = r.GetString(7),
+
+                    };
+                    UserT = entity;
+                }
+                r.Close();
+                sql.command.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return UserT;
+        }
         private List<Cards> GetDataFromBD() 
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 ";
             List<Cards> CardsTemp = new List<Cards>();
             try
             {
@@ -396,7 +431,7 @@ namespace Drevo_Project
 
         private List<Cards> GetSortedFioDataFromBD() 
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 and isDelete!=0 ORDER BY surname|| ' ' || name || ' ' || middlename";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday, gender FROM Card WHERE id >= 1 and id!='" + DataClass.ID + "' and isDelete!=0  ORDER BY surname|| ' ' || name || ' ' || middlename";
             List<Cards> CardsTemp = new List<Cards>();
             try
             {
@@ -414,6 +449,7 @@ namespace Drevo_Project
                         FIO = r.GetString(5),
                         isDelete = r.GetInt32(6),
                         BirthDay = r.GetString(7),
+                        Gender = r.GetInt32(8),
 
                     };
                     CardsTemp.Add(entity);
@@ -431,7 +467,129 @@ namespace Drevo_Project
 
         private void SortListFam()
         {
+            int BabTemp, Bab1Temp, DedTemp, Ded1Temp,BrothTemp,SistTemp, SonTemp, DoatTemp;
+            BabTemp = Bab1Temp = DedTemp = Ded1Temp = BrothTemp =SistTemp = SonTemp = DoatTemp = 0;
+            Cards User = GetUser();
             List<Cards> personesL = GetSortedFioDataFromBD();
+
+            foreach (var item in personesL)
+            {
+                if (item.Gener == User.Gener)
+                {
+                    if (item.Id == User.IdPartner)
+                    {
+                        if (item.Gender == 0)
+                        {
+                            item.StepRod = "Жена";
+                        }
+                        else item.StepRod = "Муж";
+                    }
+                    if (item.IdDad == User.IdDad || item.IdMom == User.IdMom)
+                    {
+                        if (item.Gender == 0)
+                        {
+                            item.StepRod = "Сестра";
+                            SistTemp = item.Id;
+                        }
+                        else
+                        {
+                            item.StepRod = "Брат";
+                            BrothTemp = item.Id;
+                        }
+                    }
+                }
+                if (item.Gener == User.Gener+1)
+                {
+                    if (item.Id == User.IdMom)
+                    {
+                        item.StepRod = "Мать";
+                        BabTemp = item.IdMom;
+                        DedTemp = item.IdDad;
+                    }
+                    else if (item.Id == User.IdDad)
+                    {
+                        item.StepRod = "Отец";
+                        Bab1Temp = item.IdMom;
+                        Ded1Temp = item.IdDad;
+                    }                    
+                }                
+                if (item.Gener == User.Gener - 1)
+                {
+                    if (item.IdDad == User.Id || item.IdMom == User.Id)
+                    {
+                        if (item.Gender == 0)
+                        {
+                            item.StepRod = "Дочь";
+                            DoatTemp = item.Id;
+                        }
+                        else
+                        {
+                            item.StepRod = "Сын";
+                            SonTemp = item.Id;
+                        }
+                    }
+                    if (item.IdDad == BrothTemp || item.IdMom == SistTemp)
+                    {
+                        if (item.Gender == 0)
+                        {
+                            item.StepRod = "Племянница";
+                        }
+                        else
+                        {
+                            item.StepRod = "Племянник";
+                        }
+                    }
+                }
+                
+            }
+            foreach (var item in personesL)
+            {
+                if (item.Gener == User.Gener + 2)
+                {
+                    if (item.Id == BabTemp || item.Id == Bab1Temp )
+                    {
+                        item.StepRod = "Бабушка";
+                    }
+                    else if (item.Id == DedTemp || item.Id == Ded1Temp)
+                    {
+                        item.StepRod = "Дедушка";
+                    }
+                }
+                if (item.Gener == User.Gener - 2)
+                {
+                    if (item.IdDad == SonTemp || item.IdMom == DoatTemp)
+                    {
+                        if (item.Gender == 0)
+                        {
+                            item.StepRod = "Внучка";
+                            DoatTemp = item.Id;
+                        }
+                        else
+                        {
+                            item.StepRod = "Внук";
+                            SonTemp = item.Id;
+                        }
+                    }
+                }
+            }
+            foreach (var item in personesL)
+            {
+                if (item.Gener == User.Gener +1)
+                {
+                    if ((item.Id != User.IdMom && item.Id != User.IdDad) && (item.IdMom == BabTemp || item.IdMom == Bab1Temp) && (item.IdDad == DedTemp || item.IdDad == Ded1Temp))
+                    {
+                        if (item.Gender == 0)
+                        {
+                            item.StepRod = "Тетя";
+                        }
+                        else
+                        {
+                            item.StepRod = "Дядя";
+                        }
+                    }
+                }
+            }
+
             listBox1.DataSource = personesL;
             listBox1.DisplayMember = "FIO";
             listBox1.ValueMember = "Id";
@@ -846,8 +1004,9 @@ namespace Drevo_Project
         {
             string fio = ((Cards)e.ListItem).FIO.ToString();
             string data = ((Cards)e.ListItem).BirthDay.ToString();
+            string steprod = ((Cards)e.ListItem).StepRod.ToString();
 
-            e.Value = fio + " ; " + data;
+            e.Value = fio + " ; Д/Р: " + data + " ; " + steprod;
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
