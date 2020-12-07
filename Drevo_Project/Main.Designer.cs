@@ -75,6 +75,11 @@ namespace Drevo_Project
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxMother = new System.Windows.Forms.ComboBox();
+            this.comboBoxFather = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -377,6 +382,11 @@ namespace Drevo_Project
             // 
             this.tabContactsCard.BackColor = System.Drawing.Color.White;
             this.tabContactsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabContactsCard.Controls.Add(this.label9);
+            this.tabContactsCard.Controls.Add(this.label8);
+            this.tabContactsCard.Controls.Add(this.comboBoxFather);
+            this.tabContactsCard.Controls.Add(this.comboBoxMother);
+            this.tabContactsCard.Controls.Add(this.label7);
             this.tabContactsCard.Controls.Add(this.ChangeContactsButton);
             this.tabContactsCard.Controls.Add(this.label5);
             this.tabContactsCard.Controls.Add(this.label4);
@@ -405,7 +415,7 @@ namespace Drevo_Project
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 89);
+            this.label5.Location = new System.Drawing.Point(64, 92);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 20);
             this.label5.TabIndex = 7;
@@ -414,7 +424,7 @@ namespace Drevo_Project
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 36);
+            this.label4.Location = new System.Drawing.Point(64, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 20);
             this.label4.TabIndex = 6;
@@ -422,14 +432,14 @@ namespace Drevo_Project
             // 
             // MailBox
             // 
-            this.MailBox.Location = new System.Drawing.Point(101, 86);
+            this.MailBox.Location = new System.Drawing.Point(159, 89);
             this.MailBox.Name = "MailBox";
             this.MailBox.Size = new System.Drawing.Size(170, 26);
             this.MailBox.TabIndex = 7;
             // 
             // NumberBox
             // 
-            this.NumberBox.Location = new System.Drawing.Point(101, 36);
+            this.NumberBox.Location = new System.Drawing.Point(159, 39);
             this.NumberBox.Name = "NumberBox";
             this.NumberBox.Size = new System.Drawing.Size(170, 26);
             this.NumberBox.TabIndex = 4;
@@ -574,6 +584,49 @@ namespace Drevo_Project
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(14, 169);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 20);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Родители:";
+            // 
+            // comboBoxMother
+            // 
+            this.comboBoxMother.FormattingEnabled = true;
+            this.comboBoxMother.Location = new System.Drawing.Point(159, 217);
+            this.comboBoxMother.Name = "comboBoxMother";
+            this.comboBoxMother.Size = new System.Drawing.Size(172, 28);
+            this.comboBoxMother.TabIndex = 10;
+            // 
+            // comboBoxFather
+            // 
+            this.comboBoxFather.FormattingEnabled = true;
+            this.comboBoxFather.Location = new System.Drawing.Point(157, 268);
+            this.comboBoxFather.Name = "comboBoxFather";
+            this.comboBoxFather.Size = new System.Drawing.Size(172, 28);
+            this.comboBoxFather.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(64, 217);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 20);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Мама:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(67, 268);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 20);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Папа:";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -659,5 +712,10 @@ namespace Drevo_Project
         private ComboBox comboBoxSearch;
         private ListView listView1;
         private ColumnHeader columnHeader1;
+        private Label label9;
+        private Label label8;
+        private ComboBox comboBoxFather;
+        private ComboBox comboBoxMother;
+        private Label label7;
     }
 }

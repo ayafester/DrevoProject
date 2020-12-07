@@ -21,10 +21,6 @@ namespace Drevo_Project
             InitializeComponent();
         }
 
-        private void Login_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         private void btnCheckLogin_Click(object sender, EventArgs e)
         {

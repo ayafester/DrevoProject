@@ -278,7 +278,7 @@
             this.buttonAddAva.Text = "Добавить аватарку";
             this.buttonAddAva.UseVisualStyleBackColor = false;
             this.buttonAddAva.Visible = false;
-            this.buttonAddAva.Click += new System.EventHandler(this.buttonAddAva_Click);
+            
             // 
             // textBoxDateBirthday
             // 

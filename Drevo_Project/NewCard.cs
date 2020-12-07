@@ -194,37 +194,7 @@ namespace Drevo_Project
             }
         }
 
-        private void buttonAddAva_Click(object sender, EventArgs e)
-        {
-            /*OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Image Files(*.BPM;*.JPG;*.GIF;*.PNG)|*.BPM;*.JPG;*.GIF;*.PNG|All Files (*.*)|*.*";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    PathSave = ofd.FileName.ToString();
-                }
-                catch
-                {
-                    MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            if (PathSave != "q")
-            {
-                byte[] ImageBt = null;
-                FileStream fstream = new FileStream(this.PathSave, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fstream);
-                ImageBt = br.ReadBytes((int)fstream.Length);
-
-                sql.command.CommandText = "UPDATE Card SET PhotoOnAva =@img , ifAva = 1 WHERE id= '" + MyId + "'";
-                sql.command.Parameters.AddWithValue("@img", ImageBt);
-                sql.command.ExecuteNonQuery();
-
-                MessageBox.Show("Фото успешно изменено");
-                PathSave = "";
-            }*/
-        }
+        
     }
     class Person
     {

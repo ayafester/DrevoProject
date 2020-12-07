@@ -270,7 +270,6 @@
             this.Name = "RegForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Load += new System.EventHandler(this.RegForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

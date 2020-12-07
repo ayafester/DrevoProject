@@ -34,7 +34,6 @@ namespace Drevo_Project
         public int Yeartd { get; set; }
         public int Mounthtd { get; set; }
         public int Daytd { get; set; }
-        public String Try { get; set; }
         public String PathSave { get; set; }
         public String PathSave2 { get; set; }
 
@@ -263,7 +262,7 @@ namespace Drevo_Project
 
             try
             {
-                sqlQuery = "SELECT Generation, id, idPartner, idMom, idDad FROM Card ORDER BY Generation";
+                sqlQuery = "SELECT Generation, id, idPartner, idMom, idDad FROM Card WHERE id >= 1 and isDelete!=0 ORDER BY Generation";
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter(sqlQuery, sql.connect);
                 adapter.Fill(dt);
             }
@@ -299,51 +298,53 @@ namespace Drevo_Project
         private List<List<int[]>> SortDataToGeneration() //преобразование в список по поколениям
         {
             int[][] values = GetData();
+
+            //найти число уникальных чисел из первого столбца двумерного массива
+
+            
             int rowsVal = values.Length;
-            int maxGen;
+            int columnsVal = values.Length;
 
-            sql.command.CommandText = "SELECT MAX(Generation) FROM Card";
-            SQLiteDataReader read = sql.command.ExecuteReader();
-            while (read.Read())
+            List<int> unicNum = new List<int>();
+            List<int> gen = new List<int>();
+
+            for (int i = 0; i < rowsVal; i++)
             {
-                maxGen = read.GetInt32(0);
-            }
-            read.Close();
-
-            List<List<int[]>> generation = new List<List<int[]>> { //количество поколений 3 например. сделать динамические изменения поколений
-                new List<int[]>(),
-                new List<int[]>(),
-                new List<int[]>(),
-                new List<int[]>(),
-
-            };
-
-            for (int i = 1; i < rowsVal; i++)
-            {
-                if (values[i][0] == 99)
-                {
-                    generation[0].Add(values[i]);
-
-                } else if (values[i][0] == 0)
-                {
-                    generation[1].Add(values[i]);
-                }
-                else if (values[i][0] == 1)
-                {
-                    generation[2].Add(values[i]);
-                }
-                else if (values[i][0] == 2)
-                {
-                    generation[3].Add(values[i]);
-                }
-                
-
-
+                unicNum.Add(values[i][0]);
             }
 
+            for (int i = 0; i < unicNum.Count; i++)
+            {
+                if (!gen.Exists(value => value == unicNum[i]))
+                {
+                    gen.Add(unicNum[i]);
+                }
+            }
+            
+            int generCount = gen.Count;
+            
+
+            List<List<int[]>> generation = new List<List<int[]>>();
+
+            for(int i=0; i< generCount; i++) //динамический массив
+            {
+                generation.Add(new List<int[]>());
+            }
+
+            for (int k = 0; k < generCount; k++) //
+            {
+                for (int i = 0; i < rowsVal; i++)
+                {
+                    if (values[i][0] == gen[k])
+                    {
+                        generation[k].Add(values[i]);
+
+                    }
+                }
+            }
             return generation;
         }
-        class Cards //человек (ребята обратите внимание сюда. может будем одним классом пользоваться? дополняйте как нужно
+        class Cards //человек 
         {
             public int Gener { get; set; }
             public int Id { get; set; }
@@ -657,7 +658,7 @@ namespace Drevo_Project
                         {
                             if (!usedId.Exists(value => value == idTemp)) //проверка если он уже нарисован
                             {
-                                graph.DrawLine(penLine, x, y + stepVert, x + length * 250, y + stepVert); //вертикальная линия
+                                //graph.DrawLine(penLine, x, y + stepVert, x + length * 250, y + stepVert); вертикальная линия ДУМАААААААЙ
 
                                 if (item.IdPartner != 0) //если у человека пара не ноль
                                 {
@@ -744,12 +745,12 @@ namespace Drevo_Project
 
                                             if (persones.Exists(find => find.IdDad == item.Id)) //проверка является ли этот человек отцом
                                             {
-                                                graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+                                                graph.DrawLine(penLine, x + 50, y + 150, x + 50, y + 200);  //линия вниз в другое поколение
                                             }
 
                                             if (persones.Exists(find => find.IdMom == item.Id)) //проверка является ли этот человек матерью
                                             {
-                                                graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+                                                graph.DrawLine(penLine, x + 50, y + 150, x + 50, y + 200);  //линия вниз в другое поколение
                                             }
 
                                             graph.DrawImage(image1, x, y + 50); //добавить фото
@@ -784,12 +785,12 @@ namespace Drevo_Project
 
                                     if (persones.Exists(find => find.IdDad == item.Id) == true) //проверка является ли этот человек отцом
                                     {
-                                        graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+                                        graph.DrawLine(penLine, x + 50, y + 150, x + 50, y + 200); //линия вниз в другое поколение
                                     }
 
                                     if (persones.Exists(find => find.IdMom == item.Id) == true) //проверка является ли этот человек матерью
                                     {
-                                        graph.DrawLine(penLine, x + 125, y + 100, x + 125, y + 200); //линия вниз в другое поколение
+                                        graph.DrawLine(penLine, x + 50, y + 150, x + 50, y + 200);  //линия вниз в другое поколение
                                     }
 
                                     graph.DrawImage(image1, x, y + 50); //добавить фото
@@ -816,11 +817,21 @@ namespace Drevo_Project
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             List<Cards> persones = GetDataFromBD();
-            
-            string choseen = comboBoxSearch.SelectedItem.ToString();
 
-            Cards choseenPerson = persones.Find(find => find.FIO == choseen);
-            showCard(choseenPerson.Id);
+            object obj = comboBoxSearch.SelectedItem;
+            
+
+            if (obj == null)
+            {
+                MessageBox.Show("Выберите родственника");
+            } else
+            {
+               string choseen = obj.ToString();
+               Cards choseenPerson = persones.Find(find => find.FIO == choseen);
+               showCard(choseenPerson.Id);
+            }
+
+            
             comboBoxSearch.SelectedIndex = -1;
         }
 

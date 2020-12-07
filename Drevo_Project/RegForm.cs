@@ -36,11 +36,6 @@ namespace Drevo_Project
             InitializeComponent();
         }
 
-        private void RegForm_Load(object sender, EventArgs e)
-        {
-        }
-
-
 
         private void btOK_Click(object sender, EventArgs e)
         {
