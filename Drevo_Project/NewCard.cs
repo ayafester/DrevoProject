@@ -194,7 +194,40 @@ namespace Drevo_Project
             }
         }
 
-        
+        private void NewCard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (idPartner!=0)
+            {
+                string NameT = Surname +" "+Name+" "+Middlename;
+                sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender, Generation FROM Card WHERE id >= 1 and isDelete!=0 ";
+                List<Person> Names = new List<Person>();
+                try
+                {
+                    SQLiteDataReader r = sql.command.ExecuteReader();
+
+                    while (r.Read())
+                    {
+                        Person entity = new Person
+                        {
+                            Id = r.GetInt32(0),
+                            Name = r.GetString(1),
+                            Gender = r.GetInt32(2),
+                            Generation = r.GetInt32(3),
+                        };
+                        Names.Add(entity);
+                    }
+                    r.Close();
+                    sql.command.ExecuteNonQuery();
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                Person Created = Names.Find(find=>find.Name == NameT);
+                sql.command.CommandText = "UPDATE Card SET idPartner='" + Created.Id + "' WHERE id ='" + idPartner + "'  ";
+                sql.command.ExecuteNonQuery();
+            }
+        }
     }
     class Person
     {

@@ -113,25 +113,48 @@ namespace Drevo_Project
                         Males.Add(item);
                     }
                 };
-
-
-                Females.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
+                int ind = 0;
+                if (idMom!=0)
+                {
+                    Person Mom = Females.Find(find => find.Id == idMom);
+                    ind = Females.IndexOf(Mom);
+                }
+                else
+                {
+                    Females.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
+                }
                 comboBox1.DataSource = Females;
                 comboBox1.DisplayMember = "Name";
                 comboBox1.ValueMember = "Id";
-                comboBox1.SelectedIndex = 0;
-
-                Males.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
+                comboBox1.SelectedIndex = ind;
+                ind = 0;
+                if (idDad !=0)
+                {
+                    Person Dad = Males.Find(find=>find.Id == idDad);
+                    ind = Males.IndexOf(Dad);
+                }
+                else
+                {
+                    Males.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
+                }                
                 comboBox2.DataSource = Males;
                 comboBox2.DisplayMember = "Name";
                 comboBox2.ValueMember = "Id";
-                comboBox2.SelectedIndex = 0;
-
-                Names.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
+                comboBox2.SelectedIndex = ind;
+                ind = 0;
+                if (idPartner!=0)
+                {
+                    Person Partner = Names.Find(find=>find.Id == idPartner);
+                    ind = Names.IndexOf(Partner);
+                }
+                else
+                {
+                    Names.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
+                }                
                 comboBox3.DataSource = Names;
                 comboBox3.DisplayMember = "Name";
                 comboBox3.ValueMember = "Id";
-                comboBox3.SelectedIndex = 0;
+                comboBox3.SelectedIndex = ind;
 
                 comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
                 comboBox2.SelectedIndexChanged += ComboBox2_SelectedIndexChanged;
@@ -158,11 +181,11 @@ namespace Drevo_Project
             Number = textBoxNumberEdit.Text;
 
 
+
             if (Gener != GenerT)
             {
                 Gener = GenerT;
             }
-
             
             try
             {
@@ -177,8 +200,8 @@ namespace Drevo_Project
                     "' , number='" + Number + 
                     "' , mail='" + Mail +
                     "' , Generation='" + Gener +
-                    "' , idPartner='" + idPartner + "' WHERE id ='" + MyId + "'  ";          
-                
+                    "' , idPartner='" + idPartner + "' WHERE id ='" + MyId + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idPartner='" + MyId + "' WHERE id ='" + idPartner + "'  ";
                 sql.command.ExecuteNonQuery();
                 MessageBox.Show("Данные успешно изменены");
             }
@@ -229,7 +252,7 @@ namespace Drevo_Project
             {
                 GenerT = Person.Generation;
             }
-            else GenerT = Gener;
+            else GenerT = Gener;            
         }
 
         private void buttonAddAva_Click(object sender, EventArgs e)
@@ -264,6 +287,20 @@ namespace Drevo_Project
             }
         }
 
-        
+        private void EditCard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Person Mom = comboBox1.SelectedItem as Person;
+            Person Dad = comboBox2.SelectedItem as Person;
+            if ((Mom.Generation==99 && Dad.Generation==99)&&(Mom.Id!=0||Dad.Id!=0))
+            {
+                sql.command.CommandText = "UPDATE Card SET Generaton='" + (Gener + 1) + "' WHERE id ='" + idMom + "'  ";
+                sql.command.CommandText = "UPDATE Card SET Generaton='" + (Gener + 1) + "' WHERE id ='" + idDad + "'  ";
+            }
+            if (idPartner!=0)
+            {
+                sql.command.CommandText = "UPDATE Card SET idPartner='" + MyId + "' WHERE id ='" + idPartner + "'  ";
+                sql.command.ExecuteNonQuery();
+            }
+        }
     }
 }

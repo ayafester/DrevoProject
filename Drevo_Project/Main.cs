@@ -27,6 +27,9 @@ namespace Drevo_Project
         public String Middlename { get; set; }
         public String Birthday { get; set; }
         public String Deathday { get; set; }
+        public int idMom { get; set; }
+        public int idDad { get; set; }
+        public int idPartner { get; set; }
         public int Age { get; set; }
         public int Year { get; set; }
         public int Mounth { get; set; }
@@ -68,6 +71,16 @@ namespace Drevo_Project
                     DataClass.CardID = read["idCard"].ToString();
                 }
                 read.Close();
+
+                sql.command.CommandText = "SELECT idMom,idDad,idPartner FROM Card WHERE id = '" + DataClass.CardID + "' ";
+                SQLiteDataReader read1 = sql.command.ExecuteReader();
+                while (read1.Read())
+                {
+                    idMom = read1.GetInt32(0);
+                    idDad = read1.GetInt32(1);
+                    idPartner = read1.GetInt32(2);
+                }
+                read1.Close();
 
                 sql.command.CommandText = "SELECT * FROM Card WHERE id = '" + DataClass.CardID + "' ";
                 SQLiteDataReader read2 = sql.command.ExecuteReader();
@@ -131,13 +144,53 @@ namespace Drevo_Project
 
 
                 ShowPhoto();
-                
-            }
 
+                
+
+            }
             catch (SQLiteException ex)
             {
                 MessageBox.Show("Error:" + ex.Message);
             }
+            List<Cards> persones = GetSortedFioDataFromBD();
+            List<Cards> Males = new List<Cards>();
+            List<Cards> Females = new List<Cards>();
+            foreach (var item in persones)
+            {
+                if (item.Gender == 0)
+                {
+                    Females.Add(item);
+                }
+                else
+                {
+                    Males.Add(item);
+                }
+            };
+            int ind = 0;
+            if (idMom != 0)
+            {
+                Cards Mom = Females.Find(find => find.Id == idMom);
+                ind = Females.IndexOf(Mom);
+            }
+            
+            comboBoxMother.DataSource = Females;
+            comboBoxMother.DisplayMember = "FIO";
+            comboBoxMother.ValueMember = "Id";
+            comboBoxMother.SelectedIndex = ind;
+            ind = 0;
+            if (idDad != 0)
+            {
+                Cards Dad = Males.Find(find => find.Id == idDad);
+                ind = Males.IndexOf(Dad);
+            }
+            comboBoxFather.DataSource = Males;
+            comboBoxFather.DisplayMember = "FIO";
+            comboBoxFather.ValueMember = "Id";
+            comboBoxFather.SelectedIndex = ind;
+            ind = 0;
+
+            comboBoxMother.SelectedIndexChanged += ComboBoxMother_SelectedIndexChanged;
+            comboBoxFather.SelectedIndexChanged += ComboBoxFather_SelectedIndexChanged;
         }
 
         private void ShowPhoto()
@@ -1028,6 +1081,9 @@ namespace Drevo_Project
             {
                 Person.isDelete = 0;
                 sql.command.CommandText = "UPDATE Card SET isDelete = '" + Person.isDelete + "' WHERE id = '" + Person.Id + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idMom = 0 WHERE idMom = '" + Person.Id + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idDad = 0 WHERE idDad = '" + Person.Id + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idPartner = 0 WHERE idPartner = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
             }
             else
@@ -1077,6 +1133,20 @@ namespace Drevo_Project
                 PathSave2 = "";
                 ShowPhoto();
             }
+        }
+
+        private void ComboBoxMother_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cards Mom = comboBoxMother.SelectedItem as Cards;
+            idMom = Mom.Id;
+            sql.command.CommandText = "UPDATE Card SET Generaton='" + 1 + "' WHERE id ='" + idMom + "'  ";
+        }
+
+        private void ComboBoxFather_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cards Dad = comboBoxFather.SelectedItem as Cards;            
+            idDad = Dad.Id;
+            sql.command.CommandText = "UPDATE Card SET Generaton='" + 1 + "' WHERE id ='" + idDad + "'  ";
         }
     }
 
