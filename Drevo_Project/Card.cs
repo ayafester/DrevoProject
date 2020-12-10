@@ -20,6 +20,28 @@ namespace Drevo_Project
     public partial class Card : Form
     {
         ConnectBD sql = new ConnectBD();
+
+        class Cards //человек 
+        {
+            public int Gener { get; set; }
+            public int Id { get; set; }
+            public int IdPartner { get; set; }
+            public int IdMom { get; set; }
+            public int IdDad { get; set; }
+            public string FIO { get; set; }
+            public string BirthDay { get; set; }
+            public int Gender { get; set; }
+            public string StepRod { get; set; } = "";
+
+            public int isDelete { get; set; }
+
+
+
+        }
+        public static int MomToNewGen { get; set; }
+        public static int DadToNewGen { get; set; }
+
+        public static int CreatedID { get; set; }
         public int MyId { get; set; } // это для выгрузки данных по пришедшему айди у человека
         public Card(int id) //когда вызываешь форму эту модальную, надо туда указывать айди человека которого хотим взять данные
         {
@@ -30,11 +52,43 @@ namespace Drevo_Project
                 buttonEditCard.Enabled = false;
             }
         }
-
-
-        private void Card_Load(object sender, EventArgs e) 
+        private List<Cards> GetDataFromBD()
         {
-            
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 ";
+            List<Cards> CardsTemp = new List<Cards>();
+            try
+            {
+                SQLiteDataReader r = sql.command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    Cards entity = new Cards
+                    {
+                        Gener = r.GetInt32(0),
+                        Id = r.GetInt32(1),
+                        IdPartner = r.GetInt32(2),
+                        IdMom = r.GetInt32(3),
+                        IdDad = r.GetInt32(4),
+                        FIO = r.GetString(5),
+                        isDelete = r.GetInt32(6),
+                        BirthDay = r.GetString(7),
+
+                    };
+                    CardsTemp.Add(entity);
+                }
+                r.Close();
+                sql.command.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+            return CardsTemp;
+        }
+        private void Card_Load(object sender, EventArgs e)
+        {
+
             try
             {
                 sql.command.CommandText = "SELECT * FROM User WHERE id='" + MyId + "' ";
@@ -73,7 +127,7 @@ namespace Drevo_Project
                 {
                     NumberBoxCard.Text = read3["number"].ToString();
                     MailBoxCard.Text = read3["mail"].ToString();
-                    
+
 
                 }
                 read3.Close();
@@ -92,7 +146,7 @@ namespace Drevo_Project
 
                 }
                 read4.Close();
-                
+
             }
 
             catch (SQLiteException ex)
@@ -104,11 +158,30 @@ namespace Drevo_Project
         private void buttonEditCard_Click(object sender, EventArgs e)
         {
             EditCard editCard = new EditCard(MyId);
-            
+
 
             if (editCard.ShowDialog() == DialogResult.OK)
             {
+
                 editCard.Close();
+                List<Cards> personesFind = GetDataFromBD();
+                Cards created = personesFind.Find(find => find.Id == CreatedID); //нашли персонажа которого изменили только что
+                if (DadToNewGen != 0)
+                {
+                    Cards dad = personesFind.Find(find => find.Id == DadToNewGen); //нашли отца его
+                    int gen = created.Gener + 1;
+                    sql.command.CommandText = " UPDATE Card SET Generation = '" + gen + "' WHERE id = '" + dad.Id + "' ";
+                    sql.command.ExecuteNonQuery();
+                }
+
+                if (MomToNewGen != 0)
+                {
+                    Cards mom = personesFind.Find(find => find.Id == MomToNewGen); //нашли мать
+                    int gen = created.Gener + 1;
+                    sql.command.CommandText = " UPDATE Card SET Generation = '" + gen + "' WHERE id = '" + mom.Id + "' ";
+                    sql.command.ExecuteNonQuery();
+                }
+
                 DialogResult = DialogResult.OK;
             }
         }

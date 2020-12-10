@@ -35,10 +35,12 @@ namespace Drevo_Project
         public int idPartner { get; set; }
         public int Gender { get; set; }
         public String idCreator { get; set; }
-        public int Gener  { get; set; }
+        public int Gener { get; set; }
         public int isDelete { get; set; }
 
         public String PathSave { get; set; }
+
+        public int ID { get; set; }
 
         public NewCard()
         {
@@ -134,33 +136,37 @@ namespace Drevo_Project
                 Gender = 1;
             }
 
-                try
-                {
-                    sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number', 'mail', 'idCreator', 'isDelete', 'Generation', 'idPartner') VALUES ('" + //пока добавление связей нет
-                        Surname + "' , '" +
-                        NamePerson + "' , '" +
-                        Middlename + "' , '" +
-                        Gender + "' , '" +
-                        BIO + "' , '" +
-                        idMom + "' , '" +
-                        idDad + "' , '" +
-                        DateBirthday + "' ,'" +
-                        DateDeathday + "' , '" +
-                        Number + "' , '" +
-                        Mail + "' , '" +
-                        idCreator + "' , '" +
-                        isDelete + "' , '" +
-                        Gener + "' , '" +
-                        idPartner + "')";
+            try
+            {
+                sql.command.CommandText = "INSERT INTO Card ('surname', 'name', 'middlename', 'gender', 'bio', 'idMom' ,'idDad' , 'birthday' , 'deathday', 'number', 'mail', 'idCreator', 'isDelete', 'Generation', 'idPartner') VALUES ('" + //пока добавление связей нет
+                    Surname + "' , '" +
+                    NamePerson + "' , '" +
+                    Middlename + "' , '" +
+                    Gender + "' , '" +
+                    BIO + "' , '" +
+                    idMom + "' , '" +
+                    idDad + "' , '" +
+                    DateBirthday + "' ,'" +
+                    DateDeathday + "' , '" +
+                    Number + "' , '" +
+                    Mail + "' , '" +
+                    idCreator + "' , '" +
+                    isDelete + "' , '" +
+                    Gener + "' , '" +
+                    idPartner + "')";
 
-                    sql.command.ExecuteNonQuery();
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error:" + ex.Message);
-                }
+                sql.command.ExecuteNonQuery();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
 
-
+            if (idPartner != 0)
+            {
+                Main.IdToSearchPartner = idPartner;
+                Main.findFIO = Surname + " " + NamePerson + " " + Middlename;
+            }
             DialogResult = DialogResult.OK;
         }
 
@@ -168,7 +174,7 @@ namespace Drevo_Project
         {
             Person Female = comboBox1.SelectedItem as Person;
             idMom = Female.Id;
-            if (Female.Generation!=99)
+            if (Female.Generation != 99)
             {
                 Gener = Female.Generation - 1;
             }
@@ -178,7 +184,7 @@ namespace Drevo_Project
         {
             Person Male = comboBox2.SelectedItem as Person;
             idDad = Male.Id;
-            if(Male.Generation != 99)
+            if (Male.Generation != 99)
             {
                 Gener = Male.Generation - 1;
             }
@@ -188,46 +194,13 @@ namespace Drevo_Project
         {
             Person Person = comboBox3.SelectedItem as Person;
             idPartner = Person.Id;
-            if(Person.Generation != 99)
+
+            if (Person.Generation != 99)
             {
                 Gener = Person.Generation;
             }
         }
 
-        private void NewCard_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (idPartner!=0)
-            {
-                string NameT = Surname +" "+Name+" "+Middlename;
-                sql.command.CommandText = "SELECT id,surname|| ' ' || name|| ' ' || middlename, gender, Generation FROM Card WHERE id >= 1 and isDelete!=0 ";
-                List<Person> Names = new List<Person>();
-                try
-                {
-                    SQLiteDataReader r = sql.command.ExecuteReader();
-
-                    while (r.Read())
-                    {
-                        Person entity = new Person
-                        {
-                            Id = r.GetInt32(0),
-                            Name = r.GetString(1),
-                            Gender = r.GetInt32(2),
-                            Generation = r.GetInt32(3),
-                        };
-                        Names.Add(entity);
-                    }
-                    r.Close();
-                    sql.command.ExecuteNonQuery();
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-                Person Created = Names.Find(find=>find.Name == NameT);
-                sql.command.CommandText = "UPDATE Card SET idPartner='" + Created.Id + "' WHERE id ='" + idPartner + "'  ";
-                sql.command.ExecuteNonQuery();
-            }
-        }
     }
     class Person
     {

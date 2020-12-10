@@ -331,7 +331,7 @@
             this.Name = "NewCard";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NewCard_FormClosed);
+            
             this.Load += new System.EventHandler(this.NewCard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

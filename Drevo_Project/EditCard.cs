@@ -42,13 +42,13 @@ namespace Drevo_Project
             MyId = id;
             InitializeComponent();
         }
-        
+
 
         private void EditCard_Load(object sender, EventArgs e)
         {
             try
             {
-                
+
                 sql.command.CommandText = "SELECT * FROM Card WHERE id = '" + MyId + "' ";
                 SQLiteDataReader read = sql.command.ExecuteReader();
                 while (read.Read())
@@ -61,11 +61,11 @@ namespace Drevo_Project
                     textBoxDateBirthday.Text = read["birthday"].ToString();
                     textBoxDateDeathDay.Text = read["deathday"].ToString();
                     textBoxMailEdit.Text = read["mail"].ToString();
-                    textBoxNumberEdit.Text = read["number"].ToString();                    
+                    textBoxNumberEdit.Text = read["number"].ToString();
                 }
                 read.Close();
 
-                sql.command.CommandText = "SELECT idMom,idDad,idPartner,Generation FROM Card WHERE id = '"+MyId+"' ";
+                sql.command.CommandText = "SELECT idMom,idDad,idPartner,Generation FROM Card WHERE id = '" + MyId + "' ";
                 SQLiteDataReader read1 = sql.command.ExecuteReader();
                 while (read1.Read())
                 {
@@ -114,7 +114,7 @@ namespace Drevo_Project
                     }
                 };
                 int ind = 0;
-                if (idMom!=0)
+                if (idMom != 0)
                 {
                     Person Mom = Females.Find(find => find.Id == idMom);
                     ind = Females.IndexOf(Mom);
@@ -123,34 +123,38 @@ namespace Drevo_Project
                 {
                     Females.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
                 }
+
+
                 comboBox1.DataSource = Females;
                 comboBox1.DisplayMember = "Name";
                 comboBox1.ValueMember = "Id";
                 comboBox1.SelectedIndex = ind;
+
                 ind = 0;
-                if (idDad !=0)
+                if (idDad != 0)
                 {
-                    Person Dad = Males.Find(find=>find.Id == idDad);
+                    Person Dad = Males.Find(find => find.Id == idDad);
                     ind = Males.IndexOf(Dad);
                 }
                 else
                 {
                     Males.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
-                }                
+                }
                 comboBox2.DataSource = Males;
                 comboBox2.DisplayMember = "Name";
                 comboBox2.ValueMember = "Id";
                 comboBox2.SelectedIndex = ind;
+
                 ind = 0;
-                if (idPartner!=0)
+                if (idPartner != 0)
                 {
-                    Person Partner = Names.Find(find=>find.Id == idPartner);
+                    Person Partner = Names.Find(find => find.Id == idPartner);
                     ind = Names.IndexOf(Partner);
                 }
                 else
                 {
                     Names.Insert(0, new Person() { Id = 0, Name = " ", Gender = 0, Generation = 99 });
-                }                
+                }
                 comboBox3.DataSource = Names;
                 comboBox3.DisplayMember = "Name";
                 comboBox3.ValueMember = "Id";
@@ -181,34 +185,45 @@ namespace Drevo_Project
             Number = textBoxNumberEdit.Text;
 
 
-
             if (Gener != GenerT)
             {
                 Gener = GenerT;
             }
-            
+
+
             try
             {
                 sql.command.CommandText = "UPDATE Card SET surname= '" + Surname +
                     "', name='" + NamePerson +
-                    "' , middlename='" + Middlename + 
-                    "' , bio='" + BIO + 
+                    "' , middlename='" + Middlename +
+                    "' , bio='" + BIO +
                     "' , idMom='" + idMom +
-                    "'  ,idDad='" + idDad + 
+                    "'  ,idDad='" + idDad +
                     "'  , birthday='" + DateBirthday +
                     "'  , deathday='" + DateDeathday +
-                    "' , number='" + Number + 
+                    "' , number='" + Number +
                     "' , mail='" + Mail +
                     "' , Generation='" + Gener +
                     "' , idPartner='" + idPartner + "' WHERE id ='" + MyId + "'  ";
-                sql.command.CommandText = "UPDATE Card SET idPartner='" + MyId + "' WHERE id ='" + idPartner + "'  ";
+
                 sql.command.ExecuteNonQuery();
                 MessageBox.Show("Данные успешно изменены");
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: стр рег" + ex.Message);
+                MessageBox.Show("Error:" + ex.Message);
             }
+
+            if (idDad != 0)
+            {
+                Card.DadToNewGen = idDad;
+            }
+            if (idMom != 0)
+            {
+                Card.MomToNewGen = idMom;
+            }
+
+            Card.CreatedID = MyId;
 
             DialogResult = DialogResult.OK;
         }
@@ -226,6 +241,7 @@ namespace Drevo_Project
         {
             Person Female = comboBox1.SelectedItem as Person;
             idMom = Female.Id;
+
             if (Female.Generation != 99)
             {
                 GenerT = Female.Generation - 1;
@@ -237,6 +253,7 @@ namespace Drevo_Project
         {
             Person Male = comboBox2.SelectedItem as Person;
             idDad = Male.Id;
+
             if (Male.Generation != 99)
             {
                 GenerT = Male.Generation - 1;
@@ -252,7 +269,7 @@ namespace Drevo_Project
             {
                 GenerT = Person.Generation;
             }
-            else GenerT = Gener;            
+            else GenerT = Gener;
         }
 
         private void buttonAddAva_Click(object sender, EventArgs e)
@@ -287,20 +304,6 @@ namespace Drevo_Project
             }
         }
 
-        private void EditCard_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Person Mom = comboBox1.SelectedItem as Person;
-            Person Dad = comboBox2.SelectedItem as Person;
-            if ((Mom.Generation==99 && Dad.Generation==99)&&(Mom.Id!=0||Dad.Id!=0))
-            {
-                sql.command.CommandText = "UPDATE Card SET Generaton='" + (Gener + 1) + "' WHERE id ='" + idMom + "'  ";
-                sql.command.CommandText = "UPDATE Card SET Generaton='" + (Gener + 1) + "' WHERE id ='" + idDad + "'  ";
-            }
-            if (idPartner!=0)
-            {
-                sql.command.CommandText = "UPDATE Card SET idPartner='" + MyId + "' WHERE id ='" + idPartner + "'  ";
-                sql.command.ExecuteNonQuery();
-            }
-        }
+
     }
 }

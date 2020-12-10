@@ -301,7 +301,8 @@
             this.Name = "EditCard";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditCard_FormClosed);
+            
+            
             this.Load += new System.EventHandler(this.EditCard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
