@@ -173,33 +173,40 @@ namespace Drevo_Project
                 }
             };
             int ind = 0;
-            // if (idMom != 0)
-            //{
-            Cards Mom = Females.Find(find => find.Id == idMom);
-            ind = Females.IndexOf(Mom);
-            //}
-            //  
-            // if(ind != 0)
-            // {
-            comboBoxMother.DataSource = Females;
-            comboBoxMother.DisplayMember = "FIO";
-            comboBoxMother.ValueMember = "Id";
-            comboBoxMother.SelectedIndex = ind;
-            //}
+            if (idMom != 0)
+            {
+                Cards Mom = Females.Find(find => find.Id == idMom);
+                ind = Females.IndexOf(Mom);
+            } else
+            {
+                Females.Insert(0, new Cards() { Id = 0, FIO = " ", Gender = 0, Gener = 99 });
+            }
+            
+            if(ind != 0)
+            {
+                comboBoxMother.DataSource = Females;
+                comboBoxMother.DisplayMember = "FIO";
+                comboBoxMother.ValueMember = "Id";
+                comboBoxMother.SelectedIndex = ind;
+            }
 
-            // ind = 0;
-            // if (idDad != 0)
-            // {
-            Cards Dad = Males.Find(find => find.Id == idDad);
-            ind = Males.IndexOf(Dad);
-            //}
-            //if(ind!=0)
-            //{
+            ind = 0;
+            if (idDad != 0)
+            {
+                Cards Dad = Males.Find(find => find.Id == idDad);
+                ind = Males.IndexOf(Dad);
+            }
+            else
+            {
+                Males.Insert(0, new Cards() { Id = 0, FIO = " ", Gender = 0, Gener = 99 });
+            }
+            if (ind!=0)
+            {
             comboBoxFather.DataSource = Males;
             comboBoxFather.DisplayMember = "FIO";
             comboBoxFather.ValueMember = "Id";
             comboBoxFather.SelectedIndex = ind;
-            // }
+            }
 
             ind = 0;
 
