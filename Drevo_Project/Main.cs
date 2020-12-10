@@ -1306,6 +1306,7 @@ namespace Drevo_Project
 
                 MessageBox.Show("Фото успешно добавлено");
                 PathSave2 = "";
+                listView1.Clear();
                 ShowPhoto();
             }
         }
@@ -1330,6 +1331,18 @@ namespace Drevo_Project
                 sql.command.CommandText = "UPDATE Card SET Generaton='" + 1 + "' WHERE id ='" + idDad + "'  ";
             }
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listView1.CheckedItems.Count; i++)
+                {
+                    //string id = listView1.CheckedItems[0].SubItems[1].Text;
+
+                    //sql.command.CommandText = "UPDATE Photos SET ifEx = '0' WHERE id = '" + Convert.ToInt32(id) + "'  ";
+                    //sql.command.ExecuteNonQuery();
+                    listView1.CheckedItems[i].Remove();
+                }
         }
     }
 

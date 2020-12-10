@@ -80,6 +80,7 @@ namespace Drevo_Project
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.button5 = new System.Windows.Forms.Button();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -309,6 +310,7 @@ namespace Drevo_Project
             // 
             this.tabPhotoCard.BackColor = System.Drawing.Color.White;
             this.tabPhotoCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPhotoCard.Controls.Add(this.button5);
             this.tabPhotoCard.Controls.Add(this.listView1);
             this.tabPhotoCard.Controls.Add(this.button4);
             this.tabPhotoCard.Controls.Add(this.button1);
@@ -322,6 +324,7 @@ namespace Drevo_Project
             // 
             // listView1
             // 
+            this.listView1.CheckBoxes = true;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listView1.HideSelection = false;
@@ -629,6 +632,19 @@ namespace Drevo_Project
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(237, 560);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(103, 33);
+            this.button5.TabIndex = 42;
+            this.button5.Text = "Удалить";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,5 +735,6 @@ namespace Drevo_Project
         private ComboBox comboBoxFather;
         private ComboBox comboBoxMother;
         private Label label7;
+        private Button button5;
     }
 }
