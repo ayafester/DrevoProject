@@ -287,6 +287,9 @@ namespace Drevo_Project
                 {
                     MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            } else
+            {
+                MessageBox.Show("Выберите файл");
             }
             if (PathSave != "q")
             {

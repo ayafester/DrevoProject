@@ -449,9 +449,7 @@ namespace Drevo_Project
 
             public int isDelete { get; set; }
 
-            public SolidBrush colorLine { get; set; } //для дерева
-
-
+            public Pen pen { get; set; }
             public Point coord { get; set; } = new Point(0, 0); //координаты фигуры
             public Point endVertical { get; set; } = new Point(0, 0); //координаты окончания вертикальной линии в поколение вниз
 
@@ -715,38 +713,39 @@ namespace Drevo_Project
             Bitmap bmp = new Bitmap(maxCounGen * 380, length * 250);//размер битмапа под количество элементов
             Graphics graph = Graphics.FromImage(bmp);
 
-            List<SolidBrush> pens = new List<SolidBrush>() {
-                new SolidBrush(Color.DarkSlateGray), //основной цвет семьи темно зеленый
-                new SolidBrush(Color.Red),
-                new SolidBrush(Color.Green),
-                new SolidBrush(Color.Yellow),
-                new SolidBrush(Color.Orange),
-                new SolidBrush(Color.Pink),
-                new SolidBrush(Color.Lavender),
-                new SolidBrush(Color.DarkOliveGreen),
-                new SolidBrush(Color.Blue),
-                new SolidBrush(Color.DarkTurquoise),
-                new SolidBrush(Color.DeepPink),
-                new SolidBrush(Color.DarkViolet),
-                new SolidBrush(Color.DodgerBlue),
-                new SolidBrush(Color.DarkOrange),
-                new SolidBrush(Color.DarkGray)
+            List<Pen> pens = new List<Pen> () {
+
+                new Pen(Color.Orange, 1.5f), //основной цвет семьи темно зеленый
+                new Pen(Color.Red , 1.5f),
+                new Pen(Color.Green, 1.5f),
+                new Pen(Color.Black, 1.5f),
+                new Pen(Color.DarkKhaki, 1.5f),
+                new Pen(Color.Pink, 1.5f),
+                new Pen(Color.Lavender, 1.5f),
+                new Pen(Color.DarkOliveGreen, 1.5f),
+                new Pen(Color.Blue, 1.5f),
+                new Pen(Color.DarkTurquoise, 1.5f),
+                new Pen(Color.DeepPink, 1.5f),
+                new Pen(Color.DarkViolet, 1.5f),
+                new Pen(Color.DodgerBlue, 1.5f),
+                new Pen(Color.DarkOrange, 1.5f),
+                new Pen(Color.DarkGray, 1.5f)
 
             };
-
             Pen penLine = new Pen(Color.Gray, 1.5f);
             Font fnt = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             Brush br = new SolidBrush(Color.Black);
 
 
-
+            int m = 0;
             Image image1 = Image.FromFile("" + path + "\\img\\logoLogo.png"); //просто лого-заглушка
             int x = 10, y = 30; //положение точки для верхнего поколения
             int stepHor = 350; //блок для одного чела с партнером 50 отступ 100 эллипс 50 отступ справа снова 100 эллипс 50 отступ
             int stepVert = 200; //блок для пары в высоту 50 100 50 \
 
             int stepVertLineforCouple = 0;
-            int stepVertforOnce = 0;
+            
+            
 
             int count = persones.Count; //количество людей
 
@@ -754,7 +753,8 @@ namespace Drevo_Project
 
             for (int i = length - 1; i >= 0; i--) //прорисовка блоков цикл по поколениям c самого старого
             {
-                //graph.DrawLine(penLine, x, y + stepVert, bmp.Width, y + stepVert);
+                
+               
 
                 for (int k = 0; k < gener[i].Count; k++) //цикл по массивам внутри поколений 
                 {
@@ -778,10 +778,7 @@ namespace Drevo_Project
                                         if (partnerTemp.isDelete == 1) //&& !usedId.Exists(value => value == partnerTemp.Id)) и проверяем не удален ли партнер
                                         {
 
-                                            item.colorLine = pens[k];
-                                            partnerTemp.colorLine = pens[k];
-
-
+                                           
                                             if (item.IdMom != 0) //ищем мать, если есть для отрисовки линии наверх для связи
                                             {
 
@@ -789,9 +786,9 @@ namespace Drevo_Project
                                                 if (momTemp.isDelete == 1)
                                                 {
 
-                                                    graph.DrawLine(penLine, x + 50, y + 50, x + 50, momTemp.endVertical.Y); //линия вверх
-                                                    graph.DrawLine(penLine, x + 50, momTemp.endVertical.Y, momTemp.endVertical.X, momTemp.endVertical.Y); //линия горизонтальная
-                                                    item.colorLine = momTemp.colorLine;
+                                                    graph.DrawLine(momTemp.pen, x + 50, y + 50, x + 50, momTemp.endVertical.Y); //линия вверх
+                                                    graph.DrawLine(momTemp.pen, x + 50, momTemp.endVertical.Y, momTemp.endVertical.X, momTemp.endVertical.Y); //линия горизонтальная
+                                                    
                                                 }
 
                                             }
@@ -802,17 +799,17 @@ namespace Drevo_Project
 
                                                 if (dadTemp.isDelete == 1)
                                                 {
-                                                    graph.DrawLine(penLine, x + 50, dadTemp.endVertical.Y, dadTemp.endVertical.X, dadTemp.endVertical.Y);
-                                                    graph.DrawLine(penLine, x + 50, y + 50, x + 50, dadTemp.endVertical.Y);
-                                                    item.colorLine = dadTemp.colorLine;
+                                                    graph.DrawLine(dadTemp.pen, x + 50, dadTemp.endVertical.Y, dadTemp.endVertical.X, dadTemp.endVertical.Y);
+                                                    graph.DrawLine(dadTemp.pen, x + 50, y + 50, x + 50, dadTemp.endVertical.Y);
+                                                    
                                                 }
 
                                             }
                                             Point coord = new Point(x, y + 50);
                                             item.coord = coord;
 
-                                            //graph.FillEllipse(item.colorLine, item.coord.X - 5, item.coord.Y - 5, 110, 120);
 
+                                            
                                             graph.DrawImage(image1, item.coord.X, item.coord.Y); //нарисовали человека, по идее надо брать фотографию!! стоит заглушка
                                             graph.DrawString(item.FIO, fnt, br, x, y + 30); //написали имя внизу
 
@@ -821,9 +818,9 @@ namespace Drevo_Project
                                                 Cards momPartnerTemp = persones.Find(find => find.Id == partnerTemp.IdMom);//присваиваем в переменную матери партнера
                                                 if (momPartnerTemp.isDelete == 1)
                                                 {
-                                                    graph.DrawLine(penLine, x + 200, momPartnerTemp.endVertical.Y, momPartnerTemp.endVertical.X, momPartnerTemp.endVertical.Y);
-                                                    graph.DrawLine(penLine, x + 200, y + 50, x + 200, momPartnerTemp.endVertical.Y);
-                                                    partnerTemp.colorLine = momPartnerTemp.colorLine;
+                                                    graph.DrawLine(momPartnerTemp.pen, x + 200, momPartnerTemp.endVertical.Y, momPartnerTemp.endVertical.X, momPartnerTemp.endVertical.Y);
+                                                    graph.DrawLine(momPartnerTemp.pen, x + 200, y + 50, x + 200, momPartnerTemp.endVertical.Y);
+                                                   
                                                 }
 
                                             }
@@ -832,9 +829,9 @@ namespace Drevo_Project
                                                 Cards dadPartnerTemp = persones.Find(find => find.Id == partnerTemp.IdDad);//присваиваем в переменную отца партнера
                                                 if (dadPartnerTemp.isDelete == 1)
                                                 {
-                                                    graph.DrawLine(penLine, x + 200, dadPartnerTemp.endVertical.Y, dadPartnerTemp.endVertical.X, dadPartnerTemp.endVertical.Y);
-                                                    graph.DrawLine(penLine, x + 200, y + 50, x + 200, dadPartnerTemp.endVertical.Y);
-                                                    partnerTemp.colorLine = dadPartnerTemp.colorLine;
+                                                    graph.DrawLine(dadPartnerTemp.pen, x + 200, dadPartnerTemp.endVertical.Y, dadPartnerTemp.endVertical.X, dadPartnerTemp.endVertical.Y);
+                                                    graph.DrawLine(dadPartnerTemp.pen, x + 200, y + 50, x + 200, dadPartnerTemp.endVertical.Y);
+                                                    
                                                 }
 
                                             }
@@ -845,7 +842,12 @@ namespace Drevo_Project
 
                                             graph.DrawString(partnerTemp.FIO, fnt, br, x + 200, y + 30); //фио партнера
 
-                                            graph.DrawLine(penLine, x + 100, y + 100, x + 150, y + 100); //линия между супругами
+                                            item.pen = pens[m];
+                                            m++;
+                                            partnerTemp.pen = item.pen;
+
+
+                                            graph.DrawLine(item.pen, x + 100, y + 100, x + 150, y + 100); //линия между супругами
 
                                             if (persones.Exists(find => find.IdDad == item.Id)) //проверка является ли отцом  для линии вниз
                                             {
@@ -858,7 +860,7 @@ namespace Drevo_Project
                                                     partnerTemp.endVertical = endVert;
 
 
-                                                    graph.DrawLine(penLine, x + 125, y + 100, item.endVertical.X, item.endVertical.Y);
+                                                    graph.DrawLine(item.pen, x + 125, y + 100, item.endVertical.X, item.endVertical.Y);
                                                     //линия вниз в другое поколение СДЕЛАТЬ С КАЖДОЙ ИТЕРАЦИЕЙ НА ШАГ МЕНЬШЕ
 
 
@@ -877,7 +879,7 @@ namespace Drevo_Project
                                                     partnerTemp.endVertical = endVert;
 
 
-                                                    graph.DrawLine(penLine, x + 125, y + 100, item.endVertical.X, item.endVertical.Y); //линия вниз в другое поколение
+                                                    graph.DrawLine(item.pen, x + 125, y + 100, item.endVertical.X, item.endVertical.Y); //линия вниз в другое поколение
 
 
                                                 }
@@ -896,53 +898,51 @@ namespace Drevo_Project
                                                 if (momTemp2.isDelete == 1)
                                                 {
 
-                                                    graph.DrawLine(penLine, x + 50, y + 50, x + 50, momTemp2.endVertical.Y);
-                                                    graph.DrawLine(penLine, x + 50, momTemp2.endVertical.Y, momTemp2.endVertical.X, momTemp2.endVertical.Y);
-                                                    item.colorLine = momTemp2.colorLine;
+                                                    graph.DrawLine(momTemp2.pen, x + 50, y + 50, x + 50, momTemp2.endVertical.Y);
+                                                    graph.DrawLine(momTemp2.pen, x + 50, momTemp2.endVertical.Y, momTemp2.endVertical.X, momTemp2.endVertical.Y);
+                                                   
                                                 }
 
                                             }
-                                            else
-                                            {
-                                                item.colorLine = pens[k];
-                                            }
+                                            
                                             if (item.IdDad != 0)
                                             {
                                                 Cards dadTemp = persones.Find(find => find.Id == item.IdDad);
 
                                                 if (dadTemp.isDelete == 1)
                                                 {
-                                                    graph.DrawLine(penLine, x + 50, dadTemp.endVertical.Y, dadTemp.endVertical.X, dadTemp.endVertical.Y);
-                                                    graph.DrawLine(penLine, x + 50, y + 50, x + 50, dadTemp.endVertical.Y);
-                                                    item.colorLine = dadTemp.colorLine;
+                                                    graph.DrawLine(dadTemp.pen, x + 50, dadTemp.endVertical.Y, dadTemp.endVertical.X, dadTemp.endVertical.Y);
+                                                    graph.DrawLine(dadTemp.pen, x + 50, y + 50, x + 50, dadTemp.endVertical.Y);
+                                                   
                                                 }
                                             }
-                                            else
-                                            {
-                                                item.colorLine = pens[k];
-                                            }
+                                            
 
                                             if (persones.Exists(find => find.IdDad == item.Id)) //проверка является ли этот человек отцом
                                             {
+                                                item.pen = pens[m];
+                                                m++;
                                                 Cards child = persones.Find(find => find.IdDad == item.Id);
                                                 if (child.isDelete == 1)
                                                 {
                                                     Point endVert = new Point(x + 50, y + 200 - stepVertLineforCouple);
                                                     item.endVertical = endVert;
-                                                    graph.DrawLine(penLine, x + 50, y + 150, item.endVertical.X, item.endVertical.Y); //линия вниз в другое поколение
+                                                    graph.DrawLine(item.pen, x + 50, y + 150, item.endVertical.X, item.endVertical.Y); //линия вниз в другое поколение
                                                 }
                                                 //линия вниз в другое поколение
                                             }
 
                                             if (persones.Exists(find => find.IdMom == item.Id)) //проверка является ли этот человек матерью
                                             {
+                                                item.pen = pens[m];
+                                                m++;
                                                 Cards child = persones.Find(find => find.IdMom == item.Id);
                                                 if (child.isDelete == 1)
                                                 {
 
                                                     Point endVert = new Point(x + 50, y + 200 - stepVertLineforCouple);
                                                     item.endVertical = endVert;
-                                                    graph.DrawLine(penLine, x + 50, y + 150, item.endVertical.X, item.endVertical.Y);  //линия вниз в другое поколение
+                                                    graph.DrawLine(item.pen, x + 50, y + 150, item.endVertical.X, item.endVertical.Y);  //линия вниз в другое поколение
                                                 }
 
                                             }
@@ -950,7 +950,7 @@ namespace Drevo_Project
                                             Point coord = new Point(x, y + 50);
                                             item.coord = coord;
                                             stepVertLineforCouple += 5;
-                                            //graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 120);
+                                            
                                             graph.DrawImage(image1, item.coord.X, item.coord.Y); //добавить фото
                                             graph.DrawString(item.FIO, fnt, br, x, y + 30); //строчка внизу
                                             usedId.Add(item.Id);
@@ -965,41 +965,36 @@ namespace Drevo_Project
                                         Cards momTemp2 = persones.Find(find => find.Id == item.IdMom);
                                         if (momTemp2.isDelete == 1)
                                         {
-                                            graph.DrawLine(penLine, x + 50, momTemp2.endVertical.Y, momTemp2.endVertical.X, momTemp2.endVertical.Y);
+                                            graph.DrawLine(momTemp2.pen, x + 50, momTemp2.endVertical.Y, momTemp2.endVertical.X, momTemp2.endVertical.Y);
                                             graph.DrawLine(penLine, x + 50, y + 50, x + 50, momTemp2.endVertical.Y);
-                                            item.colorLine = momTemp2.colorLine;
+                                            
                                         }
 
                                     }
-                                    else
-                                    {
-                                        item.colorLine = pens[0];
-                                    }
+                                   
                                     if (item.IdDad != 0)
                                     {
                                         Cards dadTemp = persones.Find(find => find.Id == item.IdDad);
 
                                         if (dadTemp.isDelete == 1)
                                         {
-                                            graph.DrawLine(penLine, x + 50, dadTemp.endVertical.Y, dadTemp.endVertical.X, dadTemp.endVertical.Y);
-                                            graph.DrawLine(penLine, x + 50, y + 50, x + 50, dadTemp.endVertical.Y);
-                                            item.colorLine = dadTemp.colorLine;
+                                            graph.DrawLine(dadTemp.pen, x + 50, dadTemp.endVertical.Y, dadTemp.endVertical.X, dadTemp.endVertical.Y);
+                                            graph.DrawLine(dadTemp.pen, x + 50, y + 50, x + 50, dadTemp.endVertical.Y);
+                                            
                                         }
                                     }
-                                    else
-                                    {
-                                        item.colorLine = pens[0];
-                                    }
+                                   
 
                                     if (persones.Exists(find => find.IdDad == item.Id)) //проверка является ли этот человек отцом
                                     {
                                         Cards father = persones.Find(find => find.IdDad == item.Id);
                                         if (father.isDelete == 1)
                                         {
-
+                                            item.pen = pens[m];
+                                            m++;
                                             Point endVert = new Point(x + 50, y + 200 - stepVertLineforCouple);
                                             item.endVertical = endVert;
-                                            graph.DrawLine(penLine, x + 50, y + 150, item.endVertical.X, item.endVertical.Y); //линия вниз в другое поколение
+                                            graph.DrawLine(item.pen, x + 50, y + 150, item.endVertical.X, item.endVertical.Y); //линия вниз в другое поколение
                                         }
 
                                     }
@@ -1009,14 +1004,16 @@ namespace Drevo_Project
                                         Cards mother = persones.Find(find => find.IdMom == item.Id);
                                         if (mother.isDelete == 1)
                                         {
+                                            item.pen = pens[m];
+                                            m++;
                                             Point endVert = new Point(x + 50, y + 200 - stepVertLineforCouple);
                                             item.endVertical = endVert;
-                                            graph.DrawLine(penLine, x + 50, y + 150, item.endVertical.X, item.endVertical.Y);  //линия вниз в другое поколение
+                                            graph.DrawLine(item.pen, x + 50, y + 150, item.endVertical.X, item.endVertical.Y);  //линия вниз в другое поколение
                                         }
                                     }
                                     Point coord = new Point(x, y + 50);
                                     item.coord = coord;
-                                    // graph.FillEllipse(item.colorLine, x - 5, y + 45, 110, 120);
+                                   
                                     graph.DrawImage(image1, item.coord.X, item.coord.Y); //добавить фото
                                     graph.DrawString(item.FIO, fnt, br, x, y + 30); //строчка внизу
                                     usedId.Add(item.Id);
@@ -1038,7 +1035,7 @@ namespace Drevo_Project
 
             }
 
-            stepVertforOnce = 0;
+            
             pictureBoxTree.Image = bmp;
         }
 
@@ -1295,6 +1292,9 @@ namespace Drevo_Project
                 {
                     MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            } else
+            {
+                MessageBox.Show("Выберите файл");
             }
         }
 
