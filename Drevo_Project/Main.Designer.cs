@@ -51,6 +51,7 @@ namespace Drevo_Project
             this.ChangeBioButton = new System.Windows.Forms.Button();
             this.textBoxBio = new System.Windows.Forms.TextBox();
             this.tabPhotoCard = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button4 = new System.Windows.Forms.Button();
@@ -80,7 +81,7 @@ namespace Drevo_Project
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.button5 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -322,6 +323,19 @@ namespace Drevo_Project
             this.tabPhotoCard.TabIndex = 1;
             this.tabPhotoCard.Text = "Фотоальбом";
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(237, 560);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(103, 33);
+            this.button5.TabIndex = 42;
+            this.button5.Text = "Удалить";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // listView1
             // 
             this.listView1.CheckBoxes = true;
@@ -385,6 +399,7 @@ namespace Drevo_Project
             // 
             this.tabContactsCard.BackColor = System.Drawing.Color.White;
             this.tabContactsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabContactsCard.Controls.Add(this.label10);
             this.tabContactsCard.Controls.Add(this.label9);
             this.tabContactsCard.Controls.Add(this.label8);
             this.tabContactsCard.Controls.Add(this.comboBoxFather);
@@ -632,18 +647,14 @@ namespace Drevo_Project
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // button5
+            // label10
             // 
-            this.button5.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(237, 560);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(103, 33);
-            this.button5.TabIndex = 42;
-            this.button5.Text = "Удалить";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(178, 404);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 20);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "label10";
             // 
             // Main
             // 
@@ -736,5 +747,6 @@ namespace Drevo_Project
         private ComboBox comboBoxMother;
         private Label label7;
         private Button button5;
+        private Label label10;
     }
 }

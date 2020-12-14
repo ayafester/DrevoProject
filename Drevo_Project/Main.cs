@@ -53,6 +53,7 @@ namespace Drevo_Project
             DrawTreeBmp();
             SortListFam();
             SearchCard();
+            UpdateParents();
             if (DataClass.ID != "1")
             {
                 buttonAddCard.Enabled = false;
@@ -158,62 +159,151 @@ namespace Drevo_Project
             {
                 MessageBox.Show("Error:" + ex.Message);
             }
-            List<Cards> persones = GetSortedFioDataFromBD();
+            
+        }
+
+
+        private void UpdateParents()
+        {
+            List<Cards> persones = GetDataFromBD();
+
             List<Cards> Males = new List<Cards>();
             List<Cards> Females = new List<Cards>();
+
+            Cards User = persones.Find(find => find.Id == Convert.ToInt32(DataClass.ID));
+
             foreach (var item in persones)
             {
-                if (item.Gender == 0)
+                if(item.isDelete == 1 && item.Id != User.Id) 
                 {
-                    Females.Add(item);
+                    if (item.Gender == 0)
+                    {
+                        Females.Add(item);
+                    }
+                    else
+                    {
+                        Males.Add(item);
+                    }
                 }
-                else
-                {
-                    Males.Add(item);
-                }
+                
             };
-            int ind = 0;
+            
+            int indM = 0;
+            idMom = User.IdMom;
             if (idMom != 0)
             {
                 Cards Mom = Females.Find(find => find.Id == idMom);
-                ind = Females.IndexOf(Mom);
+                indM = Females.IndexOf(Mom);
             } else
             {
                 Females.Insert(0, new Cards() { Id = 0, FIO = " ", Gender = 0, Gener = 99 });
             }
-            
-            if(ind != 0)
-            {
-                comboBoxMother.DataSource = Females;
-                comboBoxMother.DisplayMember = "FIO";
-                comboBoxMother.ValueMember = "Id";
-                comboBoxMother.SelectedIndex = ind;
-            }
 
-            ind = 0;
+            comboBoxMother.DataSource = Females;
+            comboBoxMother.DisplayMember = "FIO";
+            comboBoxMother.ValueMember = "Id";
+            comboBoxMother.SelectedIndex = indM;
+
+            int indF = 0;
+            idDad = User.IdDad;
+
             if (idDad != 0)
             {
                 Cards Dad = Males.Find(find => find.Id == idDad);
-                ind = Males.IndexOf(Dad);
-            }
-            else
+                indF = Males.IndexOf(Dad);
+            } else
             {
                 Males.Insert(0, new Cards() { Id = 0, FIO = " ", Gender = 0, Gener = 99 });
             }
-            if (ind!=0)
-            {
+            
             comboBoxFather.DataSource = Males;
             comboBoxFather.DisplayMember = "FIO";
             comboBoxFather.ValueMember = "Id";
-            comboBoxFather.SelectedIndex = ind;
-            }
-
-            ind = 0;
+            comboBoxFather.SelectedIndex = indF;
+            
 
             comboBoxMother.SelectedIndexChanged += ComboBoxMother_SelectedIndexChanged;
             comboBoxFather.SelectedIndexChanged += ComboBoxFather_SelectedIndexChanged;
         }
+        private void ComboBoxMother_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cards Mom = comboBoxMother.SelectedItem as Cards;
+            if (Mom != null)
+            {
+                idMom = Mom.Id;
+            }
 
+        }
+
+        private void ComboBoxFather_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Cards Dad = comboBoxFather.SelectedItem as Cards;
+            if (Dad != null)
+            {
+                idDad = Dad.Id;
+            }
+
+        }
+
+        private void ChangeContactsButton_Click(object sender, EventArgs e)
+        {
+            List<Cards> persones = GetDataFromBD();
+            Cards User = persones.Find(find => find.Id == Convert.ToInt32(DataClass.ID));
+            int ParGen = User.Gener + 1;
+            if (NumberBox.Text != ContNum || MailBox.Text != ContMail)
+            {
+                try
+                {
+                    sql.command.CommandText = "UPDATE Card SET number= '" + NumberBox.Text + "', mail='" + MailBox.Text + "' WHERE id = '" + DataClass.CardID + "'  ";
+                    sql.command.ExecuteNonQuery();
+                    MessageBox.Show("Контакты успешно изменены");
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+
+            if (idMom != 0)
+            {
+               try 
+               {
+                    sql.command.CommandText = "UPDATE Card SET idMom = '" + idMom + "' WHERE id = '" + User.Id + "'  ";
+                    sql.command.ExecuteNonQuery();
+                    sql.command.CommandText = "UPDATE Card SET Generation = '" + ParGen + "' WHERE id = '" + idMom + "'  ";
+                    sql.command.ExecuteNonQuery();
+                    DrawTreeBmp();
+                    SortListFam();
+                    SearchCard();
+                    
+                } 
+               catch (SQLiteException ex)
+               { 
+                     MessageBox.Show("Error:" + ex.Message);
+               }
+            }
+
+            if (idDad != 0)
+            {
+                try
+                {
+                    sql.command.CommandText = "UPDATE Card SET idDad = '" + idDad + "' WHERE id = '" + User.Id + "'  ";
+                    sql.command.ExecuteNonQuery();
+                    sql.command.CommandText = "UPDATE Card SET Generation = '" + ParGen + "' WHERE id = '" + idDad + "'  ";
+                    sql.command.ExecuteNonQuery();
+                    DrawTreeBmp();
+                    SortListFam();
+                    SearchCard();
+                   
+                }
+                catch (SQLiteException ex)
+                {
+                    MessageBox.Show("Error:" + ex.Message);
+                }
+            }
+
+            UpdateParents();
+        }
         private void ShowPhoto()
         {
             sql.command.CommandText = "SELECT * FROM Photos WHERE idCard ='" + DataClass.CardID + "' ";
@@ -296,22 +386,7 @@ namespace Drevo_Project
             }
         }
 
-        private void ChangeContactsButton_Click(object sender, EventArgs e)
-        {
-            if (NumberBox.Text != ContNum || MailBox.Text != ContMail)
-            {
-                try
-                {
-                    sql.command.CommandText = "UPDATE Card SET number= '" + NumberBox.Text + "', mail='" + MailBox.Text + "' WHERE id = '" + DataClass.CardID + "'  ";
-                    sql.command.ExecuteNonQuery();
-                    MessageBox.Show("Контакты успешно изменены");
-                }
-                catch (SQLiteException ex)
-                {
-                    MessageBox.Show("Error: стр рег" + ex.Message);
-                }
-            }
-        }
+       
 
 
         private void buttonAddCard_Click(object sender, EventArgs e) //кнопка добавления человека в дерево
@@ -341,6 +416,7 @@ namespace Drevo_Project
                 DrawTreeBmp();
                 SortListFam();
                 SearchCard();
+                UpdateParents();
             }
 
         }
@@ -491,7 +567,7 @@ namespace Drevo_Project
         }
         private List<Cards> GetDataFromBD()
         {
-            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday FROM Card WHERE id >= 1 ";
+            sql.command.CommandText = "SELECT Generation, id, idPartner, idMom, idDad, surname|| ' ' || name || ' ' || middlename, isDelete, birthday, gender FROM Card WHERE id >= 1 "; //добавить сортировку по пколениям тогда возмоэно не будет двойных людей
             List<Cards> CardsTemp = new List<Cards>();
             try
             {
@@ -509,6 +585,7 @@ namespace Drevo_Project
                         FIO = r.GetString(5),
                         isDelete = r.GetInt32(6),
                         BirthDay = r.GetString(7),
+                        Gender = r.GetInt32(8),
 
                     };
                     CardsTemp.Add(entity);
@@ -1303,9 +1380,9 @@ namespace Drevo_Project
                 Person.isDelete = 0;
                 sql.command.CommandText = "UPDATE Card SET isDelete = '" + Person.isDelete + "' WHERE id = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
-                sql.command.CommandText = "UPDATE Card SET idMom = 0 WHERE idMom = '" + Person.Id + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idMom = 0 WHERE id = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
-                sql.command.CommandText = "UPDATE Card SET idDad = 0 WHERE idDad = '" + Person.Id + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idDad = 0 WHERE id = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
                 sql.command.CommandText = "UPDATE Card SET idPartner = 0 WHERE idPartner = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
@@ -1316,7 +1393,7 @@ namespace Drevo_Project
             DrawTreeBmp();
             SortListFam();
             SearchCard();
-
+            UpdateParents();
         }
 
 
@@ -1363,27 +1440,7 @@ namespace Drevo_Project
             }
         }
 
-        private void ComboBoxMother_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Cards Mom = comboBoxMother.SelectedItem as Cards;
-            if (Mom != null)
-            {
-                idMom = Mom.Id;
-                sql.command.CommandText = "UPDATE Card SET Generaton='" + 1 + "' WHERE id ='" + idMom + "'  ";
-            }
-
-        }
-
-        private void ComboBoxFather_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Cards Dad = comboBoxFather.SelectedItem as Cards;
-            if (Dad != null)
-            {
-                idDad = Dad.Id;
-                sql.command.CommandText = "UPDATE Card SET Generaton='" + 1 + "' WHERE id ='" + idDad + "'  ";
-            }
-
-        }
+        
 
         private void button5_Click(object sender, EventArgs e)
         {
