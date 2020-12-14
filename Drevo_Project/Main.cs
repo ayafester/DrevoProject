@@ -309,20 +309,24 @@ namespace Drevo_Project
             sql.command.CommandText = "SELECT * FROM Photos WHERE idCard ='" + DataClass.CardID + "' ";
             SQLiteDataReader read4 = sql.command.ExecuteReader();
             ImageList ImageList = new ImageList();
-            ImageList.ImageSize = new Size(225, 150);
+            ImageList.ImageSize = new Size(225, 150); 
+            int i = 0;
             while (read4.Read())//Вывод фотоальбома
             {
-                if (Convert.ToInt32(read4["ifEx"]) != 0)
+                if (Convert.ToInt32(read4["ifEx"]) == 1)
                 {
-                    if (Convert.ToInt32(read4["idLink"]) == 0)
-                    {
-                        byte[] img = (byte[])(read4["photo"]);
-                        MemoryStream mstr = new MemoryStream(img);
-                        ImageList.Images.Add(Image.FromStream(mstr));
-                        ListViewItem listViewItem = new ListViewItem();
-                        listViewItem.ImageIndex = Convert.ToInt32(read4["id"]);
-                        listView1.Items.Add(listViewItem);
-                    }
+                    /*if (Convert.ToInt32(read4["idLink"]) == 0) //закоментированно, т. к. нет реализации фотоальбома с общими фото
+                    {*/
+                    byte[] img = (byte[])(read4["photo"]);
+                    MemoryStream mstr = new MemoryStream(img);
+                    ImageList.Images.Add(Image.FromStream(mstr));
+                    ListViewItem listViewItem = new ListViewItem();
+                    listViewItem.ImageIndex = i; // Convert.ToInt32(read4["id"]);
+                    listViewItem.Tag = Convert.ToInt32(read4["id"]);
+                    listView1.Items.Add(listViewItem);
+                    i += 1;
+                    //listView1.Tag = Convert.ToInt32(read4["id"]);
+                    /* }*/
                 }
             }
             read4.Close();
@@ -1445,13 +1449,15 @@ namespace Drevo_Project
         private void button5_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < listView1.CheckedItems.Count; i++)
-                {
-                    //string id = listView1.CheckedItems[0].SubItems[1].Text;
+            {
+                int id = Convert.ToInt32(listView1.CheckedItems[i].Tag);
 
-                    //sql.command.CommandText = "UPDATE Photos SET ifEx = '0' WHERE id = '" + Convert.ToInt32(id) + "'  ";
-                    //sql.command.ExecuteNonQuery();
-                    listView1.CheckedItems[i].Remove();
-                }
+                sql.command.CommandText = "UPDATE Photos SET ifEx = '0' WHERE id = '" + id + "'  ";
+                sql.command.ExecuteNonQuery();
+                MessageBox.Show("Фото успешно удалено.");
+                listView1.CheckedItems[i].Remove();
+
+            }
         }
     }
 
