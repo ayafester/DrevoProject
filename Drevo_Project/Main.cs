@@ -50,10 +50,12 @@ namespace Drevo_Project
         public Main()
         {
             InitializeComponent();
+
             DrawTreeBmp();
             SortListFam();
             SearchCard();
             UpdateParents();
+
             if (DataClass.ID != "1")
             {
                 buttonAddCard.Enabled = false;
@@ -599,7 +601,7 @@ namespace Drevo_Project
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message); //если ошибка
             }
 
             return CardsTemp;
@@ -1166,70 +1168,69 @@ namespace Drevo_Project
         }
 
 
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void buttonSearch_Click(object sender, EventArgs e) //????????????????????????????????????
         {
-            List<Cards> persones = GetDataFromBD();
+            List<Cards> persones = GetDataFromBD(); //забираем данные из БД 
 
-            object obj = comboBoxSearch.SelectedItem;
+            object obj = comboBoxSearch.SelectedItem; //выбранный человек
 
 
-            if (obj == null)
+            if (obj == null) //если поле пустое
             {
                 MessageBox.Show("Выберите родственника");
             }
             else
             {
-                string choseen = obj.ToString();
-                Cards choseenPerson = persones.Find(find => find.FIO == choseen);
-                showCard(choseenPerson.Id);
+                string choseen = obj.ToString(); //переводим в строку для будущего поиска
+                Cards choseenPerson = persones.Find(find => find.FIO == choseen); //метод для поиска человека в БД
+                showCard(choseenPerson.Id); // нашли и показываем человека
 
             }
-
-
-            comboBoxSearch.SelectedIndex = -1;
+            comboBoxSearch.SelectedIndex = -1; //очистить поле поиска
         }
 
-        private void showCard(int MyId)
+        private void showCard(int MyId) //показ карты, которую ищем
         {
             if (MyId != 0)
             {
-                Card cardShow = new Card(MyId);
+                Card cardShow = new Card(MyId); //вызываем форму карт для открытия карты человека
 
 
                 if (cardShow.ShowDialog() == DialogResult.OK)
                 {
 
-                    cardShow.Close();
-                    comboBoxSearch.SelectedIndex = -1;
-                    DrawTreeBmp();
-                    SortListFam();
-                    SearchCard();
+                    cardShow.Close(); //закрываем форму
+                    comboBoxSearch.SelectedIndex = -1; //очистить поле поиска
+                    DrawTreeBmp();//перерисовали дерево
+                    SortListFam();//обновили список родсвтенников
+                    SearchCard(); //забрали новые данные
+                    UpdateParents(); //обновили родителей 
                 }
             }
         }
 
-        private void SearchCard()
+        private void SearchCard() //забирает данные и заполняет комбобокс
         {
-            comboBoxSearch.Items.Clear();
-            List<Cards> persones = GetDataFromBD();
-            List<String> fioPersones = new List<String>();
+            comboBoxSearch.Items.Clear(); //очищаешь комбобокс
+            List<Cards> persones = GetDataFromBD(); //заполняем из БД людьми
+            List<String> fioPersones = new List<String>(); //только фамилии людей из БД
 
             foreach (var item in persones)
             {
-                if (item.isDelete == 1 && item.Id != 1) //список из фамилий, которые не удалены
+                if (item.isDelete == 1 && item.Id != 1) //список из фамилий, которые не удалены и не пользователь
                 {
                     fioPersones.Add(item.FIO);
-                    comboBoxSearch.Items.Add(item.FIO);
+                    comboBoxSearch.Items.Add(item.FIO); //заполняем комбобокс фамилиями только 
                 }
 
                 //заполняем комбобокс
             }
 
-            var values = new AutoCompleteStringCollection();
-            values.AddRange(fioPersones.ToArray());
-            comboBoxSearch.AutoCompleteCustomSource = values;
-            comboBoxSearch.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            var values = new AutoCompleteStringCollection(); //делаем автозаполнение по совпадению по буквам
+            values.AddRange(fioPersones.ToArray()); //переводим в массив строчек
+            comboBoxSearch.AutoCompleteCustomSource = values; //заполняем автозаполнение 
+            comboBoxSearch.AutoCompleteMode = AutoCompleteMode.Suggest; //работа автозаполнения
+            comboBoxSearch.AutoCompleteSource = AutoCompleteSource.CustomSource;//работа автозаполнения 
         }
         private void ChangeBioButton_Click(object sender, EventArgs e)
         {
@@ -1459,6 +1460,7 @@ namespace Drevo_Project
 
             }
         }
+
     }
 
 }

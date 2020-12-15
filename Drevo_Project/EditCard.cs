@@ -36,11 +36,13 @@ namespace Drevo_Project
         public int Gener { get; set; }
 
         public String PathSave { get; set; }
+        public String PathSave2 { get; set; }
 
         public EditCard(int id)
         {
             MyId = id;
             InitializeComponent();
+            
         }
 
 
@@ -170,6 +172,8 @@ namespace Drevo_Project
             {
                 MessageBox.Show("Error: стр рег" + ex.Message);
             }
+
+            ShowPhotoEdit();
         }
 
         private void buttonSaveInfo_Click(object sender, EventArgs e)
@@ -307,6 +311,90 @@ namespace Drevo_Project
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files(*.BPM;*.JPG;*.GIF;*.PNG)|*.BPM;*.JPG;*.GIF;*.PNG|All Files (*.*)|*.*";
 
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBoxCard.Image = new Bitmap(ofd.FileName);
+                    PathSave2 = ofd.FileName.ToString();
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите файл");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e) //сохранить
+        {
+            if (PathSave2 != "q")
+            {
+                byte[] ImageBt = null;
+                FileStream fstream = new FileStream(this.PathSave2, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fstream);
+                ImageBt = br.ReadBytes((int)fstream.Length);
+
+                sql.command.CommandText = "INSERT INTO Photos (photo, IfEx, idCard) VALUES ( @img , 1 , '" + MyId + "') ";
+                sql.command.Parameters.AddWithValue("@img", ImageBt);
+                sql.command.ExecuteNonQuery();
+
+                MessageBox.Show("Фото успешно добавлено");
+                PathSave2 = "";
+                listViewCard.Clear();
+                ShowPhotoEdit();
+            }
+           
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < listViewCard.CheckedItems.Count; i++)
+            {
+                int id = Convert.ToInt32(listViewCard.CheckedItems[i].Tag);
+
+                sql.command.CommandText = "UPDATE Photos SET ifEx = '0' WHERE id = '" + id + "'  ";
+                sql.command.ExecuteNonQuery();
+                MessageBox.Show("Фото успешно удалено.");
+                listViewCard.CheckedItems[i].Remove();
+
+            }
+            ShowPhotoEdit();
+        }
+
+        private void ShowPhotoEdit()
+        {
+            sql.command.CommandText = "SELECT * FROM Photos WHERE idCard ='" +  MyId + "' ";
+            SQLiteDataReader read4 = sql.command.ExecuteReader();
+            ImageList ImageList = new ImageList();
+            ImageList.ImageSize = new Size(225, 150);
+            int i = 0;
+            while (read4.Read())//Вывод фотоальбома
+            {
+                if (Convert.ToInt32(read4["ifEx"]) == 1)
+                {
+                   
+                    byte[] img = (byte[])(read4["photo"]);
+                    MemoryStream mstr = new MemoryStream(img);
+                    ImageList.Images.Add(Image.FromStream(mstr));
+                    ListViewItem listViewItem = new ListViewItem();
+                    listViewItem.ImageIndex = i; // Convert.ToInt32(read4["id"]);
+                    listViewItem.Tag = Convert.ToInt32(read4["id"]);
+                    listViewCard.Items.Add(listViewItem);
+                    i += 1;
+                    
+                }
+            }
+            read4.Close();
+            listViewCard.SmallImageList = ImageList;
+        }
     }
 }

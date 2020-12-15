@@ -42,9 +42,12 @@
             this.NumberBoxCard = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.listViewCardShow = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.pictureCard)).BeginInit();
             this.tabInfoCard.SuspendLayout();
             this.tabBioCard.SuspendLayout();
+            this.tabPhotoCard.SuspendLayout();
             this.tabContactsCard.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +111,7 @@
             // tabBioCard
             // 
             this.tabBioCard.AutoScroll = true;
+            this.tabBioCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabBioCard.Controls.Add(this.labelBioCard);
             this.tabBioCard.Controls.Add(this.labelBio);
             this.tabBioCard.Location = new System.Drawing.Point(4, 29);
@@ -139,6 +143,8 @@
             // 
             // tabPhotoCard
             // 
+            this.tabPhotoCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPhotoCard.Controls.Add(this.listViewCardShow);
             this.tabPhotoCard.Location = new System.Drawing.Point(4, 29);
             this.tabPhotoCard.Name = "tabPhotoCard";
             this.tabPhotoCard.Padding = new System.Windows.Forms.Padding(3);
@@ -149,6 +155,7 @@
             // 
             // tabContactsCard
             // 
+            this.tabContactsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabContactsCard.Controls.Add(this.MailBoxCard);
             this.tabContactsCard.Controls.Add(this.NumberBoxCard);
             this.tabContactsCard.Controls.Add(this.label5);
@@ -196,6 +203,24 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "Номер: ";
             // 
+            // listViewCardShow
+            // 
+            this.listViewCardShow.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.listViewCardShow.HideSelection = false;
+            this.listViewCardShow.Location = new System.Drawing.Point(-1, 6);
+            this.listViewCardShow.MultiSelect = false;
+            this.listViewCardShow.Name = "listViewCardShow";
+            this.listViewCardShow.Size = new System.Drawing.Size(453, 604);
+            this.listViewCardShow.TabIndex = 42;
+            this.listViewCardShow.UseCompatibleStateImageBehavior = false;
+            this.listViewCardShow.View = System.Windows.Forms.View.SmallIcon;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Изображение";
+            this.columnHeader1.Width = 150;
+            // 
             // Card
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +241,7 @@
             this.tabInfoCard.ResumeLayout(false);
             this.tabBioCard.ResumeLayout(false);
             this.tabBioCard.PerformLayout();
+            this.tabPhotoCard.ResumeLayout(false);
             this.tabContactsCard.ResumeLayout(false);
             this.tabContactsCard.PerformLayout();
             this.ResumeLayout(false);
@@ -239,5 +265,7 @@
         private System.Windows.Forms.Label MailBoxCard;
         private System.Windows.Forms.Label NumberBoxCard;
         public System.Windows.Forms.PictureBox pictureCard;
+        private System.Windows.Forms.ListView listViewCardShow;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

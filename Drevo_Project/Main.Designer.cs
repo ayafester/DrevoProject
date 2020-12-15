@@ -81,7 +81,6 @@ namespace Drevo_Project
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label10 = new System.Windows.Forms.Label();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -399,7 +398,6 @@ namespace Drevo_Project
             // 
             this.tabContactsCard.BackColor = System.Drawing.Color.White;
             this.tabContactsCard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabContactsCard.Controls.Add(this.label10);
             this.tabContactsCard.Controls.Add(this.label9);
             this.tabContactsCard.Controls.Add(this.label8);
             this.tabContactsCard.Controls.Add(this.comboBoxFather);
@@ -572,6 +570,8 @@ namespace Drevo_Project
             this.comboBoxSearch.Name = "comboBoxSearch";
             this.comboBoxSearch.Size = new System.Drawing.Size(543, 28);
             this.comboBoxSearch.TabIndex = 13;
+            
+            
             // 
             // listBox1
             // 
@@ -646,15 +646,6 @@ namespace Drevo_Project
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(178, 404);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 20);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "label10";
             // 
             // Main
             // 
@@ -747,6 +738,5 @@ namespace Drevo_Project
         private ComboBox comboBoxMother;
         private Label label7;
         private Button button5;
-        private Label label10;
     }
 }

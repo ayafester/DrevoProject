@@ -47,6 +47,7 @@ namespace Drevo_Project
         {
             MyId = id;
             InitializeComponent();
+            ShowPhotoCard();
             if (DataClass.ID != "1")
             {
                 buttonEditCard.Enabled = false;
@@ -88,7 +89,7 @@ namespace Drevo_Project
         }
         private void Card_Load(object sender, EventArgs e)
         {
-
+           
             try
             {
                 sql.command.CommandText = "SELECT * FROM User WHERE id='" + MyId + "' ";
@@ -155,6 +156,34 @@ namespace Drevo_Project
             }
         }
 
+        private void ShowPhotoCard()
+        {
+            sql.command.CommandText = "SELECT * FROM Photos WHERE idCard ='" + MyId + "' ";
+            SQLiteDataReader read4 = sql.command.ExecuteReader();
+            ImageList ImageList = new ImageList();
+            ImageList.ImageSize = new Size(225, 150);
+            int i = 0;
+            while (read4.Read())//Вывод фотоальбома
+            {
+                if (Convert.ToInt32(read4["ifEx"]) == 1)
+                {
+                    /*if (Convert.ToInt32(read4["idLink"]) == 0) //закоментированно, т. к. нет реализации фотоальбома с общими фото
+                    {*/
+                    byte[] img = (byte[])(read4["photo"]);
+                    MemoryStream mstr = new MemoryStream(img);
+                    ImageList.Images.Add(Image.FromStream(mstr));
+                    ListViewItem listViewItem = new ListViewItem();
+                    listViewItem.ImageIndex = i; 
+                    listViewItem.Tag = Convert.ToInt32(read4["id"]);
+                    listViewCardShow.Items.Add(listViewItem);
+                    i += 1;
+                    //listView1.Tag = Convert.ToInt32(read4["id"]);
+                    /* }*/
+                }
+            }
+            read4.Close();
+            listViewCardShow.SmallImageList = ImageList;
+        }
         private void buttonEditCard_Click(object sender, EventArgs e)
         {
             EditCard editCard = new EditCard(MyId);
