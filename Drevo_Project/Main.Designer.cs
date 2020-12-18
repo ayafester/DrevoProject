@@ -58,6 +58,7 @@ namespace Drevo_Project
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabContactsCard = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxFather = new System.Windows.Forms.ComboBox();
@@ -73,15 +74,17 @@ namespace Drevo_Project
             this.panelTree = new System.Windows.Forms.Panel();
             this.pictureBoxTree = new System.Windows.Forms.PictureBox();
             this.tabRelatives = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.FIO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BirthDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StepRod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBoxSearch = new System.Windows.Forms.ComboBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddCard = new System.Windows.Forms.Button();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label10 = new System.Windows.Forms.Label();
             this.tabMenu.SuspendLayout();
             this.tabMyProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAva)).BeginInit();
@@ -94,6 +97,7 @@ namespace Drevo_Project
             this.panelTree.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTree)).BeginInit();
             this.tabRelatives.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelChk
@@ -417,6 +421,15 @@ namespace Drevo_Project
             this.tabContactsCard.TabIndex = 2;
             this.tabContactsCard.Text = "Контакты";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(178, 404);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(60, 20);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "label10";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -551,8 +564,8 @@ namespace Drevo_Project
             // 
             this.tabRelatives.BackColor = System.Drawing.Color.White;
             this.tabRelatives.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabRelatives.Controls.Add(this.dataGridView1);
             this.tabRelatives.Controls.Add(this.comboBoxSearch);
-            this.tabRelatives.Controls.Add(this.listBox1);
             this.tabRelatives.Controls.Add(this.label3);
             this.tabRelatives.Controls.Add(this.label2);
             this.tabRelatives.Controls.Add(this.buttonDelete);
@@ -565,6 +578,45 @@ namespace Drevo_Project
             this.tabRelatives.TabIndex = 2;
             this.tabRelatives.Text = "Родственники";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.FIO,
+            this.BirthDay,
+            this.StepRod});
+            this.dataGridView1.Location = new System.Drawing.Point(46, 101);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(760, 514);
+            this.dataGridView1.TabIndex = 14;
+            // 
+            // FIO
+            // 
+            this.FIO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.FIO.DataPropertyName = "FIO";
+            this.FIO.HeaderText = "Фамилия Имя Отчество";
+            this.FIO.Name = "FIO";
+            this.FIO.ReadOnly = true;
+            this.FIO.Width = 21;
+            // 
+            // BirthDay
+            // 
+            this.BirthDay.DataPropertyName = "BirthDay";
+            this.BirthDay.HeaderText = "День Рождения";
+            this.BirthDay.Name = "BirthDay";
+            this.BirthDay.ReadOnly = true;
+            // 
+            // StepRod
+            // 
+            this.StepRod.DataPropertyName = "StepRod";
+            this.StepRod.HeaderText = "Родство";
+            this.StepRod.Name = "StepRod";
+            this.StepRod.ReadOnly = true;
+            // 
             // comboBoxSearch
             // 
             this.comboBoxSearch.FormattingEnabled = true;
@@ -572,16 +624,6 @@ namespace Drevo_Project
             this.comboBoxSearch.Name = "comboBoxSearch";
             this.comboBoxSearch.Size = new System.Drawing.Size(543, 28);
             this.comboBoxSearch.TabIndex = 13;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(46, 104);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(752, 484);
-            this.listBox1.TabIndex = 12;
-            this.listBox1.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.listBox1_Format);
             // 
             // label3
             // 
@@ -647,15 +689,6 @@ namespace Drevo_Project
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(178, 404);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 20);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "label10";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -686,6 +719,7 @@ namespace Drevo_Project
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTree)).EndInit();
             this.tabRelatives.ResumeLayout(false);
             this.tabRelatives.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -733,7 +767,6 @@ namespace Drevo_Project
         private Label label6;
         private Button button2;
         private Button button3;
-        private ListBox listBox1;
         private TabPage tabPhotoCard;
         private Button button4;
         private Button button1;
@@ -748,5 +781,9 @@ namespace Drevo_Project
         private Label label7;
         private Button button5;
         private Label label10;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn FIO;
+        private DataGridViewTextBoxColumn BirthDay;
+        private DataGridViewTextBoxColumn StepRod;
     }
 }

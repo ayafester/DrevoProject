@@ -151,9 +151,7 @@ namespace Drevo_Project
 
 
                 ShowPhoto();
-
-
-
+                
             }
             catch (SQLiteException ex)
             {
@@ -765,10 +763,8 @@ namespace Drevo_Project
                     }
                 }
             }
-
-            listBox1.DataSource = personesL;
-            listBox1.DisplayMember = "FIO";
-            listBox1.ValueMember = "Id";
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = personesL;
         }
 
 
@@ -1378,15 +1374,15 @@ namespace Drevo_Project
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            Cards Person = listBox1.SelectedItem as Cards;
-            if (listBox1.SelectedIndex != -1)
+            Cards Person = dataGridView1.CurrentRow.DataBoundItem as Cards;
+            if (dataGridView1.SelectedRows.Count ==  1)
             {
                 Person.isDelete = 0;
                 sql.command.CommandText = "UPDATE Card SET isDelete = '" + Person.isDelete + "' WHERE id = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
-                sql.command.CommandText = "UPDATE Card SET idMom = 0 WHERE id = '" + Person.Id + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idMom = 0 WHERE idMom = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
-                sql.command.CommandText = "UPDATE Card SET idDad = 0 WHERE id = '" + Person.Id + "'  ";
+                sql.command.CommandText = "UPDATE Card SET idDad = 0 WHERE idDad = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
                 sql.command.CommandText = "UPDATE Card SET idPartner = 0 WHERE idPartner = '" + Person.Id + "'  ";
                 sql.command.ExecuteNonQuery();
@@ -1458,7 +1454,7 @@ namespace Drevo_Project
                 listView1.CheckedItems[i].Remove();
 
             }
-        }
+        }        
     }
 
 }
