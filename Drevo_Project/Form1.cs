@@ -29,6 +29,15 @@ namespace Drevo_Project
         {
             sql.command.CommandText = "INSERT or REPLACE INTO Card(id, idCreator) VALUES(0,1)";
             sql.command.ExecuteNonQuery();
+
+            int check;
+            sql.command.CommandText = "SELECT COUNT(*) FROM User";
+            check = Convert.ToInt32(sql.command.ExecuteScalar());
+            if (check != 0)
+            {
+
+                btnToReg.Enabled = false;
+            }
         }
 
         private void btnToReg_Click(object sender, EventArgs e)
@@ -44,7 +53,7 @@ namespace Drevo_Project
             if (addData.ShowDialog() == DialogResult.OK)
             {
                 addData.Close();
-                MessageBox.Show("Войдите в систему");
+               
 
             }
         }

@@ -70,5 +70,30 @@ namespace Drevo_Project
 
 
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            string tempMail = "";
+            string tempPass = " ";
+
+            try
+            {
+                sql.command.CommandText = "SELECT * FROM User WHERE  id = '" + 1 + "' ";
+                SQLiteDataReader read2 = sql.command.ExecuteReader();
+                while (read2.Read())
+                {
+                    tempMail = read2["mail"].ToString();
+                    tempPass = read2["password"].ToString();
+                }
+                read2.Close();
+
+               MessageBox.Show($"Ваш пароль: {tempPass}. Ваш логин: {tempMail}");
+                
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+        }
     }
 }

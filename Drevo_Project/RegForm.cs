@@ -36,7 +36,6 @@ namespace Drevo_Project
             InitializeComponent();
         }
 
-
         private void btOK_Click(object sender, EventArgs e)
         {
             Number = NumberBox.Text;
@@ -55,10 +54,31 @@ namespace Drevo_Project
             {
                 Gender = 1;
             }
+            
 
-            if (Surname == " " && NamePerson == " " && Middlename == " " && DateBirthday == " " && Number == " " && Mail == " " && Password == " " && radioButtonFemale.Checked == false && radioButtonMen.Checked == false)
+            if (Surname == "")
             {
-                MessageBox.Show("Введите данные!");
+                MessageBox.Show("Введите фамилию!");
+            } else if (NamePerson == "")
+            {
+                MessageBox.Show("Введите имя!");
+            } 
+            else if (DateBirthday == "")
+            {
+                MessageBox.Show("Введите дату рождения!");
+            }
+            else if (Number == "")
+            {
+                MessageBox.Show("Введите номер!");
+            } else if(Mail == "")
+            {
+                MessageBox.Show("Введите почту!");
+            } else if(Password == "")
+            {
+                MessageBox.Show("Введите пароль!");
+            } else if(radioButtonFemale.Checked == false && radioButtonMen.Checked == false)
+            {
+                MessageBox.Show("Выберите пол!");
             }
             else
             {
@@ -103,14 +123,19 @@ namespace Drevo_Project
                 }
                 catch (SQLiteException ex)
                 {
-                    MessageBox.Show("Error: стр рег" + ex.Message);
+                    MessageBox.Show("Error:" + ex.Message);
                 }
 
+                MessageBox.Show("Войдите в систему");
                 DialogResult = DialogResult.OK;
             }
 
 
 
         }
+
+        
+
+        
     }
 }
